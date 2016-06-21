@@ -3,48 +3,49 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class WorkWithList {
-    public ArrayList<Integer> arrayListbuilder(int [] array){
-        ArrayList someArrayList = new ArrayList();
-        for (int i = 0;i<array.length;i++)
-            someArrayList.add(array[i]);
-        return someArrayList;
+    public ArrayList<Integer> arrayListbuilder(int[] array) {
+        ArrayList userArrayList = new ArrayList();
+        for (int i = 0; i < array.length; i++)
+            userArrayList.add(array[i]);
+        return userArrayList;
     }
 
 
-    public ArrayList<Integer> sorter(ArrayList <Integer> arrayListThatWeWillOpperate) {
-        System.out.println("Как вы хотите отсортировать?(true - если по возростанию false - если по убыванию)");
+    public ArrayList<Integer> sorter(ArrayList<Integer> arrayListThatWeWillOpperate) {
+        System.out.println("In witch way u want (true - upper way, false - down way)");
         Scanner sc = new Scanner(System.in);
-        boolean Trigger = sc.nextBoolean();
+        boolean trigger = sc.nextBoolean();
         boolean Flag = false;
         int switcherVar1 = 0;
         int switcherVar2 = 0;
         int i = 0;
         int size = arrayListThatWeWillOpperate.size() + 20;
 
-        if (Trigger == true && !arrayListThatWeWillOpperate.isEmpty()) {
+        if (trigger == true && !arrayListThatWeWillOpperate.isEmpty()) {
 
             for (; ; ) {
 
-                if (arrayListThatWeWillOpperate.get(i) > arrayListThatWeWillOpperate.get(i + 1)) {     //меняем местами элементы пока не отсортируеться
+                if (arrayListThatWeWillOpperate.get(i) > arrayListThatWeWillOpperate.get(i + 1)) {     //Switch variables untill thay will be in right order
                     switcherVar1 = arrayListThatWeWillOpperate.get(i);
                     switcherVar2 = arrayListThatWeWillOpperate.get(i + 1);
                     arrayListThatWeWillOpperate.set(i + 1, switcherVar1);
                     arrayListThatWeWillOpperate.set(i, switcherVar2);
                     i++;
-                    size = arrayListThatWeWillOpperate.size() + 200;                         //после последней перестановки должно пройти
-                } else {                                                    //стлько итераций сколько членов в коллекции
+                    size = arrayListThatWeWillOpperate.size() + 200;
+                } else {
                     size--;
                     i++;
                 }
                 if (i == arrayListThatWeWillOpperate.size() - 1)
-                    i = 0;                        //прежде чем  метод прервет работу и вернет значение
+                    i = 0;
                 if (size == 0)
-                    break;                                   //чтобы убедиться что сортировка завершина успешно
+                    break;
             }
-        } if (Trigger == false && !arrayListThatWeWillOpperate.isEmpty()) {
+        }
+        if (trigger == false && !arrayListThatWeWillOpperate.isEmpty()) {
             for (; ; ) {
 
-                if (arrayListThatWeWillOpperate.get(i) < arrayListThatWeWillOpperate.get(i + 1)) {     //все тоже самое для обратной сортировки
+                if (arrayListThatWeWillOpperate.get(i) < arrayListThatWeWillOpperate.get(i + 1)) {     //Same cycle for reverse sort
                     switcherVar1 = arrayListThatWeWillOpperate.get(i);
                     switcherVar2 = arrayListThatWeWillOpperate.get(i + 1);
                     arrayListThatWeWillOpperate.set(i + 1, switcherVar1);
@@ -65,24 +66,23 @@ public class WorkWithList {
         return arrayListThatWeWillOpperate;
     }
 
-    public int ourMax(ArrayList<Integer>arrayListThatWeWillOpperate) {
+    public int findMax(ArrayList<Integer> arrayListThatWeWillOpperate) {
         int max = 0;
         if (arrayListThatWeWillOpperate.isEmpty()) {
-            System.out.println("Поступила пустая коллекция - вывод метода ошибочный");
+            throw new NullPointerException("Array is empty");
+
         }
         for (int i = 0; i < arrayListThatWeWillOpperate.size(); i++) {
             if (arrayListThatWeWillOpperate.get(i) > max) {
                 max = arrayListThatWeWillOpperate.get(i);
             }
         }
-        System.out.println("самый большой элемент " + max);
+        System.out.println("Max element " + max);
         return max;
     }
 
-    public ArrayList <Integer> emptyArrayList(ArrayList<Integer>arrayListThatWeWillOpperate) {
+    public ArrayList<Integer> emptyArrayList(ArrayList<Integer> arrayListThatWeWillOpperate) {
         arrayListThatWeWillOpperate.clear();
-        System.out.println("отработал метод emptyArrayList, теперь от " +
-                "вашего масива осталось только " + arrayListThatWeWillOpperate.toString());
         return arrayListThatWeWillOpperate;
     }
 }
