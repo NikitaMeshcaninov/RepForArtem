@@ -6,9 +6,9 @@ public class Main {
         ArrayList arrayListForTranforming = new ArrayList();
         WorkWithList userArray = new WorkWithList();
         int [] array = {10,150,55,16,2};
-        arrayListForTranforming =  userArray.arrayListbuilder(array);
+        arrayListForTranforming =  userArray.arrayListBuilder(array);
 
-        
+
         System.out.println("Max int in our Array is " +  userArray.findMax(arrayListForTranforming));
         arrayListForTranforming = userArray.sorter(arrayListForTranforming);
         arrayListForTranforming = userArray.emptyArrayList(arrayListForTranforming);

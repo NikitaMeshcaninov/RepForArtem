@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class WorkWithList {
-    public ArrayList<Integer> arrayListbuilder(int[] array) {
+    public ArrayList<Integer> arrayListBuilder(int[] array) {
         ArrayList userArrayList = new ArrayList();
         for (int i = 0; i < array.length; i++)
             userArrayList.add(array[i]);
