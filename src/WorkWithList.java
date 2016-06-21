@@ -1,32 +1,23 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-
 import java.util.Scanner;
 
 public class WorkWithList {
-
-
-
-    private int[] thatArrayThatWeWillTransformToArrayList = {1,8,5};
-    private ArrayList<Integer> arrayListThatWeWillOpperate;
-
-
-
-
-    public void transformerArrayToArrayList() {
-
-        for (int i = 0; i < thatArrayThatWeWillTransformToArrayList.length; i++) {
-            arrayListThatWeWillOpperate.add(i, thatArrayThatWeWillTransformToArrayList[i]);
-        }
+    public ArrayList<Integer> arrayListbuilder(int [] array){
+        ArrayList someArrayList = new ArrayList();
+        for (int i = 0;i<array.length;i++)
+            someArrayList.add(array[i]);
+        return someArrayList;
     }
 
 
-    public ArrayList Sorter() {
+    public ArrayList<Integer> sorter(ArrayList <Integer> arrayListThatWeWillOpperate) {
         System.out.println("Как вы хотите отсортировать?(true - если по возростанию false - если по убыванию)");
         Scanner sc = new Scanner(System.in);
         boolean Trigger = sc.nextBoolean();
         boolean Flag = false;
-        int p = 0;
-        int b = 0;
+        int switcherVar1 = 0;
+        int switcherVar2 = 0;
         int i = 0;
         int size = arrayListThatWeWillOpperate.size() + 20;
 
@@ -35,10 +26,10 @@ public class WorkWithList {
             for (; ; ) {
 
                 if (arrayListThatWeWillOpperate.get(i) > arrayListThatWeWillOpperate.get(i + 1)) {     //меняем местами элементы пока не отсортируеться
-                    p = arrayListThatWeWillOpperate.get(i);
-                    b = arrayListThatWeWillOpperate.get(i + 1);
-                    arrayListThatWeWillOpperate.set(i + 1, p);
-                    arrayListThatWeWillOpperate.set(i, b);
+                    switcherVar1 = arrayListThatWeWillOpperate.get(i);
+                    switcherVar2 = arrayListThatWeWillOpperate.get(i + 1);
+                    arrayListThatWeWillOpperate.set(i + 1, switcherVar1);
+                    arrayListThatWeWillOpperate.set(i, switcherVar2);
                     i++;
                     size = arrayListThatWeWillOpperate.size() + 200;                         //после последней перестановки должно пройти
                 } else {                                                    //стлько итераций сколько членов в коллекции
@@ -50,14 +41,14 @@ public class WorkWithList {
                 if (size == 0)
                     break;                                   //чтобы убедиться что сортировка завершина успешно
             }
-        } else if (Trigger = false && !arrayListThatWeWillOpperate.isEmpty()) {
+        } if (Trigger == false && !arrayListThatWeWillOpperate.isEmpty()) {
             for (; ; ) {
 
                 if (arrayListThatWeWillOpperate.get(i) < arrayListThatWeWillOpperate.get(i + 1)) {     //все тоже самое для обратной сортировки
-                    p = arrayListThatWeWillOpperate.get(i);
-                    b = arrayListThatWeWillOpperate.get(i + 1);
-                    arrayListThatWeWillOpperate.set(i + 1, p);
-                    arrayListThatWeWillOpperate.set(i, b);
+                    switcherVar1 = arrayListThatWeWillOpperate.get(i);
+                    switcherVar2 = arrayListThatWeWillOpperate.get(i + 1);
+                    arrayListThatWeWillOpperate.set(i + 1, switcherVar1);
+                    arrayListThatWeWillOpperate.set(i, switcherVar2);
                     i++;
                     size = arrayListThatWeWillOpperate.size() + 200;
                 } else {
@@ -74,7 +65,7 @@ public class WorkWithList {
         return arrayListThatWeWillOpperate;
     }
 
-    public int ourMax() {
+    public int ourMax(ArrayList<Integer>arrayListThatWeWillOpperate) {
         int max = 0;
         if (arrayListThatWeWillOpperate.isEmpty()) {
             System.out.println("Поступила пустая коллекция - вывод метода ошибочный");
@@ -88,7 +79,7 @@ public class WorkWithList {
         return max;
     }
 
-    public ArrayList emptyArrayList() {
+    public ArrayList <Integer> emptyArrayList(ArrayList<Integer>arrayListThatWeWillOpperate) {
         arrayListThatWeWillOpperate.clear();
         System.out.println("отработал метод emptyArrayList, теперь от " +
                 "вашего масива осталось только " + arrayListThatWeWillOpperate.toString());
