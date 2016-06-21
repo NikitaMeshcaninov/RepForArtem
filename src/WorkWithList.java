@@ -10,7 +10,6 @@ public class WorkWithList {
 
 
 
-    //Changes
     public ArrayList<Integer> arrayListBuilder(int[] array) {
         ArrayList userArrayList = new ArrayList();
         for (int i = 0; i < array.length; i++)
@@ -19,7 +18,6 @@ public class WorkWithList {
     }
 
 
-    //Changes
     public ArrayList<Integer> sorter(ArrayList<Integer> arrayListThatWeWillOpperate) {
         System.out.println("In witch way u want (true - upper way, false - down way)");
         Scanner sc = new Scanner(System.in);
@@ -29,7 +27,6 @@ public class WorkWithList {
         int switcherVar2 = 0;
         int i = 0;
         int size = arrayListThatWeWillOpperate.size() + 20;
-        //Changes
 
         if (trigger == true && !arrayListThatWeWillOpperate.isEmpty()) {
 
@@ -46,13 +43,11 @@ public class WorkWithList {
                     size--;
                     i++;
                 }
-                //Changes
                 if (i == arrayListThatWeWillOpperate.size() - 1)
                     i = 0;
                 if (size == 0)
                     break;
             }
-            //Changes
         }
         if (trigger == false && !arrayListThatWeWillOpperate.isEmpty()) {
             for (; ; ) {
@@ -64,7 +59,6 @@ public class WorkWithList {
                     arrayListThatWeWillOpperate.set(i, switcherVar2);
                     i++;
                     size = arrayListThatWeWillOpperate.size() + 200;
-                    //Changes
                 } else {
                     size--;
                     i++;
@@ -75,7 +69,6 @@ public class WorkWithList {
                     break;
             }
         }
-        //Changes
         System.out.println(arrayListThatWeWillOpperate.toString());
         return arrayListThatWeWillOpperate;
     }
@@ -84,20 +77,19 @@ public class WorkWithList {
         int max = 0;
         if (arrayListThatWeWillOpperate.isEmpty()) {
             throw new NullPointerException("Array is empty");
+
         }
         for (int i = 0; i < arrayListThatWeWillOpperate.size(); i++) {
             if (arrayListThatWeWillOpperate.get(i) > max) {
                 max = arrayListThatWeWillOpperate.get(i);
             }
         }
-        //Changes
         System.out.println("Max element " + max);
         return max;
     }
 
     public ArrayList<Integer> emptyArrayList(ArrayList<Integer> arrayListThatWeWillOpperate) {
         arrayListThatWeWillOpperate.clear();
-        //Changes
         return arrayListThatWeWillOpperate;
     }
 }
