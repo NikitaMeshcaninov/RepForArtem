@@ -8,6 +8,7 @@ public class Main {
         int [] array = {10,150,55,16,2};
         arrayListForTranforming =  userArray.arrayListbuilder(array);
 
+        
         System.out.println("Max int in our Array is " +  userArray.findMax(arrayListForTranforming));
         arrayListForTranforming = userArray.sorter(arrayListForTranforming);
         arrayListForTranforming = userArray.emptyArrayList(arrayListForTranforming);
