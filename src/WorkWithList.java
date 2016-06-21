@@ -10,7 +10,6 @@ public class WorkWithList {
         return userArrayList;
     }
 
-
     public ArrayList<Integer> sorter(ArrayList<Integer> arrayListThatWeWillOpperate) {
         System.out.println("In witch way u want (true - upper way, false - down way)");
         Scanner sc = new Scanner(System.in);
