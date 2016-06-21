@@ -1,6 +1,16 @@
+
 public class Main {
 
+
     public static void main(String[] args) {
-        System.out.println("TEst Artem REPO");
+
+        WorkWithList arrayListThatWillBeOurObject = new WorkWithList();
+
+        arrayListThatWillBeOurObject.transformerArrayToArrayList();
+        arrayListThatWillBeOurObject.ourMax();
+        arrayListThatWillBeOurObject.Sorter();
+        arrayListThatWillBeOurObject.emptyArrayList();
+
+
     }
 }
