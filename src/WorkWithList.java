@@ -3,6 +3,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class WorkWithList {
+    private ArrayList<Integer> targetList = new ArrayList<Integer>();
+    public ArrayList<Integer> getTargetList() {
+        return targetList;
+    }
+
+
+
     public ArrayList<Integer> arrayListBuilder(int[] array) {
         ArrayList userArrayList = new ArrayList();
         for (int i = 0; i < array.length; i++)
