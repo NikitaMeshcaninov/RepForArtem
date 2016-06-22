@@ -18,6 +18,7 @@ public class WorkWithList {
     }
 
 
+
     public ArrayList<Integer> sorter(ArrayList<Integer> arrayListThatWeWillOpperate) {
         System.out.println("In witch way u want (true - upper way, false - down way)");
         Scanner sc = new Scanner(System.in);
@@ -72,7 +73,7 @@ public class WorkWithList {
         System.out.println(arrayListThatWeWillOpperate.toString());
         return arrayListThatWeWillOpperate;
     }
-//Coments
+//Coments1
     public int findMax(ArrayList<Integer> arrayListThatWeWillOpperate) {
         int max = 0;
         if (arrayListThatWeWillOpperate.isEmpty()) {
