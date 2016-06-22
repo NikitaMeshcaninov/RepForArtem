@@ -73,7 +73,8 @@ public class WorkWithList {
         System.out.println(arrayListThatWeWillOpperate.toString());
         return arrayListThatWeWillOpperate;
     }
-//Coments1
+
+    //Artem changes
     public int findMax(ArrayList<Integer> arrayListThatWeWillOpperate) {
         int max = 0;
         if (arrayListThatWeWillOpperate.isEmpty()) {
