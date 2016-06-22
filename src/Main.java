@@ -6,8 +6,8 @@ public class Main {
         ArrayList arrayListForTranforming = new ArrayList();
         WorkWithList userArray = new WorkWithList();
         int [] array = {10,150,55,16,2};
-        arrayListForTranforming =  userArray.fillArrayList(array);
-
+        userArray.fillArrayList(array);
+        arrayListForTranforming = userArray.getTargetList();
 
         System.out.println("Max int in our Array is " +  userArray.findMax(arrayListForTranforming));
         arrayListForTranforming = userArray.sorter(arrayListForTranforming);
