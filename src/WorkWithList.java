@@ -10,11 +10,11 @@ public class WorkWithList {
 
 
 
-    public ArrayList<Integer> arrayListBuilder(int[] array) {
-        ArrayList userArrayList = new ArrayList();
+    public void fillArrayList(int[] array) {
+
         for (int i = 0; i < array.length; i++)
-            userArrayList.add(array[i]);
-        return userArrayList;
+            targetList.add(array[i]);
+
     }
 
 

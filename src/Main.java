@@ -6,7 +6,7 @@ public class Main {
         ArrayList arrayListForTranforming = new ArrayList();
         WorkWithList userArray = new WorkWithList();
         int [] array = {10,150,55,16,2};
-        arrayListForTranforming =  userArray.arrayListBuilder(array);
+        arrayListForTranforming =  userArray.fillArrayList(array);
 
 
         System.out.println("Max int in our Array is " +  userArray.findMax(arrayListForTranforming));
