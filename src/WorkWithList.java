@@ -74,8 +74,6 @@ public class WorkWithList {
         return arrayListThatWeWillOpperate;
     }
 
-    //Artem changes
-//Coments1Coments1Coments1Coments1Coments1
     public int findMax(ArrayList<Integer> arrayListThatWeWillOpperate) {
         int max = 0;
         if (arrayListThatWeWillOpperate.isEmpty()) {
