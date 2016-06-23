@@ -89,8 +89,8 @@ public class WorkWithList {
         return max;
     }
 
-    public ArrayList<Integer> emptyArrayList(ArrayList<Integer> arrayListThatWeWillOpperate) {
-        arrayListThatWeWillOpperate.clear();
-        return arrayListThatWeWillOpperate;
+    public void emptyArrayList(ArrayList<Integer> arrayListThatWeWillOpperate) {
+        targetList.clear();
+
     }
 }
