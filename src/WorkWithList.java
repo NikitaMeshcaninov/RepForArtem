@@ -74,19 +74,19 @@ public class WorkWithList {
 
     }
 
-    public int findMax(ArrayList<Integer> arrayListThatWeWillOpperate) {
+    public void findMax() {
         int max = 0;
-        if (arrayListThatWeWillOpperate.isEmpty()) {
+        if (targetList.isEmpty()) {
             throw new NullPointerException("Array is empty");
 
         }
-        for (int i = 0; i < arrayListThatWeWillOpperate.size(); i++) {
-            if (arrayListThatWeWillOpperate.get(i) > max) {
-                max = arrayListThatWeWillOpperate.get(i);
+        for (int i = 0; i < targetList.size(); i++) {
+            if (targetList.get(i) > max) {
+                max = targetList.get(i);
             }
         }
         System.out.println("Max element " + max);
-        return max;
+
     }
 
     public void emptyArrayList() {
