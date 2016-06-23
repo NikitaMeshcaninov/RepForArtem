@@ -10,7 +10,7 @@ public class Main {
         arrayListForTranforming = userArray.getTargetList();
 
         System.out.println("Max int in our Array is " +  userArray.findMax(arrayListForTranforming));
-        arrayListForTranforming = userArray.sorter(arrayListForTranforming);
+        userArray.sorter();
         userArray.emptyArrayList();
 
         System.out.println(userArray.getTargetList());
