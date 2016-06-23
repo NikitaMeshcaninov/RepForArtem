@@ -8,9 +8,6 @@ public class WorkWithList {
         return targetList;
     }
 
-    private int switcherVar1 = 0;
-    private int i = 0;
-
     public void fillArrayList(int[] array) {
 
         for (int i = 0; i < array.length; i++)
@@ -29,20 +26,22 @@ public class WorkWithList {
             throw new NullPointerException("Array is empty");
         }
         int size = targetList.size();
-
+        int counter = 0;
 
         while (size != 0) {
 
-            if (targetList.get(i) > targetList.get(i + 1) && trigger) {
-                size = switcher();
-            } else if (targetList.get(i) < targetList.get(i + 1) && !trigger) {
-                size = switcher();
+            if (targetList.get(counter) > targetList.get(counter + 1) && trigger) {
+                size = switcher(counter);
+                counter++;
+            } else if (targetList.get(counter) < targetList.get(counter + 1) && !trigger) {
+                size = switcher(counter);
+                counter++;
             } else {
                 size--;
-                i++;
+                counter++;
             }
-            if (i == targetList.size() - 1)
-                i = 0;
+            if (counter == targetList.size() - 1)
+                counter = 0;
 
         }
         System.out.println(targetList.toString());
@@ -69,11 +68,10 @@ public class WorkWithList {
 
     }
 
-    public int switcher() {
-        switcherVar1 = targetList.get(i);
-        targetList.set(i, targetList.get(i + 1));
-        targetList.set(i + 1, switcherVar1);
-        i++;
+    public int switcher(int index) {
+        int switcherVar1 = targetList.get(index);
+        targetList.set(index, targetList.get(index + 1));
+        targetList.set(index + 1, switcherVar1);
         return targetList.size();
     }
 }
