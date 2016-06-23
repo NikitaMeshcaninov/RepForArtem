@@ -89,7 +89,7 @@ public class WorkWithList {
         return max;
     }
 
-    public void emptyArrayList(ArrayList<Integer> arrayListThatWeWillOpperate) {
+    public void emptyArrayList() {
         targetList.clear();
 
     }

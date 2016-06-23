@@ -11,8 +11,8 @@ public class Main {
 
         System.out.println("Max int in our Array is " +  userArray.findMax(arrayListForTranforming));
         arrayListForTranforming = userArray.sorter(arrayListForTranforming);
-        arrayListForTranforming = userArray.emptyArrayList(arrayListForTranforming);
+        userArray.emptyArrayList();
 
-        System.out.println(userArray.toString());
+        System.out.println(userArray.getTargetList());
     }
 }
