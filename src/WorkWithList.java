@@ -12,7 +12,7 @@ public class WorkWithList {
     private int switcherVar1 = 0;
     private int switcherVar2 = 0;
     private int i = 0;
-    private int size = targetList.size();
+    private int size;
 
     public void setSize(int size) {
         this.size = size;
