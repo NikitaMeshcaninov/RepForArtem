@@ -17,33 +17,49 @@ public class WorkWithList {
 
 
     public void sorter() {
-        System.out.println("In witch way u want (true - upper way, false - down way)");
+        System.out.println("In witch way u want (descend - any key, or type ascend)");
         Scanner sc = new Scanner(System.in);
-        boolean trigger = sc.nextBoolean();
-
+        boolean ascend = false;
+        if (sc.next().equals("ascend")) {
+            ascend = true;
+        }
 
         if (getTargetList().isEmpty()) {
             throw new NullPointerException("Array is empty");
         }
-        int size = targetList.size();
+//        int size = targetList.size();
+//        int counter = 0;
+//
+//        while (size != 0) {
+//
+//            if (targetList.get(counter) > targetList.get(counter + 1) && trigger) {
+//                size = switcher(counter);
+//                counter++;
+//            } else if (targetList.get(counter) < targetList.get(counter + 1) && !trigger) {
+//                size = switcher(counter);
+//                counter++;
+//            } else {
+//                size--;
+//                counter++;
+//            }
+//            if (counter == targetList.size() - 1)
+//                counter = 0;
+//
+//        }
+
         int counter = 0;
 
-        while (size != 0) {
-
-            if (targetList.get(counter) > targetList.get(counter + 1) && trigger) {
-                size = switcher(counter);
-                counter++;
-            } else if (targetList.get(counter) < targetList.get(counter + 1) && !trigger) {
-                size = switcher(counter);
-                counter++;
-            } else {
-                size--;
-                counter++;
+        while (targetList.size() - counter != 0) {
+            for (int i = 0; i < targetList.size() - 1; i++) {
+                if (targetList.get(i) > targetList.get(i + 1) && ascend) {
+                    switcher(i);
+                } else if (targetList.get(i) < targetList.get(i + 1) && !ascend) {
+                    switcher(i);
+                }
             }
-            if (counter == targetList.size() - 1)
-                counter = 0;
-
+            counter++;
         }
+
         System.out.println(targetList.toString());
 
     }
@@ -68,10 +84,9 @@ public class WorkWithList {
 
     }
 
-    public int switcher(int index) {
+    public void switcher(int index) {
         int switcherVar1 = targetList.get(index);
         targetList.set(index, targetList.get(index + 1));
         targetList.set(index + 1, switcherVar1);
-        return targetList.size();
     }
 }
