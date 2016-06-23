@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,11 +11,6 @@ public class WorkWithList {
     private int switcherVar1 = 0;
     private int switcherVar2 = 0;
     private int i = 0;
-    private int size;
-
-    public void setSize(int size) {
-        this.size = size;
-    }
 
     public void fillArrayList(int[] array) {
 
@@ -35,13 +29,14 @@ public class WorkWithList {
         if (getTargetList().isEmpty()) {
             throw new NullPointerException("Array is empty");
         }
+        int size = targetList.size();
 
         if (trigger) {
 
             while (size != 0) {
 
                 if (targetList.get(i) > targetList.get(i + 1)) {     //Switch variables untill thay will be in right order
-                    this.switcher();
+                    size = switcher();
                 } else {
                     size--;
                     i++;
@@ -56,7 +51,7 @@ public class WorkWithList {
             while (size != 0) {
 
                 if (targetList.get(i) < targetList.get(i + 1)) {     //Same cycle for reverse sort
-                    this.switcher();
+                    size = switcher();
                 } else {
                     size--;
                     i++;
@@ -90,12 +85,12 @@ public class WorkWithList {
 
     }
 
-    public void switcher() {
+    public int switcher() {
         switcherVar1 = targetList.get(i);
         switcherVar2 = targetList.get(i + 1);
         targetList.set(i + 1, switcherVar1);
         targetList.set(i, switcherVar2);
         i++;
-        size = targetList.size();
+        return targetList.size();
     }
 }

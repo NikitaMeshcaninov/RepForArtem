@@ -8,7 +8,6 @@ public class Main {
         int [] array = {10,150,55,16,2,52,4,452,5,22,484,5};
         userArray.fillArrayList(array);
         userArray.getTargetList();
-        userArray.setSize(array.length);
 
         userArray.findMax();
         userArray.sorter();
