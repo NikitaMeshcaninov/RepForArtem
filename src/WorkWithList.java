@@ -23,7 +23,7 @@ public class WorkWithList {
         System.out.println("In witch way u want (true - upper way, false - down way)");
         Scanner sc = new Scanner(System.in);
         boolean trigger = sc.nextBoolean();
-        boolean Flag = false;
+
         int switcherVar1 = 0;
         int switcherVar2 = 0;
         int i = 0;
@@ -49,7 +49,7 @@ public class WorkWithList {
 
             }
         }
-        if (trigger && !targetList.isEmpty()) {
+        if (!trigger && !targetList.isEmpty()) {
 
             while (size != 0) {
 
