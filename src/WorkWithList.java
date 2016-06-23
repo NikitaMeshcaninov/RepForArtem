@@ -4,11 +4,19 @@ import java.util.Scanner;
 
 public class WorkWithList {
     private ArrayList<Integer> targetList = new ArrayList<Integer>();
+
     public ArrayList<Integer> getTargetList() {
         return targetList;
     }
 
+    private int switcherVar1 = 0;
+    private int switcherVar2 = 0;
+    private int i = 0;
+    private int size = targetList.size();
 
+    public void setSize(int size) {
+        this.size = size;
+    }
 
     public void fillArrayList(int[] array) {
 
@@ -18,28 +26,22 @@ public class WorkWithList {
     }
 
 
-
     public void sorter() {
         System.out.println("In witch way u want (true - upper way, false - down way)");
         Scanner sc = new Scanner(System.in);
         boolean trigger = sc.nextBoolean();
 
-        int switcherVar1 = 0;
-        int switcherVar2 = 0;
-        int i = 0;
-        int size = targetList.size();
 
-        if (trigger && !targetList.isEmpty()) {
+        if (getTargetList().isEmpty()) {
+            throw new NullPointerException("Array is empty");
+        }
+
+        if (trigger) {
 
             while (size != 0) {
 
                 if (targetList.get(i) > targetList.get(i + 1)) {     //Switch variables untill thay will be in right order
-                    switcherVar1 = targetList.get(i);
-                    switcherVar2 = targetList.get(i + 1);
-                    targetList.set(i + 1, switcherVar1);
-                    targetList.set(i, switcherVar2);
-                    i++;
-                    size = targetList.size() ;
+                    this.switcher();
                 } else {
                     size--;
                     i++;
@@ -49,17 +51,12 @@ public class WorkWithList {
 
             }
         }
-        if (!trigger && !targetList.isEmpty()) {
+        if (!trigger) {
 
             while (size != 0) {
 
                 if (targetList.get(i) < targetList.get(i + 1)) {     //Same cycle for reverse sort
-                    switcherVar1 = targetList.get(i);
-                    switcherVar2 = targetList.get(i + 1);
-                    targetList.set(i + 1, switcherVar1);
-                    targetList.set(i, switcherVar2);
-                    i++;
-                    size = targetList.size();
+                    this.switcher();
                 } else {
                     size--;
                     i++;
@@ -91,5 +88,14 @@ public class WorkWithList {
     public void emptyArrayList() {
         targetList.clear();
 
+    }
+
+    public void switcher() {
+        switcherVar1 = targetList.get(i);
+        switcherVar2 = targetList.get(i + 1);
+        targetList.set(i + 1, switcherVar1);
+        targetList.set(i, switcherVar2);
+        i++;
+        size = targetList.size();
     }
 }
