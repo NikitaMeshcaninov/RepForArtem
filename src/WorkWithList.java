@@ -31,35 +31,50 @@ public class WorkWithList {
         }
         int size = targetList.size();
 
-        if (trigger) {
+//        if (trigger) {
+//
+//            while (size != 0) {
+//
+//                if (targetList.get(i) > targetList.get(i + 1)) {     //Switch variables untill thay will be in right order
+//                    size = switcher();
+//                } else {
+//                    size--;
+//                    i++;
+//                }
+//                if (i == targetList.size() - 1)
+//                    i = 0;
+//
+//            }
+//        } else {
+//
+//            while (size != 0) {
+//
+//                if (targetList.get(i) < targetList.get(i + 1)) {     //Same cycle for reverse sort
+//                    size = switcher();
+//                } else {
+//                    size--;
+//                    i++;
+//                }
+//                if (i == targetList.size() - 1)
+//                    i = 0;
+//
+//            }
+//        }
 
-            while (size != 0) {
 
-                if (targetList.get(i) > targetList.get(i + 1)) {     //Switch variables untill thay will be in right order
-                    size = switcher();
-                } else {
-                    size--;
-                    i++;
-                }
-                if (i == targetList.size() - 1)
-                    i = 0;
+        while (size != 0) {
 
+            if (targetList.get(i) > targetList.get(i + 1) && trigger) {
+                size = switcher();
+            } else if (targetList.get(i) < targetList.get(i + 1) && !trigger) {
+                size = switcher();
+            } else {
+                size--;
+                i++;
             }
-        }
-        if (!trigger) {
+            if (i == targetList.size() - 1)
+                i = 0;
 
-            while (size != 0) {
-
-                if (targetList.get(i) < targetList.get(i + 1)) {     //Same cycle for reverse sort
-                    size = switcher();
-                } else {
-                    size--;
-                    i++;
-                }
-                if (i == targetList.size() - 1)
-                    i = 0;
-
-            }
         }
         System.out.println(targetList.toString());
 
