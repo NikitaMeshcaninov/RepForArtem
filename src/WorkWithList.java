@@ -27,7 +27,7 @@ public class WorkWithList {
         int switcherVar1 = 0;
         int switcherVar2 = 0;
         int i = 0;
-        int size = targetList.size() * targetList.size();
+        int size = targetList.size();
 
         if (trigger && !targetList.isEmpty()) {
 
@@ -39,7 +39,7 @@ public class WorkWithList {
                     targetList.set(i + 1, switcherVar1);
                     targetList.set(i, switcherVar2);
                     i++;
-                    size = targetList.size()*targetList.size() ;
+                    size = targetList.size() ;
                 } else {
                     size--;
                     i++;
@@ -59,15 +59,14 @@ public class WorkWithList {
                     targetList.set(i + 1, switcherVar1);
                     targetList.set(i, switcherVar2);
                     i++;
-                    size = targetList.size() * targetList.size();
+                    size = targetList.size();
                 } else {
                     size--;
                     i++;
                 }
                 if (i == targetList.size() - 1)
                     i = 0;
-                if (size == 0)
-                    break;
+
             }
         }
         System.out.println(targetList.toString());
