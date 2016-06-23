@@ -27,11 +27,11 @@ public class WorkWithList {
         int switcherVar1 = 0;
         int switcherVar2 = 0;
         int i = 0;
-        int size = targetList.size() + 20;
+        int size = targetList.size() * targetList.size();
 
-        if (trigger == true && !targetList.isEmpty()) {
+        if (trigger && !targetList.isEmpty()) {
 
-            for (; ; ) {
+            while (size != 0) {
 
                 if (targetList.get(i) > targetList.get(i + 1)) {     //Switch variables untill thay will be in right order
                     switcherVar1 = targetList.get(i);
@@ -39,19 +39,19 @@ public class WorkWithList {
                     targetList.set(i + 1, switcherVar1);
                     targetList.set(i, switcherVar2);
                     i++;
-                    size = targetList.size() + 200;
+                    size = targetList.size()*targetList.size() ;
                 } else {
                     size--;
                     i++;
                 }
                 if (i == targetList.size() - 1)
                     i = 0;
-                if (size == 0)
-                    break;
+
             }
         }
-        if (trigger == false && !targetList.isEmpty()) {
-            for (; ; ) {
+        if (trigger && !targetList.isEmpty()) {
+
+            while (size != 0) {
 
                 if (targetList.get(i) < targetList.get(i + 1)) {     //Same cycle for reverse sort
                     switcherVar1 = targetList.get(i);
@@ -59,7 +59,7 @@ public class WorkWithList {
                     targetList.set(i + 1, switcherVar1);
                     targetList.set(i, switcherVar2);
                     i++;
-                    size = targetList.size() + 200;
+                    size = targetList.size() * targetList.size();
                 } else {
                     size--;
                     i++;
