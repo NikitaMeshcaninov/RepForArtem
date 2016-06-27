@@ -27,25 +27,6 @@ public class WorkWithList {
         if (getTargetList().isEmpty()) {
             throw new NullPointerException("Array is empty");
         }
-//        int size = targetList.size();
-//        int counter = 0;
-//
-//        while (size != 0) {
-//
-//            if (targetList.get(counter) > targetList.get(counter + 1) && trigger) {
-//                size = switcher(counter);
-//                counter++;
-//            } else if (targetList.get(counter) < targetList.get(counter + 1) && !trigger) {
-//                size = switcher(counter);
-//                counter++;
-//            } else {
-//                size--;
-//                counter++;
-//            }
-//            if (counter == targetList.size() - 1)
-//                counter = 0;
-//
-//        }
 
         int counter = 0;
 
