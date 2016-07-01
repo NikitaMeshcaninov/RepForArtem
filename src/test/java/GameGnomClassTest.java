@@ -45,7 +45,7 @@ public class GameGnomClassTest {
         WebElement enterField = driver.findElement(By.name("form-username"));
         enterField.sendKeys("shmublon");
         Thread.sleep(500);
-        WebElement enterButton = driver.findElement(By.className("btn"));
+        WebElement enterButton = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div[2]/form/button"));
         enterButton.click();
         Thread.sleep(500);
         WebElement nameField = driver.findElement(By.id("name"));
@@ -55,7 +55,7 @@ public class GameGnomClassTest {
         WebElement experienceField = driver.findElement(By.id("experience"));
         experienceField.sendKeys("200");
         Thread.sleep(500);
-        WebElement addCharacterButton = driver.findElement(By.className("btn"));
+        WebElement addCharacterButton = driver.findElement(By.xpath("/html/body/div/div[2]/form/div[5]/div/button"));
         addCharacterButton.click();
         Thread.sleep(15000);
 

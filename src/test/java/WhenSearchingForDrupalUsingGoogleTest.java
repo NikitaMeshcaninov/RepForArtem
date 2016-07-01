@@ -2,10 +2,8 @@ package test.java;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
-
 import java.io.File;
 import java.io.IOException;
-
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -24,7 +22,7 @@ public class WhenSearchingForDrupalUsingGoogleTest {
     @Before
     public void openBrowser() {
         driver = new ChromeDriver();
-        driver.get("http://www.google.com");
+        driver.get("https://www.google.com.ua/?gfe_rd=cr&ei=Rz92V-qcCtPCtAG33KvoCg&gws_rd=ssl");
         screenshotHelper = new ScreenshotHelper();
     }
 
@@ -36,13 +34,12 @@ public class WhenSearchingForDrupalUsingGoogleTest {
 
     @Test
     public void pageTitleAfterSearchShouldBeginWithDrupal() throws IOException, InterruptedException {
-        assertEquals("The page title should equal Google at the start of the test.", "Google", driver.getTitle());
-        WebElement searchField = driver.findElement(By.name("q"));
-        searchField.sendKeys("Drupal!");
-        searchField.submit();
+        assertEquals("The page title should e qual Google at the start of the test.", "Вход", driver.getTitle());
+        WebElement enterField = driver.findElement(By.name("form-username"));
+        enterField.sendKeys("Шмублон");
+        enterField.submit();
         Thread.sleep(500);
-        assertTrue("The page title should start with the search string after the search.",
-                driver.getTitle().toLowerCase().startsWith("drupal!"));
+
     }
 
     private class ScreenshotHelper {
