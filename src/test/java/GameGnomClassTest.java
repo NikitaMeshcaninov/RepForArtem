@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Driver;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
@@ -34,8 +35,22 @@ public class GameGnomClassTest {
     }
 
     @After
-    public void saveScreenshotAndCloseBrowser() throws IOException {
+    public void saveScreenshotAndCloseBrowser() throws IOException, InterruptedException {
         screenshotHelper.saveScreenshot("screenshot.png");
+        WebElement mainMenuButton = driver.findElement(By.xpath("/html/body/div/div[2]/div/div/div[1]/h4/a"));
+        mainMenuButton.click();
+        Thread.sleep(500);
+        WebElement myCharactersButton = driver.findElement(By.xpath("/html/body/div/div[2]/div/div/div[2]/ul/li[10]/a"));
+        myCharactersButton.click();
+        Thread.sleep(500);
+        driver.switchTo().alert().accept();
+        Thread.sleep(500);
+        WebElement moreForCharacterButton = driver.findElement(By.xpath("/html/body/div/div[1]/table/tbody/tr[4]/td[2]/div/button"));
+        moreForCharacterButton.click();
+        Thread.sleep(500);
+        WebElement xDellButton = driver.findElement(By.xpath("/html/body/div/div[1]/table/tbody/tr[4]/td[2]/div/ul/li[3]/a"));
+        xDellButton.click();
+        Thread.sleep(1500);
         driver.close();
     }
 
@@ -57,9 +72,9 @@ public class GameGnomClassTest {
         Thread.sleep(500);
         WebElement addCharacterButton = driver.findElement(By.xpath("/html/body/div/div[2]/form/div[5]/div/button"));
         addCharacterButton.click();
-        Thread.sleep(15000);
+        Thread.sleep(3000);
 
-        assertEquals("Name should be \"Тестовый персонаж\"","тестовый персонаж",
+        assertEquals("Name should be \"Тестовый персонаж\"", "тестовый персонаж",
                 driver.findElement(By.xpath("/html/body/div/h3")).getText().toLowerCase());
         assertEquals("Расса персонажа должна быть \"Гном\"", "гном"
                 , driver.findElement(By.xpath("/html/body/div/div[3]/div[1]/div[2]/p")).getText().toLowerCase());
