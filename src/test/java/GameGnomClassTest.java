@@ -45,15 +45,15 @@ public class GameGnomClassTest {
 
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         screenshotHelper.saveScreenshot("screenshot.png");
-        WebElement mainMenuButton = driver.findElement(By.xpath("/html/body/div/div[2]/div/div/div[1]/h4/a"));
+        WebElement mainMenuButton = driver.findElement(By.xpath("//a[text()='Главное меню']"));
         mainMenuButton.click();
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("/html/body/div/div[2]/div/div/div[2]/ul/li[10]/a"))));
-        WebElement myCharactersButton = driver.findElement(By.xpath("/html/body/div/div[2]/div/div/div[2]/ul/li[10]/a"));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//a[text()='Мои персонажи']"))));
+        WebElement myCharactersButton = driver.findElement(By.xpath("//a[text()='Мои персонажи']"));
         myCharactersButton.click();
         driver.switchTo().alert().accept();
-        WebElement moreForCharacterButton = driver.findElement(By.xpath("/html/body/div/div[1]/table/tbody/tr[4]/td[2]/div/button"));
+        WebElement moreForCharacterButton = driver.findElement(By.xpath("//tr[4]/td[2]/div/button"));
         moreForCharacterButton.click();
-        WebElement xDellButton = driver.findElement(By.xpath("/html/body/div/div[1]/table/tbody/tr[4]/td[2]/div/ul/li[3]/a"));
+        WebElement xDellButton = driver.findElement(By.xpath("//tr[4]/td[2]/div/ul/li[3]/a"));
         xDellButton.click();
         driver.close();
     }
@@ -67,7 +67,7 @@ public class GameGnomClassTest {
         assertEquals("The page title should e qual Google at the start of the test.", "Вход", driver.getTitle());
         WebElement enterField = driver.findElement(By.name("form-username"));
         enterField.sendKeys("shmublon");
-        WebElement enterButton = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div/div[2]/form/button"));
+        WebElement enterButton = driver.findElement(By.xpath("//button[@ng-click='login()']"));
         enterButton.click();
         WebElement nameField = driver.findElement(By.id("name"));
         nameField.sendKeys("Тестовый персонаж");
@@ -75,19 +75,19 @@ public class GameGnomClassTest {
         raceSelector.selectByVisibleText("Гном");
         WebElement experienceField = driver.findElement(By.id("experience"));
         experienceField.sendKeys("200");
-        WebElement addCharacterButton = driver.findElement(By.xpath("/html/body/div/div[2]/form/div[5]/div/button"));
+        WebElement addCharacterButton = driver.findElement(By.xpath("//button[@ng-click='createPersonage()']"));
         addCharacterButton.click();
 
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("/html/body/div/h3"))));
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("/html/body/div/div[3]/div[1]/div[2]/p"))));
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("/html/body/div/form/div/div[2]/div/p/strong"))));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h3[text()='Тестовый персонаж']"))));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//p[text()='Гном']"))));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//p/strong[text()='200']"))));
 
         assertEquals("Name should be \"Тестовый персонаж\"", "тестовый персонаж",
-                driver.findElement(By.xpath("/html/body/div/h3")).getText().toLowerCase());
+                driver.findElement(By.xpath("//h3[text()='Тестовый персонаж']")).getText().toLowerCase());
         assertEquals("Расса персонажа должна быть \"Гном\"", "гном"
-                , driver.findElement(By.xpath("/html/body/div/div[3]/div[1]/div[2]/p")).getText().toLowerCase());
+                , driver.findElement(By.xpath("//p[text()='Гном']")).getText().toLowerCase());
         assertEquals("Опыт персонажа должна быть 200", "200"
-                , driver.findElement(By.xpath("/html/body/div/form/div/div[2]/div/p/strong")).getText().toLowerCase());
+                , driver.findElement(By.xpath("//p/strong[text()='200']")).getText().toLowerCase());
     }
 
     private class ScreenshotHelper {
