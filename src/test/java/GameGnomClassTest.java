@@ -28,6 +28,8 @@ public class GameGnomClassTest {
     private WebDriver driver;
     private ScreenshotHelper screenshotHelper;
 
+    private String testName = "Тестовый персонаж";
+
 
     @Before
     public void openBrowser() {
@@ -51,9 +53,10 @@ public class GameGnomClassTest {
         WebElement myCharactersButton = driver.findElement(By.xpath("//a[text()='Мои персонажи']"));
         myCharactersButton.click();
         driver.switchTo().alert().accept();
-        WebElement moreForCharacterButton = driver.findElement(By.xpath("//tr[4]/td[2]/div/button"));
+        WebElement moreForCharacterButton = driver.findElement(By.xpath("//table//tr[td/a[contains(text(), '" + testName + "')]]/td[2]//button"));
         moreForCharacterButton.click();
-        WebElement xDellButton = driver.findElement(By.xpath("//tr[4]/td[2]/div/ul/li[3]/a"));
+        //there is russian symbol х
+        WebElement xDellButton = driver.findElement(By.xpath("//table//tr[td/a[contains(text(), '" + testName + "')]]/td[2]//a[contains(text(), 'х')]"));
         xDellButton.click();
         driver.close();
     }
@@ -70,7 +73,7 @@ public class GameGnomClassTest {
         WebElement enterButton = driver.findElement(By.xpath("//button[@ng-click='login()']"));
         enterButton.click();
         WebElement nameField = driver.findElement(By.id("name"));
-        nameField.sendKeys("Тестовый персонаж");
+        nameField.sendKeys(testName);
         Select raceSelector = new Select(driver.findElement(By.id("race_id")));
         raceSelector.selectByVisibleText("Гном");
         WebElement experienceField = driver.findElement(By.id("experience"));
@@ -82,8 +85,8 @@ public class GameGnomClassTest {
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//p[text()='Гном']"))));
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//p/strong[text()='200']"))));
 
-        assertEquals("Name should be \"Тестовый персонаж\"", "тестовый персонаж",
-                driver.findElement(By.xpath("//h3[text()='Тестовый персонаж']")).getText().toLowerCase());
+        assertEquals("Name should be \"Тестовый персонаж\"", testName,
+                driver.findElement(By.xpath("//h3[text()='Тестовый персонаж']")).getText());
         assertEquals("Расса персонажа должна быть \"Гном\"", "гном"
                 , driver.findElement(By.xpath("//p[text()='Гном']")).getText().toLowerCase());
         assertEquals("Опыт персонажа должна быть 200", "200"
