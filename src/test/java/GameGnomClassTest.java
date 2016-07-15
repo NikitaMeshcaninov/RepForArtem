@@ -70,25 +70,25 @@ public class GameGnomClassTest {
         enterField.sendKeys("shmublon");
         WebElement enterButton = driver.findElement(By.xpath("//button[@ng-click='login()']"));
         enterButton.click();
-        WebElement nameField = driver.findElement(By.id("name"));
+        WebElement nameField = driver.findElement(By.xpath(".//*[@id='name']"));
         nameField.sendKeys(testName);
-        Select raceSelector = new Select(driver.findElement(By.id("race_id")));
+        Select raceSelector = new Select(driver.findElement(By.xpath(".//*[@id='race_id']")));
         raceSelector.selectByVisibleText("Гном");
-        WebElement experienceField = driver.findElement(By.id("experience"));
+        WebElement experienceField = driver.findElement(By.xpath(".//*[@id='experience']"));
         experienceField.sendKeys("200");
         WebElement addCharacterButton = driver.findElement(By.xpath("//button[@ng-click='createPersonage()']"));
         addCharacterButton.click();
 
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h3[text()='Тестовый персонаж']"))));
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//p[text()='Гном']"))));
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//p/strong[text()='200']"))));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[p/strong[text()='Раса:']]/following-sibling::div/p"))));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[p/strong[text()='Очки опыта:']]/following-sibling::div/div/p/strong"))));
 
         assertEquals("Name should be \"Тестовый персонаж\"", testName,
-                driver.findElement(By.xpath("//h3[text()='Тестовый персонаж']")).getText());
+                driver.findElement(By.xpath("//h3")).getText());
         assertEquals("Расса персонажа должна быть \"Гном\"", "гном"
-                , driver.findElement(By.xpath("//p[text()='Гном']")).getText().toLowerCase());
+                , driver.findElement(By.xpath("//div[p/strong[text()='Раса:']]/following-sibling::div/p")).getText().toLowerCase());
         assertEquals("Опыт персонажа должна быть 200", "200"
-                , driver.findElement(By.xpath("//p/strong[text()='200']")).getText().toLowerCase());
+                , driver.findElement(By.xpath("//div[p/strong[text()='Очки опыта:']]/following-sibling::div/div/p/strong")).getText().toLowerCase());
     }
 
     private class ScreenshotHelper {

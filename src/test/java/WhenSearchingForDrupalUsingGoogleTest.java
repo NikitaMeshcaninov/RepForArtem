@@ -1,5 +1,3 @@
-package test.java;
-
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 import java.io.File;

@@ -1,3 +1,7 @@
+package test.java;
+
+import java.WorkWithList;
+
 public class Main {
 
     public static void main(String[] args) {
