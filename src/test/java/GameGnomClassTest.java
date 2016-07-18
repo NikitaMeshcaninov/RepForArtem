@@ -1,3 +1,5 @@
+import WebPages.AddNewPersonagePage;
+import WebPages.HomePage;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -8,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
@@ -24,7 +27,7 @@ import static junit.framework.Assert.assertTrue;
 public class GameGnomClassTest {
 
     private WebDriver driver;
-    private ScreenshotHelper screenshotHelper;
+
 
     private String testName = "Тестовый персонаж";
 
@@ -34,8 +37,8 @@ public class GameGnomClassTest {
 
 
         driver = new ChromeDriver();
-        driver.get("http://erilon-staging.herokuapp.com/");
-        screenshotHelper = new GameGnomClassTest.ScreenshotHelper();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
     }
 
     @After
@@ -44,7 +47,6 @@ public class GameGnomClassTest {
         final Wait<WebDriver> wait = new WebDriverWait(driver, 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
 
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        screenshotHelper.saveScreenshot("screenshot.png");
         WebElement mainMenuButton = driver.findElement(By.xpath("//a[text()='Главное меню']"));
         mainMenuButton.click();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//a[text()='Мои персонажи']"))));
@@ -62,22 +64,19 @@ public class GameGnomClassTest {
     @Test
     public void gameTest() throws IOException, InterruptedException {
 
-        final Wait<WebDriver> wait = new WebDriverWait(driver, 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
-
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        HomePage homePage = new HomePage(driver);
         assertEquals("The page title should e qual Google at the start of the test.", "Вход", driver.getTitle());
-        WebElement enterField = driver.findElement(By.name("form-username"));
-        enterField.sendKeys("shmublon");
-        WebElement enterButton = driver.findElement(By.xpath("//button[@ng-click='login()']"));
-        enterButton.click();
-        WebElement nameField = driver.findElement(By.xpath(".//*[@id='name']"));
-        nameField.sendKeys(testName);
-        Select raceSelector = new Select(driver.findElement(By.xpath(".//*[@id='race_id']")));
-        raceSelector.selectByVisibleText("Гном");
-        WebElement experienceField = driver.findElement(By.xpath(".//*[@id='experience']"));
-        experienceField.sendKeys("200");
-        WebElement addCharacterButton = driver.findElement(By.xpath("//button[@ng-click='createPersonage()']"));
-        addCharacterButton.click();
+        homePage.login();
+
+        final Wait<WebDriver> wait = new WebDriverWait(driver, 5).
+                ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
+
+
+
+        AddNewPersonagePage addNewPersonagePage = new AddNewPersonagePage(driver);
+        addNewPersonagePage.AddCharacter();
+
+
 
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h3[text()='Тестовый персонаж']"))));
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[p/strong[text()='Раса:']]/following-sibling::div/p"))));
@@ -89,13 +88,5 @@ public class GameGnomClassTest {
                 , driver.findElement(By.xpath("//div[p/strong[text()='Раса:']]/following-sibling::div/p")).getText().toLowerCase());
         assertEquals("Опыт персонажа должна быть 200", "200"
                 , driver.findElement(By.xpath("//div[p/strong[text()='Очки опыта:']]/following-sibling::div/div/p/strong")).getText().toLowerCase());
-    }
-
-    private class ScreenshotHelper {
-
-        public void saveScreenshot(String screenshotFileName) throws IOException {
-            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(screenshot, new File(screenshotFileName));
-        }
     }
 }
