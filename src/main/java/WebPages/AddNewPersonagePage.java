@@ -11,15 +11,18 @@ import org.openqa.selenium.support.ui.Select;
  * Created by Nikita on 18.07.2016.
  */
 public class AddNewPersonagePage {
+    public String charakterName = "Тестовый персонаж";
     private WebDriver driver;
     private static String PageURL = "http://erilon-staging.herokuapp.com/views/user_personage_manager.html?id=1";
     @FindBy(how = How.XPATH, using = ".//*[@id='name']")
     private WebElement nameField;
     @FindBy(how = How.XPATH, using = ".//*[@id='race_id']")
-    private Select raceSelector;
+    private WebElement raceSelector;
+    @FindBy(how = How.XPATH, using = ".//*[@id='race_id']/option[3]")
+    private WebElement raceSelectorGnom;
     @FindBy(how = How.XPATH, using = ".//*[@id='experience']")
     private WebElement experienceField;
-    @FindBy(how = How.XPATH, using = "\"//button[@ng-click='createPersonage()']")
+    @FindBy(how = How.XPATH, using = "//button[@ng-click='createPersonage()']")
     WebElement addCharacterButton;
 
     public AddNewPersonagePage(WebDriver driver){
@@ -28,9 +31,14 @@ public class AddNewPersonagePage {
         PageFactory.initElements(driver, this);
     }
 
+    public String getCharakterName() {
+        return charakterName;
+    }
+
     public void AddCharacter(){
-        nameField.sendKeys("shmublon");
-        raceSelector.selectByVisibleText("Гном");
+        nameField.sendKeys(charakterName);
+        raceSelector.click();
+        raceSelectorGnom.click();
         experienceField.sendKeys("200");
         addCharacterButton.click();
     }
