@@ -31,10 +31,17 @@ public class AddNewPersonagePage {
     }
 
     public void AddCharacter(String name){
-        nameField.sendKeys(name);
         raceSelector.click();
         raceSelectorGnom.click();
         experienceField.sendKeys("200");
         addCharacterButton.click();
+    }
+
+    public void fillName(String name) {
+        nameField.sendKeys(name);
+    }
+
+    public void selecRace(String raceName) {
+        new Select(raceSelector).selectByValue(raceName);
     }
 }
