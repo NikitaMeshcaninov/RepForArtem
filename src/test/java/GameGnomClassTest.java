@@ -1,24 +1,15 @@
 import WebPages.AddNewPersonagePage;
 import WebPages.HomePage;
-import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.File;
 import java.io.IOException;
-import java.sql.Driver;
 import java.util.concurrent.TimeUnit;
 
 import static junit.framework.Assert.assertEquals;
@@ -29,7 +20,7 @@ public class GameGnomClassTest {
     private WebDriver driver;
 
 
-    private String testName = "Тестовый персонаж";
+    private static final String TEST_NAME = "Тестовый персонаж";
 
 
     @Before
@@ -53,10 +44,10 @@ public class GameGnomClassTest {
         WebElement myCharactersButton = driver.findElement(By.xpath("//a[text()='Мои персонажи']"));
         myCharactersButton.click();
         driver.switchTo().alert().accept();
-        WebElement moreForCharacterButton = driver.findElement(By.xpath("//table//tr[td/a[contains(text(), '" + testName + "')]]/td[2]//button"));
+        WebElement moreForCharacterButton = driver.findElement(By.xpath("//table//tr[td/a[contains(text(), '" + TEST_NAME + "')]]/td[2]//button"));
         moreForCharacterButton.click();
         //there is russian symbol х
-        WebElement xDellButton = driver.findElement(By.xpath("//table//tr[td/a[contains(text(), '" + testName + "')]]/td[2]//a[contains(text(), 'х')]"));
+        WebElement xDellButton = driver.findElement(By.xpath("//table//tr[td/a[contains(text(), '" + TEST_NAME + "')]]/td[2]//a[contains(text(), 'х')]"));
         xDellButton.click();
         driver.close();
     }
@@ -76,7 +67,7 @@ public class GameGnomClassTest {
 
 
         AddNewPersonagePage addNewPersonagePage = new AddNewPersonagePage(driver);
-        addNewPersonagePage.AddCharacter(testName);
+        addNewPersonagePage.AddCharacter(TEST_NAME);
 
 
 
@@ -84,7 +75,7 @@ public class GameGnomClassTest {
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[p/strong[text()='Раса:']]/following-sibling::div/p"))));
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[p/strong[text()='Очки опыта:']]/following-sibling::div/div/p/strong"))));
 
-        assertEquals("Name should be \"Тестовый персонаж\"", testName,
+        assertEquals("Name should be \"Тестовый персонаж\"", TEST_NAME,
                 driver.findElement(By.xpath("//h3")).getText());
         assertEquals("Расса персонажа должна быть \"Гном\"", "гном"
                 , driver.findElement(By.xpath("//div[p/strong[text()='Раса:']]/following-sibling::div/p")).getText().toLowerCase());
