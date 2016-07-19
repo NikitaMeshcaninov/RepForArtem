@@ -1,15 +1,23 @@
 import WebPages.AddNewPersonagePage;
 import WebPages.HomePage;
+import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
+import java.sql.Driver;
 import java.util.concurrent.TimeUnit;
 
 import static junit.framework.Assert.assertEquals;
@@ -53,7 +61,6 @@ public class GameGnomClassTest {
     }
 
 
-
     @Test
     public void gameTest() throws IOException, InterruptedException {
 
@@ -65,10 +72,11 @@ public class GameGnomClassTest {
                 ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
 
 
-
         AddNewPersonagePage addNewPersonagePage = new AddNewPersonagePage(driver);
-        addNewPersonagePage.AddCharacter(TEST_NAME);
-
+        addNewPersonagePage.fillName(TEST_NAME);
+        addNewPersonagePage.selecRace("Гном");
+        addNewPersonagePage.fillexperience();
+        addNewPersonagePage.addCharacer();
 
 
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h3[text()='Тестовый персонаж']"))));
