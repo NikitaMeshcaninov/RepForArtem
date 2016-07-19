@@ -11,7 +11,6 @@ import org.openqa.selenium.support.ui.Select;
  * Created by Nikita on 18.07.2016.
  */
 public class AddNewPersonagePage {
-    public String charakterName = "Тестовый персонаж";
     private WebDriver driver;
     private static String PageURL = "http://erilon-staging.herokuapp.com/views/user_personage_manager.html?id=1";
     @FindBy(how = How.XPATH, using = ".//*[@id='name']")
@@ -31,12 +30,8 @@ public class AddNewPersonagePage {
         PageFactory.initElements(driver, this);
     }
 
-    public String getCharakterName() {
-        return charakterName;
-    }
-
-    public void AddCharacter(){
-        nameField.sendKeys(charakterName);
+    public void AddCharacter(String name){
+        nameField.sendKeys(name);
         raceSelector.click();
         raceSelectorGnom.click();
         experienceField.sendKeys("200");

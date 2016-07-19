@@ -76,7 +76,7 @@ public class GameGnomClassTest {
 
 
         AddNewPersonagePage addNewPersonagePage = new AddNewPersonagePage(driver);
-        addNewPersonagePage.AddCharacter();
+        addNewPersonagePage.AddCharacter(testName);
 
 
 
