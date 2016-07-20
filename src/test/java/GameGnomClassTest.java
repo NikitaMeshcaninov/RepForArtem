@@ -61,16 +61,20 @@ public class GameGnomClassTest {
         personageListPage.fillexperience();
         personageListPage.addCharacer();
 
+        PersonagePage personagePage = new PersonagePage(driver);
+
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h3[text() = '" + TEST_NAME + "']"))));
+        //wait.until(ExpectedConditions.visibilityOf(personagePage.personageName)); непонятно почему не работает
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[p/strong[text()='Раса:']]/following-sibling::div/p"))));
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[p/strong[text()='Очки опыта:']]/following-sibling::div/div/p/strong"))));
 
         assertEquals("Name should be " + TEST_NAME, TEST_NAME,
-                driver.findElement(By.xpath("//h3")).getText());
+                personagePage.getPersonageName().getText());
+
         assertEquals("Расса персонажа должна быть \"Гном\"", "гном"
-                , driver.findElement(By.xpath("//div[p/strong[text()='Раса:']]/following-sibling::div/p")).getText().toLowerCase());
+                , personagePage.getPersonageRace().getText().toLowerCase());
         assertEquals("Опыт персонажа должна быть 200", "200"
-                , driver.findElement(By.xpath("//div[p/strong[text()='Очки опыта:']]/following-sibling::div/div/p/strong")).getText().toLowerCase());
+                , personagePage.getPersonageExp().getText().toLowerCase());
 
     }
 }
