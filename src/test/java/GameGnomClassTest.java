@@ -26,13 +26,13 @@ public class GameGnomClassTest {
     public void openBrowser() {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
     }
 
     @After
     public void delTestPersonageAndCloseBrowser() throws IOException, InterruptedException {
-
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         final Wait<WebDriver> wait = new WebDriverWait(driver, 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
+
 
         PersonagePage personagePage = new PersonagePage(driver);
         personagePage.openMinMenu();
@@ -61,11 +61,11 @@ public class GameGnomClassTest {
         personageListPage.fillexperience();
         personageListPage.addCharacer();
 
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h3[text()='Тестовый персонаж']"))));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h3[text() = '" + TEST_NAME + "']"))));
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[p/strong[text()='Раса:']]/following-sibling::div/p"))));
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[p/strong[text()='Очки опыта:']]/following-sibling::div/div/p/strong"))));
 
-        assertEquals("Name should be \"Тестовый персонаж\"", TEST_NAME,
+        assertEquals("Name should be " + TEST_NAME, TEST_NAME,
                 driver.findElement(By.xpath("//h3")).getText());
         assertEquals("Расса персонажа должна быть \"Гном\"", "гном"
                 , driver.findElement(By.xpath("//div[p/strong[text()='Раса:']]/following-sibling::div/p")).getText().toLowerCase());
