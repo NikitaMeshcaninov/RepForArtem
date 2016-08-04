@@ -14,13 +14,13 @@ public class PersonagePage {
     private static String PageURL = "http://erilon-staging.herokuapp.com/views/view_personage.html?id=105";
     @FindBy(xpath = "//a[text()='Главное меню']")
     private WebElement mainMenuButton;
-    @FindBy(xpath = "//a[text()='Мои персонажи']")
+    @FindBy(xpath = "//a[@href='/views/user_personage_manager.html?id=1']")
     private WebElement myPersonagesButton;
     @FindBy(xpath = "//h3[text() = '" + testname + "']")
     private WebElement personageName;
     @FindBy(xpath = "//div[p/strong[text()='Раса:']]/following-sibling::div/p")
     private WebElement personageRace;
-    @FindBy( xpath = "//div[p/strong[text()='Очки опыта:']]/following-sibling::div/div/p/strong")
+    @FindBy(xpath = "//div[p/strong[text()='Очки опыта:']]/following-sibling::div/div/p/strong")
     private WebElement personageExp;
 
     public WebElement getPersonageName() {
@@ -40,11 +40,11 @@ public class PersonagePage {
         PageFactory.initElements(driver, this);
     }
 
-    public void openMinMenu(){
+    public void openMinMenu() {
         mainMenuButton.click();
     }
 
-    public void goToPersonageListPage(){
+    public void goToPersonageListPage() {
         myPersonagesButton.click();
     }
 

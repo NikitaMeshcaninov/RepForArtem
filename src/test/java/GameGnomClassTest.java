@@ -31,12 +31,13 @@ public class GameGnomClassTest {
 
     @After
     public void delTestPersonageAndCloseBrowser() throws IOException, InterruptedException {
-        final Wait<WebDriver> wait = new WebDriverWait(driver, 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
+        final Wait<WebDriver> wait = new WebDriverWait(driver, 5).
+                ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
 
 
         PersonagePage personagePage = new PersonagePage(driver);
         personagePage.openMinMenu();
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//a[text()='Мои персонажи']"))));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//a[@href='/views/user_personage_manager.html?id=1']"))));
         personagePage.goToPersonageListPage();
         driver.switchTo().alert().accept();
         PersonageListPage personageListPage = new PersonageListPage(driver);
@@ -52,8 +53,7 @@ public class GameGnomClassTest {
         assertEquals("The page title should e qual Google at the start of the test.", "Вход", driver.getTitle());
         homePage.login();
 
-        final Wait<WebDriver> wait = new WebDriverWait(driver, 5).
-                ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
+        final Wait<WebDriver> wait = new WebDriverWait(driver, 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
 
         PersonageListPage personageListPage = new PersonageListPage(driver);
         personageListPage.fillName(TEST_NAME);
@@ -61,16 +61,18 @@ public class GameGnomClassTest {
         personageListPage.fillexperience();
         personageListPage.addCharacer();
 
-        PersonagePage personagePage = new PersonagePage(driver);
+        wait.until(ExpectedConditions.visibilityOf(driver.
+                findElement(By.xpath("//div[p/strong[text()='Очки опыта:']]/following-sibling::div/div/p/strong"))));
 
+        PersonagePage personagePage = new PersonagePage(driver);
 
         wait.until(ExpectedConditions.visibilityOf(personagePage.getPersonageName()));
         wait.until(ExpectedConditions.visibilityOf(personagePage.getPersonageRace()));
         wait.until(ExpectedConditions.visibilityOf(personagePage.getPersonageExp()));
 
+
         assertEquals("Name should be " + TEST_NAME, TEST_NAME,
                 personagePage.getPersonageName().getText());
-
         assertEquals("Расса персонажа должна быть \"Гном\"", "гном"
                 , personagePage.getPersonageRace().getText().toLowerCase());
         assertEquals("Опыт персонажа должна быть 200", "200"
