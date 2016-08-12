@@ -20,7 +20,7 @@ public class PersonagePage {
     private WebElement personageName;
     @FindBy(xpath = "//div[p/strong[text()='Раса:']]/following-sibling::div/p")
     private WebElement personageRace;
-    @FindBy(xpath = "//div[p/strong[text()='Очки опыта:']]/following-sibling::div/div/p/strong")
+    @FindBy(xpath = ".//*[@id='expirience']")
     private WebElement personageExp;
 
     public WebElement getPersonageName() {

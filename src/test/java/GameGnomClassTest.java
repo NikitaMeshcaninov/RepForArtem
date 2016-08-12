@@ -61,14 +61,14 @@ public class GameGnomClassTest {
         personageListPage.fillexperience();
         personageListPage.addCharacer();
 
-        wait.until(ExpectedConditions.visibilityOf(driver.
-                findElement(By.xpath("//div[p/strong[text()='Очки опыта:']]/following-sibling::div/div/p/strong"))));
+        //wait.until(ExpectedConditions.visibilityOf(driver.
+                //findElement(By.xpath("//div[p/strong[text()='Очки опыта:']]/following-sibling::div/div/p/strong"))));
 
         PersonagePage personagePage = new PersonagePage(driver);
 
-        wait.until(ExpectedConditions.visibilityOf(personagePage.getPersonageName()));
-        wait.until(ExpectedConditions.visibilityOf(personagePage.getPersonageRace()));
-        wait.until(ExpectedConditions.visibilityOf(personagePage.getPersonageExp()));
+        //wait.until(ExpectedConditions.visibilityOf(personagePage.getPersonageName()));
+        //wait.until(ExpectedConditions.visibilityOf(personagePage.getPersonageRace()));
+        //wait.until(ExpectedConditions.visibilityOf(personagePage.getPersonageExp()));
 
 
         assertEquals("Name should be " + TEST_NAME, TEST_NAME,
