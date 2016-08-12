@@ -14,7 +14,6 @@ public class PersonageListPage {
     private final String testname = SettingsForTest.name;
 
     private WebDriver driver;
-    private static String PageURL = "http://erilon-staging.herokuapp.com/views/user_personage_manager.html?id=1";
     @FindBy(xpath = ".//*[@id='name']")
     private WebElement nameField;
     @FindBy(xpath = ".//*[@id='race_id']")
@@ -30,7 +29,6 @@ public class PersonageListPage {
 
     public PersonageListPage(WebDriver driver) {
         this.driver = driver;
-        driver.get(PageURL);
         PageFactory.initElements(driver, this);
     }
 

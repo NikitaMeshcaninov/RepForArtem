@@ -11,7 +11,6 @@ import org.openqa.selenium.support.PageFactory;
 public class PersonagePage {
     private final String testname = SettingsForTest.name;
     private WebDriver driver;
-    private static String PageURL = "http://erilon-staging.herokuapp.com/views/view_personage.html?id=105";
     @FindBy(xpath = "//a[text()='Главное меню']")
     private WebElement mainMenuButton;
     @FindBy(xpath = "//a[@href='/views/user_personage_manager.html?id=1']")
@@ -33,6 +32,10 @@ public class PersonagePage {
 
     public WebElement getPersonageExp() {
         return personageExp;
+    }
+
+    public WebElement getMainMenuButton() {
+        return mainMenuButton;
     }
 
     public PersonagePage(WebDriver driver) {
