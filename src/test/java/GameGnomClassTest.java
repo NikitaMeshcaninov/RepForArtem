@@ -20,7 +20,6 @@ public class GameGnomClassTest {
 
     private WebDriver driver;
 
-    public String TEST_NAME = SettingsForTest.name;
 
     @Before
     public void openBrowser() {
@@ -50,13 +49,13 @@ public class GameGnomClassTest {
     public void gameTest() throws IOException, InterruptedException {
 
         HomePage homePage = new HomePage(driver);
-        assertEquals("The page title should e qual Google at the start of the test.", "Вход", driver.getTitle());
+        assertEquals("The page should enter page to game site", "Вход", driver.getTitle());
         homePage.login();
 
         final Wait<WebDriver> wait = new WebDriverWait(driver, 5).ignoring(StaleElementReferenceException.class, ElementNotVisibleException.class);
 
         PersonageListPage personageListPage = new PersonageListPage(driver);
-        personageListPage.fillName(TEST_NAME);
+        personageListPage.fillName(SettingsForTest.name);
         personageListPage.selecRace("Гном");
         personageListPage.fillexperience();
         personageListPage.addCharacer();
@@ -70,7 +69,7 @@ public class GameGnomClassTest {
         //wait.until(ExpectedConditions.visibilityOf(personagePage.getPersonageExp()));
 
 
-        assertEquals("Name should be " + TEST_NAME, TEST_NAME,
+        assertEquals("Name should be " + SettingsForTest.name, SettingsForTest.name,
                 personagePage.getPersonageName().getText());
         assertEquals("Расса персонажа должна быть \"Гном\"", "гном"
                 , personagePage.getPersonageRace().getText().toLowerCase());
