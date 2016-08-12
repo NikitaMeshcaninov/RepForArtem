@@ -33,7 +33,7 @@ public class GameGnomClassTest {
         final Wait<WebDriver> wait = new WebDriverWait(driver, 5);
         PersonagePage personagePage = new PersonagePage(driver);
         personagePage.openMinMenu();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='Заклинания']")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(), 'персонажи')]")));
         personagePage.goToPersonageListPage();
         driver.switchTo().alert().accept();
         PersonageListPage personageListPage = new PersonageListPage(driver);

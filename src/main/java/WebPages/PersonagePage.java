@@ -13,7 +13,7 @@ public class PersonagePage {
     private WebDriver driver;
     @FindBy(xpath = "//a[text()='Главное меню']")
     private WebElement mainMenuButton;
-    @FindBy(xpath = "//a[@href='/views/user_personage_manager.html?id=1']")
+    @FindBy(xpath = "//a[contains(text(), 'персонажи')]")
     private WebElement myPersonagesButton;
     @FindBy(xpath = "//h3[text() = '" + testname + "']")
     private WebElement personageName;
