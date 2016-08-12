@@ -52,7 +52,7 @@ public class GameGnomClassTest {
         final Wait<WebDriver> wait = new WebDriverWait(driver, 5);
 
         PersonageListPage personageListPage = new PersonageListPage(driver);
-        personageListPage.fillName(SettingsForTest.name);
+        personageListPage.fillName(SettingsForTest.NAME);
         personageListPage.selecRace("Гном");
         personageListPage.fillexperience();
         personageListPage.addCharacer();
@@ -66,11 +66,11 @@ public class GameGnomClassTest {
         wait.until(ExpectedConditions.visibilityOf(personagePage.getPersonageExp()));
 
 
-        assertEquals("Name should be " + SettingsForTest.name, SettingsForTest.name,
+        assertEquals("Name should be " + SettingsForTest.NAME, SettingsForTest.NAME,
                 personagePage.getPersonageName().getText());
-        assertEquals("Расса персонажа должна быть " + SettingsForTest.name.toLowerCase(), SettingsForTest.race.toLowerCase()
+        assertEquals("Расса персонажа должна быть " + SettingsForTest.NAME.toLowerCase(), SettingsForTest.RACE.toLowerCase()
                 , personagePage.getPersonageRace().getText().toLowerCase());
-        assertEquals("Опыт персонажа должна быть " + SettingsForTest.xp.toLowerCase(), SettingsForTest.xp.toLowerCase()
+        assertEquals("Опыт персонажа должна быть " + SettingsForTest.XP.toLowerCase(), SettingsForTest.XP.toLowerCase()
                 , personagePage.getPersonageExp().getAttribute("value"));
 
     }

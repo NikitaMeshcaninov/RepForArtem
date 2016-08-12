@@ -12,7 +12,6 @@ import org.openqa.selenium.support.ui.Select;
 public class PersonageListPage {
 
 
-    private WebDriver driver;
     @FindBy(xpath = ".//*[@id='name']")
     private WebElement nameField;
     @FindBy(xpath = ".//*[@id='race_id']")
@@ -21,13 +20,12 @@ public class PersonageListPage {
     private WebElement experienceField;
     @FindBy(xpath = "//button[@ng-click='createPersonage()']")
     private WebElement addCharacterButton;
-    @FindBy(xpath = "//table//tr[td/a[contains(text(), '" + SettingsForTest.name + "')]]/td[2]//button")
+    @FindBy(xpath = "//table//tr[td/a[contains(text(), '" + SettingsForTest.NAME + "')]]/td[2]//button")
     private WebElement moreForCharacterButton;
-    @FindBy(xpath = "//table//tr[td/a[contains(text(), '" + SettingsForTest.name + "')]]/td[2]//a[contains(text(), 'х')]")
+    @FindBy(xpath = "//table//tr[td/a[contains(text(), '" + SettingsForTest.NAME + "')]]/td[2]//a[contains(text(), 'х')]")
     private WebElement delButton;
 
     public PersonageListPage(WebDriver driver) {
-        this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
@@ -42,7 +40,7 @@ public class PersonageListPage {
     }
 
     public void fillexperience() {
-        experienceField.sendKeys(SettingsForTest.xp);
+        experienceField.sendKeys(SettingsForTest.XP);
 
     }
 
