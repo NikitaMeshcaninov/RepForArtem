@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 /**
  * Created by Nikita on 19.07.2016.
@@ -27,6 +28,14 @@ public class PersonagePage extends BasePage{
     private WebElement addWorth;
     @FindBy (xpath = ".//*[@id='addMeritDialog']/div/div/div[2]/form/div[2]/div/div[1]/button")
     private WebElement abortAddWorthButton;
+    @FindBy (xpath = ".//*[@id='merit']")
+    private WebElement worthSelector;
+    @FindBy (xpath = ".//*[@id='addMeritDialog']/div/div/div[2]/form/span")
+    private WebElement warningmesage;
+
+    public WebElement getWorthSelector() {
+        return worthSelector;
+    }
 
     public WebElement getAbortAddWorthButton() {
         return abortAddWorthButton;
@@ -77,6 +86,11 @@ public class PersonagePage extends BasePage{
 
     public void abortAddWorth(){
         abortAddWorthButton.click();
+    }
+
+    public void selectWorth(String worth){
+        Select select = new Select(worthSelector);
+        select.selectByVisibleText(worth);
     }
 
 
