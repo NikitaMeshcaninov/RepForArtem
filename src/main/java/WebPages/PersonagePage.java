@@ -19,6 +19,26 @@ public class PersonagePage extends BasePage{
     private WebElement personageRace;
     @FindBy(xpath = ".//*[@id='expirience']")
     private WebElement personageExp;
+    @FindBy (xpath = ".//*[@id='accordion']/div[3]/h4/a/div")
+    private WebElement specialPropertis;
+    @FindBy (xpath = ".//*[@id='perkAccordeon']/div[2]/h4/a/div")
+    private WebElement worth;
+    @FindBy (xpath = ".//*[@id='merits']/div/button")
+    private WebElement addWorth;
+    @FindBy (xpath = ".//*[@id='addMeritDialog']/div/div/div[2]/form/div[2]/div/div[1]/button")
+    private WebElement abortAddWorthButton;
+
+    public WebElement getAbortAddWorthButton() {
+        return abortAddWorthButton;
+    }
+
+    public WebElement getAddWorth() {
+        return addWorth;
+    }
+
+    public WebElement getWorth() {
+        return worth;
+    }
 
     public PersonagePage(WebDriver webDriver) {
         super(webDriver);
@@ -36,9 +56,29 @@ public class PersonagePage extends BasePage{
         return personageExp;
     }
 
+    public WebElement getSpecialPropertis() {
+        return specialPropertis;
+    }
+
     public WebElement getMainMenuButton() {
         return mainMenuButton;
     }
+
+    public void openPropertis(){
+        specialPropertis.click();
+    }
+    public void openWorth(){
+        worth.click();
+    }
+
+    public void clikAddWorth(){
+        addWorth.click();
+    }
+
+    public void abortAddWorth(){
+        abortAddWorthButton.click();
+    }
+
 
     public void openMinMenu() {
         mainMenuButton.click();

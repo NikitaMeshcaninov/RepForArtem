@@ -51,7 +51,14 @@ public class GameGnomClassTest {
                 , personagePage.getPersonageRace().getText().toLowerCase());
         assertEquals("Опыт персонажа должна быть " + SettingsForTest.XP.toLowerCase(), SettingsForTest.XP.toLowerCase()
                 , personagePage.getPersonageExp().getAttribute("value"));
-
+        personagePage.openPropertis();
+        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getWorth()));
+        personagePage.openWorth();
+        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getAddWorth()));
+        personagePage.clikAddWorth();
+        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getAbortAddWorthButton()));
+        personagePage.abortAddWorth();
+        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getMainMenuButton()));
     }
 
     @After
