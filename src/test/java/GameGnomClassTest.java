@@ -61,8 +61,7 @@ public class GameGnomClassTest {
         personageListPage.fillexperience();
         personageListPage.addCharacer();
 
-        //wait.until(ExpectedConditions.visibilityOf(driver.
-                //findElement(By.xpath("//div[p/strong[text()='Очки опыта:']]/following-sibling::div/div/p/strong"))));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("expirience")));
 
         PersonagePage personagePage = new PersonagePage(driver);
 
@@ -76,7 +75,7 @@ public class GameGnomClassTest {
         assertEquals("Расса персонажа должна быть \"Гном\"", "гном"
                 , personagePage.getPersonageRace().getText().toLowerCase());
         assertEquals("Опыт персонажа должна быть 200", "200"
-                , personagePage.getPersonageExp().getText().toLowerCase());
+                , personagePage.getPersonageExp().getAttribute("value"));
 
     }
 }
