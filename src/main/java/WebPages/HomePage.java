@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
  */
 public class HomePage {
     private WebDriver driver;
-    private static String PageURL = "http://erilon-staging.herokuapp.com/";
+    private static String pageURL = "http://erilon-staging.herokuapp.com/";
     @FindBy(how = How.XPATH, using = ".//*[@id='nickName']")
     private WebElement nickNameTextField;
     @FindBy(how = How.XPATH, using = "//button[@ng-click='login()']")
@@ -19,12 +19,12 @@ public class HomePage {
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
-        driver.get(PageURL);
+        driver.get(pageURL);
         PageFactory.initElements(driver, this);
     }
 
     public void login() {
-        nickNameTextField.sendKeys("shmublon");
+        nickNameTextField.sendKeys(SettingsForTest.USER_NAME);
         loginButton.click();
     }
 }

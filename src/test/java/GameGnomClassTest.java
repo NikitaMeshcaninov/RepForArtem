@@ -26,6 +26,7 @@ public class GameGnomClassTest {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
+
     }
 
     @After
