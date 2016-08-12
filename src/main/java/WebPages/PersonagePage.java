@@ -9,13 +9,12 @@ import org.openqa.selenium.support.PageFactory;
  * Created by Nikita on 19.07.2016.
  */
 public class PersonagePage {
-    private final String testname = SettingsForTest.name;
     private WebDriver driver;
     @FindBy(xpath = "//a[text()='Главное меню']")
     private WebElement mainMenuButton;
     @FindBy(xpath = "//a[contains(text(), 'персонажи')]")
     private WebElement myPersonagesButton;
-    @FindBy(xpath = "//h3[text() = '" + testname + "']")
+    @FindBy(xpath = "//h3[text() = '" + SettingsForTest.name + "']")
     private WebElement personageName;
     @FindBy(xpath = "//div[p/strong[text()='Раса:']]/following-sibling::div/p")
     private WebElement personageRace;
