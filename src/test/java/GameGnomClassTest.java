@@ -29,26 +29,14 @@ public class GameGnomClassTest {
 
     }
 
-    @After
-    public void delTestPersonageAndCloseBrowser() throws IOException, InterruptedException {
-        final Wait<WebDriver> wait = new WebDriverWait(driver, 5);
-        PersonagePage personagePage = new PersonagePage(driver);
-        personagePage.openMinMenu();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(), 'персонажи')]")));
-        personagePage.goToPersonageListPage();
-        driver.switchTo().alert().accept();
-        PersonageListPage personageListPage = new PersonageListPage(driver);
-        personageListPage.openMoreMenuForPersonage();
-        personageListPage.delCharacter();
-        driver.close();
-    }
+
 
     @Test
     public void gameTest() throws IOException, InterruptedException {
 
         HomePage homePage = new HomePage(driver);
         assertEquals("The page should enter page to game site", "Вход", driver.getTitle());
-        homePage.login();
+        homePage.login(SettingsForTest.USER_NAME);
 
         final Wait<WebDriver> wait = new WebDriverWait(driver, 5);
 
@@ -74,5 +62,19 @@ public class GameGnomClassTest {
         assertEquals("Опыт персонажа должна быть " + SettingsForTest.XP.toLowerCase(), SettingsForTest.XP.toLowerCase()
                 , personagePage.getPersonageExp().getAttribute("value"));
 
+    }
+
+    @After
+    public void delTestPersonageAndCloseBrowser() throws IOException, InterruptedException {
+        final Wait<WebDriver> wait = new WebDriverWait(driver, 5);
+        PersonagePage personagePage = new PersonagePage(driver);
+        personagePage.openMinMenu();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(), 'персонажи')]")));
+        personagePage.goToPersonageListPage();
+        driver.switchTo().alert().accept();
+        PersonageListPage personageListPage = new PersonageListPage(driver);
+        personageListPage.openMoreMenuForPersonage();
+        personageListPage.delCharacter();
+        driver.close();
     }
 }

@@ -21,8 +21,8 @@ public class HomePage {
         PageFactory.initElements(driver, this);
     }
 
-    public void login() {
-        nickNameTextField.sendKeys(SettingsForTest.USER_NAME);
+    public void login(String userName) {
+        nickNameTextField.sendKeys(userName);
         loginButton.click();
     }
 }
