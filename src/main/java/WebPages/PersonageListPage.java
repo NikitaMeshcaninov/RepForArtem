@@ -21,11 +21,11 @@ public class PersonageListPage {
     @FindBy(xpath = ".//*[@id='experience']")
     private WebElement experienceField;
     @FindBy(xpath = "//button[@ng-click='createPersonage()']")
-    WebElement addCharacterButton;
+    private WebElement addCharacterButton;
     @FindBy(xpath = "//table//tr[td/a[contains(text(), '" + testname + "')]]/td[2]//button")
-    WebElement moreForCharacterButton;
+    private WebElement moreForCharacterButton;
     @FindBy(xpath = "//table//tr[td/a[contains(text(), '" + testname + "')]]/td[2]//a[contains(text(), 'х')]")
-    WebElement delButton;
+    private WebElement delButton;
 
     public PersonageListPage(WebDriver driver) {
         this.driver = driver;
