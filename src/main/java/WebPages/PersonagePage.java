@@ -33,6 +33,10 @@ public class PersonagePage extends BasePage{
     @FindBy (xpath = ".//*[@id='addMeritDialog']/div/div/div[2]/form/span")
     private WebElement warningmesage;
 
+    public WebElement getWarningmesage() {
+        return warningmesage;
+    }
+
     public WebElement getWorthSelector() {
         return worthSelector;
     }

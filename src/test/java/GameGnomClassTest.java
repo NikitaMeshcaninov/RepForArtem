@@ -61,8 +61,10 @@ public class GameGnomClassTest {
 
         personagePage.selectWorth(SettingsForTest.WORTH);
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getAbortAddWorthButton()));
-        assertEquals("Опыт персонажа должна быть " + SettingsForTest.XP.toLowerCase(), SettingsForTest.XP.toLowerCase()
-                , personagePage.getPersonageExp().getAttribute("value"));
+        wait.until(ExpectedConditions.visibilityOf(personagePage.getWarningmesage()));
+
+        assertEquals("Принехватке атрибутов должо высвечиваться предупреждение", "Требования не выполнены!"
+                , personagePage.getWarningmesage().getText());
 
 
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getAbortAddWorthButton()));
