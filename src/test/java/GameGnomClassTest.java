@@ -25,22 +25,16 @@ public class GameGnomClassTest {
     public void openBrowser() {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-
     }
-
-
 
     @Test
     public void gameTest() throws IOException, InterruptedException {
+        final Wait<WebDriver> wait = new WebDriverWait(driver, 5);
 
         HomePage homePage = new HomePage(driver);
         assertEquals("The page should enter page to game site", "Вход", driver.getTitle());
-        homePage.login(SettingsForTest.USER_NAME);
 
-        final Wait<WebDriver> wait = new WebDriverWait(driver, 5);
-
-        PersonageListPage personageListPage = new PersonageListPage(driver);
+        PersonageListPage personageListPage = homePage.login(SettingsForTest.USER_NAME);
         personageListPage.fillName(SettingsForTest.NAME);
         personageListPage.selecRace("Гном");
         personageListPage.fillexperience();

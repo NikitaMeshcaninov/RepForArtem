@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 /**
  * Created by Nikita on 18.07.2016.
  */
-public class PersonageListPage {
+public class PersonageListPage extends BasePage{
 
 
     @FindBy(xpath = ".//*[@id='name']")
@@ -25,10 +25,9 @@ public class PersonageListPage {
     @FindBy(xpath = "//table//tr[td/a[contains(text(), '" + SettingsForTest.NAME + "')]]/td[2]//a[contains(text(), 'х')]")
     private WebElement delButton;
 
-    public PersonageListPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+    public PersonageListPage(WebDriver webDriver) {
+        super(webDriver);
     }
-
 
     public void fillName(String name) {
         nameField.sendKeys(name);

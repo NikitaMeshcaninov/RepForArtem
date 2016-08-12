@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 /**
  * Created by Nikita on 19.07.2016.
  */
-public class PersonagePage {
+public class PersonagePage extends BasePage{
     @FindBy(xpath = "//a[text()='Главное меню']")
     private WebElement mainMenuButton;
     @FindBy(xpath = "//a[contains(text(), 'персонажи')]")
@@ -19,6 +19,10 @@ public class PersonagePage {
     private WebElement personageRace;
     @FindBy(xpath = ".//*[@id='expirience']")
     private WebElement personageExp;
+
+    public PersonagePage(WebDriver webDriver) {
+        super(webDriver);
+    }
 
     public WebElement getPersonageName() {
         return personageName;
@@ -34,10 +38,6 @@ public class PersonagePage {
 
     public WebElement getMainMenuButton() {
         return mainMenuButton;
-    }
-
-    public PersonagePage(WebDriver driver) {
-       PageFactory.initElements(driver, this);
     }
 
     public void openMinMenu() {

@@ -9,20 +9,21 @@ import org.openqa.selenium.support.PageFactory;
 /**
  * Created by Nikita on 18.07.2016.
  */
-public class HomePage {
+public class HomePage extends BasePage{
     private static String pageURL = "http://erilon-staging.herokuapp.com/";
     @FindBy(how = How.XPATH, using = ".//*[@id='nickName']")
     private WebElement nickNameTextField;
     @FindBy(how = How.XPATH, using = "//button[@ng-click='login()']")
     private WebElement loginButton;
 
-    public HomePage(WebDriver driver) {
-        driver.get(pageURL);
-        PageFactory.initElements(driver, this);
+    public HomePage(WebDriver webDriver) {
+        super(webDriver);
+        getWebDriver().get(pageURL);
     }
 
-    public void login(String userName) {
+    public PersonageListPage login(String userName) {
         nickNameTextField.sendKeys(userName);
         loginButton.click();
+        return new PersonageListPage(getWebDriver());
     }
 }
