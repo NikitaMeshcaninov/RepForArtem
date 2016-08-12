@@ -33,18 +33,20 @@ public class PersonageListPage extends BasePage{
         nameField.sendKeys(name);
     }
 
-    public void selecRace(String raceName) {
+    public void selecRace(String race) {
         Select select = new Select(raceSelector);
-        select.selectByVisibleText(raceName);
+        select.selectByVisibleText(race);
     }
 
-    public void fillexperience() {
-        experienceField.sendKeys(SettingsForTest.XP);
+    public void fillexperience(String xp) {
+        experienceField.sendKeys(xp);
 
     }
 
-    public void addCharacer() {
+    public PersonagePage addCharacer() {
+
         addCharacterButton.click();
+        return new PersonagePage(getWebDriver());
     }
 
     public void openMoreMenuForPersonage() {

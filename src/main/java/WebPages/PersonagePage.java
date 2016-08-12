@@ -44,8 +44,10 @@ public class PersonagePage extends BasePage{
         mainMenuButton.click();
     }
 
-    public void goToPersonageListPage() {
+    public PersonageListPage goToPersonageListPage() {
+
         myPersonagesButton.click();
+       return new PersonageListPage(getWebDriver());
     }
 
 }

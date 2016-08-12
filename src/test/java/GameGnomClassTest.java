@@ -36,13 +36,9 @@ public class GameGnomClassTest {
 
         PersonageListPage personageListPage = homePage.login(SettingsForTest.USER_NAME);
         personageListPage.fillName(SettingsForTest.NAME);
-        personageListPage.selecRace("Гном");
-        personageListPage.fillexperience();
-        personageListPage.addCharacer();
-
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("expirience")));
-
-        PersonagePage personagePage = new PersonagePage(driver);
+        personageListPage.selecRace(SettingsForTest.RACE);
+        personageListPage.fillexperience(SettingsForTest.XP);
+        PersonagePage personagePage = personageListPage.addCharacer();
 
         wait.until(ExpectedConditions.visibilityOf(personagePage.getPersonageName()));
         wait.until(ExpectedConditions.visibilityOf(personagePage.getPersonageRace()));
@@ -61,12 +57,14 @@ public class GameGnomClassTest {
     @After
     public void delTestPersonageAndCloseBrowser() throws IOException, InterruptedException {
         final Wait<WebDriver> wait = new WebDriverWait(driver, 5);
+
         PersonagePage personagePage = new PersonagePage(driver);
         personagePage.openMinMenu();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(), 'персонажи')]")));
-        personagePage.goToPersonageListPage();
+
+
+        PersonageListPage personageListPage = personagePage.goToPersonageListPage();
         driver.switchTo().alert().accept();
-        PersonageListPage personageListPage = new PersonageListPage(driver);
         personageListPage.openMoreMenuForPersonage();
         personageListPage.delCharacter();
         driver.close();
