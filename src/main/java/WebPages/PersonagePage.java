@@ -33,6 +33,7 @@ public class PersonagePage extends BasePage{
     @FindBy (xpath = ".//*[@id='addMeritDialog']/div/div/div[2]/form/span")
     private WebElement warningmesage;
 
+
     public WebElement getWarningmesage() {
         return warningmesage;
     }
@@ -80,6 +81,7 @@ public class PersonagePage extends BasePage{
     public void openPropertis(){
         specialPropertis.click();
     }
+
     public void openWorth(){
         worth.click();
     }
@@ -96,7 +98,6 @@ public class PersonagePage extends BasePage{
         Select select = new Select(worthSelector);
         select.selectByVisibleText(worth);
     }
-
 
     public void openMinMenu() {
         mainMenuButton.click();
