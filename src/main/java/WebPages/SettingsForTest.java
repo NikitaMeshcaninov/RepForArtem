@@ -8,6 +8,6 @@ public class SettingsForTest {
     public static final String RACE = "Гном";
     public static final String XP = "200";
     public static final String USER_NAME = "shmublon";
-    public static final String WORTH = "Внушительность 2";
+    public static final String WORTH = "Внушительность";
 
 }

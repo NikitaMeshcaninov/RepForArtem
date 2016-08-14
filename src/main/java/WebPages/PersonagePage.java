@@ -1,5 +1,6 @@
 package WebPages;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -24,14 +25,15 @@ public class PersonagePage extends BasePage{
     private WebElement specialPropertis;
     @FindBy (xpath = ".//*[@id='perkAccordeon']/div[2]/h4/a/div")
     private WebElement worth;
-    @FindBy (xpath = ".//*[@id='merits']/div/button")
+    @FindBy (xpath = ".//*[@id='merits']/div/md-content/button")
     private WebElement addWorth;
-    @FindBy (xpath = ".//*[@id='addMeritDialog']/div/div/div[2]/form/div[2]/div/div[1]/button")
+    @FindBy (xpath = "html/body/div[3]/md-dialog/md-toolbar/div/button")
     private WebElement abortAddWorthButton;
-    @FindBy (xpath = ".//*[@id='merit']")
+    @FindBy (xpath = ".//md-autocomplete-wrap/input")
     private WebElement worthSelector;
-    @FindBy (xpath = ".//*[@id='addMeritDialog']/div/div/div[2]/form/span")
+    @FindBy (xpath = "//p[contains(text(), 'не выполнены')]" )
     private WebElement warningmesage;
+
 
 
     public WebElement getWarningmesage() {
@@ -94,9 +96,13 @@ public class PersonagePage extends BasePage{
         abortAddWorthButton.click();
     }
 
-    public void selectWorth(String worth){
-        Select select = new Select(worthSelector);
-        select.selectByVisibleText(worth);
+    public void selectWorth(String worth) throws InterruptedException {
+        worthSelector.sendKeys(worth);
+        Thread.sleep(500);
+        worthSelector.sendKeys(Keys.ARROW_DOWN);
+        Thread.sleep(500);
+        worthSelector.sendKeys(Keys.ENTER);
+        Thread.sleep(500);
     }
 
     public void openMinMenu() {

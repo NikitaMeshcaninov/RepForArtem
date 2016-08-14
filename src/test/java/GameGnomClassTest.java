@@ -66,11 +66,11 @@ public class GameGnomClassTest {
 
         assertEquals("Принехватке атрибутов должо высвечиваться предупреждение", "Требования не выполнены!"
                 , personagePage.getWarningmesage().getText());
-        Thread.sleep(5000);
+
         System.out.println(personagePage.getAddWorth().isEnabled());
 
-        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getAbortAddWorthButton()));
         personagePage.abortAddWorth();
+        Thread.sleep(500);
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getMainMenuButton()));
     }
 
