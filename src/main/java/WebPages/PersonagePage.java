@@ -33,8 +33,12 @@ public class PersonagePage extends BasePage{
     private WebElement worthSelector;
     @FindBy (xpath = "//p[contains(text(), 'не выполнены')]" )
     private WebElement warningmesage;
+    @FindBy (xpath = "html/body/div[3]/md-dialog/md-dialog-actions/button")
+    private WebElement addButtonInPopupWindow;
 
-
+    public WebElement getAddButtonInPopupWindow() {
+        return addButtonInPopupWindow;
+    }
 
     public WebElement getWarningmesage() {
         return warningmesage;
