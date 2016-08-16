@@ -49,6 +49,18 @@ public class PersonagePage extends BasePage {
     private WebElement worthImpressiveness;
     @FindBy (xpath = "//*[@ng-click= 'savePersonage()']")
     private WebElement saveButton;
+    @FindBy (xpath = "//*[@id= 'loader']")
+    private WebElement loader;
+    @FindBy (xpath = "//*[@aria-describedby='dialogContent_5']")
+    private WebElement addWorthMenu;
+
+    public WebElement getAddWorthMenu() {
+        return addWorthMenu;
+    }
+
+    public WebElement getLoader() {
+        return loader;
+    }
 
     public WebElement getSaveButton() {
         return saveButton;

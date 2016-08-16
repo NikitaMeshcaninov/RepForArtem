@@ -74,7 +74,7 @@ public class GameGnomClassTest {
         personagePage.abortAddWorth();
 
 
-        Thread.sleep(1500);
+       wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@aria-describedby='dialogContent_5']"))); //что то с ним не так
 
 
         personagePage.openCharacteristicsMenu();
@@ -99,26 +99,20 @@ public class GameGnomClassTest {
 
         assertEquals("Конопка добавить должна быть активна", true, personagePage.getAddButtonInPopupWindow().isEnabled());
         assertEquals("Предупреждение должно отсутствовать", false, personagePage.getWarningmesage().isDisplayed());
-Thread.sleep(1000);
-        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getAbortAddWorthButton()));
-        Thread.sleep(1000);
+        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getAddButtonInPopupWindow()));
         personagePage.submitAddWorth();
-        Thread.sleep(3000);
+        wait.until(ExpectedConditions.attributeContains(personagePage.getLoader(),"aria-hidden","true"));
         assertEquals("У персонажа должна появиться внушительность", true, personagePage.getWorthImpressiveness().isDisplayed());
         personagePage.savePersonage();
-        Thread.sleep(1000);
-        /*driver.navigate().refresh();
-        Thread.sleep(1000);
+        wait.until(ExpectedConditions.attributeContains(personagePage.getLoader(),"aria-hidden","true"));
+        driver.navigate().refresh();
+        driver.switchTo().alert().accept();
+        wait.until(ExpectedConditions.attributeContains(personagePage.getLoader(),"aria-hidden","true"));
         personagePage.openPropertisMenu();
-        Thread.sleep(1000);
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getWorth()));
-        Thread.sleep(1000);
         personagePage.openWorth();
-        Thread.sleep(1000);
-        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getAddWorth()));
-        Thread.sleep(1000);
+        wait.until(ExpectedConditions.visibilityOf(personagePage.getAddWorth()));
         assertEquals("У персонажа должна остаться внушительность", true, personagePage.getWorthImpressiveness().isDisplayed());
-        Thread.sleep(1000);*/
     }
 
     @After
