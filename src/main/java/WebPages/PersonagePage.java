@@ -25,7 +25,7 @@ public class PersonagePage extends BasePage {
     private WebElement specialPropertis;
     @FindBy(xpath = ".//*[@id='perkAccordeon']/div[2]/h4/a/div")
     private WebElement worth;
-    @FindBy(xpath = ".//*[@id='merits']/div/md-content/button")
+    @FindBy(xpath = "//*[@id='merits']/div/md-content/button")
     private WebElement addWorth;
     @FindBy(xpath = "html/body/div[3]/md-dialog/md-toolbar/div/button")
     private WebElement abortAddWorthButton;
@@ -37,14 +37,26 @@ public class PersonagePage extends BasePage {
     private WebElement addButtonInPopupWindow;
     @FindBy(xpath = "//*[contains(text(), 'Характеристики')]")
     private WebElement characteristics;
-    @FindBy(xpath = "//*[text()='Выносливость']/following-sibling::*/child::*[@ng-click='increaseAttribute(personageAttribute.id)']")
+    @FindBy(xpath = "//*[text()='Сила']/following-sibling::*/child::*[@ng-click='increaseAttribute(personageAttribute.id)']")
     private WebElement increaseStr;
-    @FindBy(xpath = "//*[text()='Выносливость']/following-sibling::*/child::*[@ng-click='decreaseAttribute(personageAttribute.id)']")
+    @FindBy(xpath = "//*[text()='Сила']/following-sibling::*/child::*[@ng-click='decreaseAttribute(personageAttribute.id)']")
     private WebElement decreaseStr;
     @FindBy(xpath = "//*[text()='Живучесть']/following-sibling::*/child::*[@ng-click='increaseAttribute(personageAttribute.id)']")
     private WebElement increaseStamina;
     @FindBy(xpath = "//*[text()='Живучесть']/following-sibling::*/child::*[@ng-click='decreaseAttribute(personageAttribute.id)']")
     private WebElement decreaseStamina;
+    @FindBy (xpath = "//*[contains(text(), 'Внушительность')]")
+    private WebElement worthImpressiveness;
+    @FindBy (xpath = "//*[@ng-click= 'savePersonage()']")
+    private WebElement saveButton;
+
+    public WebElement getSaveButton() {
+        return saveButton;
+    }
+
+    public WebElement getWorthImpressiveness() {
+        return worthImpressiveness;
+    }
 
     public WebElement getDecreaseStamina() {
         return decreaseStamina;
@@ -114,7 +126,7 @@ public class PersonagePage extends BasePage {
         return mainMenuButton;
     }
 
-    public void openPropertis() {
+    public void openPropertisMenu() {
         specialPropertis.click();
     }
 
@@ -167,5 +179,12 @@ public class PersonagePage extends BasePage {
 
     public void openCharacteristicsMenu(){
         characteristics.click();
+    }
+
+    public void submitAddWorth(){
+        addButtonInPopupWindow.click();
+    }
+    public void savePersonage(){
+        saveButton.click();
     }
 }
