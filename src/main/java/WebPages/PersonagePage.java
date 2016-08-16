@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 /**
  * Created by Nikita on 19.07.2016.
  */
-public class PersonagePage extends BasePage{
+public class PersonagePage extends BasePage {
     @FindBy(xpath = "//a[text()='Главное меню']")
     private WebElement mainMenuButton;
     @FindBy(xpath = "//a[contains(text(), 'персонажи')]")
@@ -21,20 +21,50 @@ public class PersonagePage extends BasePage{
     private WebElement personageRace;
     @FindBy(xpath = ".//*[@id='expirience']")
     private WebElement personageExp;
-    @FindBy (xpath = ".//*[@id='accordion']/div[3]/h4/a/div")
+    @FindBy(xpath = ".//*[@id='accordion']/div[3]/h4/a/div")
     private WebElement specialPropertis;
-    @FindBy (xpath = ".//*[@id='perkAccordeon']/div[2]/h4/a/div")
+    @FindBy(xpath = ".//*[@id='perkAccordeon']/div[2]/h4/a/div")
     private WebElement worth;
-    @FindBy (xpath = ".//*[@id='merits']/div/md-content/button")
+    @FindBy(xpath = ".//*[@id='merits']/div/md-content/button")
     private WebElement addWorth;
-    @FindBy (xpath = "html/body/div[3]/md-dialog/md-toolbar/div/button")
+    @FindBy(xpath = "html/body/div[3]/md-dialog/md-toolbar/div/button")
     private WebElement abortAddWorthButton;
-    @FindBy (xpath = ".//md-autocomplete-wrap/input")
+    @FindBy(xpath = ".//md-autocomplete-wrap/input")
     private WebElement worthSelector;
-    @FindBy (xpath = "//p[contains(text(), 'не выполнены')]" )
+    @FindBy(xpath = "//p[contains(text(), 'не выполнены')]")
     private WebElement warningmesage;
-    @FindBy (xpath = "html/body/div[3]/md-dialog/md-dialog-actions/button")
+    @FindBy(xpath = "html/body/div[3]/md-dialog/md-dialog-actions/button")
     private WebElement addButtonInPopupWindow;
+    @FindBy(xpath = "//*[contains(text(), 'Характеристики')]")
+    private WebElement characteristics;
+    @FindBy(xpath = "//*[text()='Выносливость']/following-sibling::*/child::*[@ng-click='increaseAttribute(personageAttribute.id)']")
+    private WebElement increaseStr;
+    @FindBy(xpath = "//*[text()='Выносливость']/following-sibling::*/child::*[@ng-click='decreaseAttribute(personageAttribute.id)']")
+    private WebElement decreaseStr;
+    @FindBy(xpath = "//*[text()='Живучесть']/following-sibling::*/child::*[@ng-click='increaseAttribute(personageAttribute.id)']")
+    private WebElement increaseStamina;
+    @FindBy(xpath = "//*[text()='Живучесть']/following-sibling::*/child::*[@ng-click='decreaseAttribute(personageAttribute.id)']")
+    private WebElement decreaseStamina;
+
+    public WebElement getDecreaseStamina() {
+        return decreaseStamina;
+    }
+
+    public WebElement getIncreaseStamina() {
+        return increaseStamina;
+    }
+
+    public WebElement getDecreaseStr() {
+        return decreaseStr;
+    }
+
+    public WebElement getIncreaseStr() {
+        return increaseStr;
+    }
+
+    public WebElement getCharacteristics() {
+        return characteristics;
+    }
 
     public WebElement getAddButtonInPopupWindow() {
         return addButtonInPopupWindow;
@@ -84,19 +114,19 @@ public class PersonagePage extends BasePage{
         return mainMenuButton;
     }
 
-    public void openPropertis(){
+    public void openPropertis() {
         specialPropertis.click();
     }
 
-    public void openWorth(){
+    public void openWorth() {
         worth.click();
     }
 
-    public void clikAddWorth(){
+    public void clikAddWorth() {
         addWorth.click();
     }
 
-    public void abortAddWorth(){
+    public void abortAddWorth() {
         abortAddWorthButton.click();
     }
 
@@ -116,7 +146,26 @@ public class PersonagePage extends BasePage{
     public PersonageListPage goToPersonageListPage() {
 
         myPersonagesButton.click();
-       return new PersonageListPage(getWebDriver());
+        return new PersonageListPage(getWebDriver());
     }
 
+    public void increaseStrBy1() {
+        increaseStr.click();
+    }
+
+    public void decreaseStrBy1() {
+        decreaseStr.click();
+    }
+
+    public void increaseStaminaBy1() {
+        increaseStamina.click();
+    }
+
+    public void decreaseStaminaBy1(){
+        decreaseStamina.click();
+    }
+
+    public void openCharacteristicsMenu(){
+        characteristics.click();
+    }
 }

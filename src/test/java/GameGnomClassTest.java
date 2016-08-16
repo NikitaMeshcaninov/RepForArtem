@@ -61,7 +61,7 @@ public class GameGnomClassTest {
 
 
         personagePage.selectWorth(SettingsForTest.WORTH);
-        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getAbortAddWorthButton()));
+
         wait.until(ExpectedConditions.visibilityOf(personagePage.getWarningmesage()));
 
         assertEquals("Принехватке атрибутов должо высвечиваться предупреждение", "Требования не выполнены!"
@@ -70,8 +70,25 @@ public class GameGnomClassTest {
                 "выполненны", false, personagePage.getAddButtonInPopupWindow().isEnabled());
 
 
-        Thread.sleep(1500);
+        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getAbortAddWorthButton()));
         personagePage.abortAddWorth();
+        Thread.sleep(1500);
+
+
+        personagePage.openCharacteristicsMenu();
+        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getIncreaseStr()));
+        personagePage.increaseStrBy1();
+        personagePage.increaseStrBy1();
+        personagePage.increaseStrBy1();
+
+        personagePage.increaseStaminaBy1();
+        personagePage.increaseStaminaBy1();
+        personagePage.increaseStaminaBy1();
+        personagePage.increaseStaminaBy1();
+
+
+
+
         Thread.sleep(500);
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getMainMenuButton()));
     }
