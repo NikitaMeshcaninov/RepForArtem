@@ -123,7 +123,6 @@ public class GameGnomClassTest {
         assertEquals("У персонажа должна исчезнуть внушительность", false, search.isElementPresent
                 ("//*[contains(text(), 'Внушительность')]",driver));
 
-
     }
 
     @After
