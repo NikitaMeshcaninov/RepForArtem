@@ -21,15 +21,15 @@ public class PersonagePage extends BasePage {
     private WebElement personageRace;
     @FindBy(xpath = ".//*[@id='expirience']")
     private WebElement personageExp;
-    @FindBy(xpath = ".//*[@id='accordion']/div[3]/h4/a/div")
+    @FindBy(xpath = "//*[contains(text(),'Особенности')]")
     private WebElement specialPropertis;
-    @FindBy(xpath = ".//*[@id='perkAccordeon']/div[2]/h4/a/div")
+    @FindBy(xpath = "//div[contains(text(),'Достоинства')]")
     private WebElement worth;
-    @FindBy(xpath = "//*[@id='merits']/div/md-content/button")
+    @FindBy(xpath = ".//*[@ng-click='calculateMeritSelectOptions();showAddMeritDialog(selectMerits, addPersonageMerit, validatePrerequisites)']")
     private WebElement addWorth;
-    @FindBy(xpath = "html/body/div[3]/md-dialog/md-toolbar/div/button")
+    @FindBy(xpath = "//img[@src='/images/ic_close_24px.svg']/parent::*")
     private WebElement abortAddWorthButton;
-    @FindBy(xpath = ".//md-autocomplete-wrap/input")
+    @FindBy(xpath = "//input [@placeholder='Введите название']")
     private WebElement worthSelector;
     @FindBy(xpath = "//p[contains(text(), 'не выполнены')]")
     private WebElement warningmesage;
@@ -51,7 +51,7 @@ public class PersonagePage extends BasePage {
     private WebElement saveButton;
     @FindBy (xpath = "//*[@id= 'loader']")
     private WebElement loader;
-    @FindBy (xpath = "//*[@aria-describedby='dialogContent_5']")
+    @FindBy (xpath = "//*[@id='loader']")
     private WebElement addWorthMenu;
 
     public WebElement getAddWorthMenu() {

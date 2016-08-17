@@ -72,47 +72,56 @@ public class GameGnomClassTest {
 
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getAbortAddWorthButton()));
         personagePage.abortAddWorth();
-
-
-       wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@aria-describedby='dialogContent_5']"))); //что то с ним не так
-
-
+        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getCharacteristics()));
         personagePage.openCharacteristicsMenu();
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getIncreaseStr()));
         personagePage.increaseStrBy1();
         personagePage.increaseStrBy1();
-        personagePage.increaseStrBy1();
-
         personagePage.increaseStaminaBy1();
         personagePage.increaseStaminaBy1();
         personagePage.increaseStaminaBy1();
-        personagePage.increaseStaminaBy1();
-
-
         personagePage.openPropertisMenu();
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getAddWorth()));
         personagePage.clikAddWorth();
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getWorthSelector()));
         personagePage.selectWorth(SettingsForTest.WORTH);
-
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getAddButtonInPopupWindow()));
-
         assertEquals("Конопка добавить должна быть активна", true, personagePage.getAddButtonInPopupWindow().isEnabled());
         assertEquals("Предупреждение должно отсутствовать", false, personagePage.getWarningmesage().isDisplayed());
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getAddButtonInPopupWindow()));
         personagePage.submitAddWorth();
-        wait.until(ExpectedConditions.attributeContains(personagePage.getLoader(),"aria-hidden","true"));
+        wait.until(ExpectedConditions.attributeContains(personagePage.getLoader(), "aria-hidden", "true"));
         assertEquals("У персонажа должна появиться внушительность", true, personagePage.getWorthImpressiveness().isDisplayed());
         personagePage.savePersonage();
-        wait.until(ExpectedConditions.attributeContains(personagePage.getLoader(),"aria-hidden","true"));
+        wait.until(ExpectedConditions.attributeContains(personagePage.getLoader(), "aria-hidden", "true"));
         driver.navigate().refresh();
         driver.switchTo().alert().accept();
-        wait.until(ExpectedConditions.attributeContains(personagePage.getLoader(),"aria-hidden","true"));
+        wait.until(ExpectedConditions.attributeContains(personagePage.getLoader(), "aria-hidden", "true"));
         personagePage.openPropertisMenu();
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getWorth()));
         personagePage.openWorth();
         wait.until(ExpectedConditions.visibilityOf(personagePage.getAddWorth()));
         assertEquals("У персонажа должна остаться внушительность", true, personagePage.getWorthImpressiveness().isDisplayed());
+        personagePage.openCharacteristicsMenu();
+        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getDecreaseStamina()));
+        personagePage.decreaseStaminaBy1();
+        personagePage.openPropertisMenu();
+        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getWorth()));
+        personagePage.openWorth();
+        wait.until(ExpectedConditions.visibilityOf(personagePage.getAddWorth()));
+        assertEquals("У персонажа должна исчезнуть внушительность", false, personagePage.getWorthImpressiveness().isDisplayed());
+        personagePage.savePersonage();
+        wait.until(ExpectedConditions.attributeContains(personagePage.getLoader(), "aria-hidden", "true"));
+        driver.navigate().refresh();
+        driver.switchTo().alert().accept();
+        wait.until(ExpectedConditions.attributeContains(personagePage.getLoader(), "aria-hidden", "true"));
+        personagePage.openPropertisMenu();
+        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getWorth()));
+        personagePage.openWorth();
+        wait.until(ExpectedConditions.visibilityOf(personagePage.getAddWorth()));
+        assertEquals("У персонажа не должно быть внушительности", false, personagePage.getWorthImpressiveness().isDisplayed());
+
+
     }
 
     @After
