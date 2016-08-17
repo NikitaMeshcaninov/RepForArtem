@@ -1,7 +1,4 @@
-import WebPages.PersonageListPage;
-import WebPages.HomePage;
-import WebPages.PersonagePage;
-import WebPages.SettingsForTest;
+import WebPages.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.w3c.dom.Element;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -53,7 +51,7 @@ public class GameGnomClassTest {
                 , personagePage.getPersonageExp().getAttribute("value"));
 
         personagePage.openPropertisMenu();
-        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getWorth()));
+        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getDisadvantages()));
         personagePage.openWorth();
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getAddWorth()));
         personagePage.clikAddWorth();
@@ -72,7 +70,7 @@ public class GameGnomClassTest {
 
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getAbortAddWorthButton()));
         personagePage.abortAddWorth();
-        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getCharacteristics()));
+        Thread.sleep(500);
         personagePage.openCharacteristicsMenu();
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getIncreaseStr()));
         personagePage.increaseStrBy1();
@@ -105,11 +103,14 @@ public class GameGnomClassTest {
         personagePage.openCharacteristicsMenu();
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getDecreaseStamina()));
         personagePage.decreaseStaminaBy1();
+        Thread.sleep(500);
         personagePage.openPropertisMenu();
-        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getWorth()));
-        personagePage.openWorth();
         wait.until(ExpectedConditions.visibilityOf(personagePage.getAddWorth()));
-        assertEquals("У персонажа должна исчезнуть внушительность", false, personagePage.getWorthImpressiveness().isDisplayed());
+        Utill search = new Utill();
+
+
+        assertEquals("У персонажа должна исчезнуть внушительность", false, search.isElementPresent
+                ("//*[contains(text(), 'Внушительность')]",driver));
         personagePage.savePersonage();
         wait.until(ExpectedConditions.attributeContains(personagePage.getLoader(), "aria-hidden", "true"));
         driver.navigate().refresh();
@@ -119,7 +120,8 @@ public class GameGnomClassTest {
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getWorth()));
         personagePage.openWorth();
         wait.until(ExpectedConditions.visibilityOf(personagePage.getAddWorth()));
-        assertEquals("У персонажа не должно быть внушительности", false, personagePage.getWorthImpressiveness().isDisplayed());
+        assertEquals("У персонажа должна исчезнуть внушительность", false, search.isElementPresent
+                ("//*[contains(text(), 'Внушительность')]",driver));
 
 
     }

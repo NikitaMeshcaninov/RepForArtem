@@ -51,8 +51,14 @@ public class PersonagePage extends BasePage {
     private WebElement saveButton;
     @FindBy (xpath = "//*[@id= 'loader']")
     private WebElement loader;
-    @FindBy (xpath = "//*[@id='loader']")
+    @FindBy (xpath = "html/body/div[3]/md-dialog")
     private WebElement addWorthMenu;
+    @FindBy (xpath = "//div[contains(text(), 'Недостатки')]")
+    private WebElement disadvantages;
+
+    public WebElement getDisadvantages() {
+        return disadvantages;
+    }
 
     public WebElement getAddWorthMenu() {
         return addWorthMenu;
