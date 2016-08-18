@@ -101,23 +101,37 @@ public class GameGnomClassTest {
         wait.until(ExpectedConditions.visibilityOf(personagePage.getAddWorth()));
         assertEquals("У персонажа должна остаться внушительность", true, personagePage.getWorthImpressiveness().isDisplayed());
         personagePage.openCharacteristicsMenu();
+        System.out.println("1");
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getDecreaseStamina()));
+        System.out.println("2");
         personagePage.decreaseStaminaBy1();
+        System.out.println("3");
         Thread.sleep(500);
         personagePage.openPropertisMenu();
+        System.out.println("4");
         wait.until(ExpectedConditions.visibilityOf(personagePage.getAddWorth()));
+        System.out.println("5");
         Utill search = new Utill();
+        System.out.println("6");
         assertEquals("У персонажа должна исчезнуть внушительность", false, search.isElementPresent
                 ("//*[contains(text(), 'Внушительность')]",driver));
         personagePage.savePersonage();
+        System.out.println("7");
         wait.until(ExpectedConditions.attributeContains(personagePage.getLoader(), "aria-hidden", "true"));
+        System.out.println("8");
         driver.navigate().refresh();
         driver.switchTo().alert().accept();
+        System.out.println("9");
         wait.until(ExpectedConditions.attributeContains(personagePage.getLoader(), "aria-hidden", "true"));
+        System.out.println("10");
         personagePage.openPropertisMenu();
+        System.out.println("11");
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getWorth()));
+        System.out.println("12");
         personagePage.openWorth();
+        System.out.println("13");
         wait.until(ExpectedConditions.visibilityOf(personagePage.getAddWorth()));
+        System.out.println("14");
         assertEquals("У персонажа должна исчезнуть внушительность", false, search.isElementPresent
                 ("//*[contains(text(), 'Внушительность')]",driver));
     }
