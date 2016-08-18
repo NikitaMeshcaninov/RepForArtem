@@ -105,11 +105,8 @@ public class GameGnomClassTest {
         personagePage.decreaseStaminaBy1();
         Thread.sleep(500);
         personagePage.openPropertisMenu();
-        System.out.println("1");
         wait.until(ExpectedConditions.visibilityOf(personagePage.getAddWorth()));
-        System.out.println("1.5");
         Utill search = new Utill();
-        System.out.println("2");
         assertEquals("У персонажа должна исчезнуть внушительность", false, search.isElementPresent
                 ("//*[contains(text(), 'Внушительность')]",driver));
         personagePage.savePersonage();
