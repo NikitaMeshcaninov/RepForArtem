@@ -25,7 +25,7 @@ public class PersonagePage extends BasePage {
     private WebElement specialPropertis;
     @FindBy(xpath = "//div[contains(text(),'Достоинства')]")
     private WebElement worth;
-    @FindBy(xpath = ".//*[@ng-click='calculateMeritSelectOptions();showAddMeritDialog(selectMerits, addPersonageMerit, validatePrerequisites)']")
+    @FindBy(xpath = "//*[@id='merits']/child::*/child::*/child::button")
     private WebElement addWorth;
     @FindBy(xpath = "//img[@src='/images/ic_close_24px.svg']/parent::*")
     private WebElement abortAddWorthButton;
@@ -33,7 +33,7 @@ public class PersonagePage extends BasePage {
     private WebElement worthSelector;
     @FindBy(xpath = "//p[contains(text(), 'не выполнены')]")
     private WebElement warningmesage;
-    @FindBy(xpath = "html/body/div[3]/md-dialog/md-dialog-actions/button")
+    @FindBy(xpath = "//md-dialog//span[contains(text(), 'Добавить')]/parent::*")
     private WebElement addButtonInPopupWindow;
     @FindBy(xpath = "//*[contains(text(), 'Характеристики')]")
     private WebElement characteristics;
@@ -51,7 +51,7 @@ public class PersonagePage extends BasePage {
     private WebElement saveButton;
     @FindBy (xpath = "//*[@id= 'loader']")
     private WebElement loader;
-    @FindBy (xpath = "html/body/div[3]/md-dialog")
+    @FindBy (xpath = "//md-dialog")
     private WebElement addWorthMenu;
     @FindBy (xpath = "//div[contains(text(), 'Недостатки')]")
     private WebElement disadvantages;
