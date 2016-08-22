@@ -11,9 +11,9 @@ import org.openqa.selenium.support.PageFactory;
  */
 public class HomePage extends BasePage{
     private static String pageURL = "http://erilon-staging.herokuapp.com/";
-    @FindBy(how = How.XPATH, using = ".//*[@id='nickName']")
+    @FindBy(xpath = ".//*[@id='nickName']")
     private WebElement nickNameTextField;
-    @FindBy(how = How.XPATH, using = "//button[@ng-click='login()']")
+    @FindBy(xpath = "//button[@ng-click='login()']")
     private WebElement loginButton;
 
     public HomePage(WebDriver webDriver) {

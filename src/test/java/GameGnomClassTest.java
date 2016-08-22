@@ -21,6 +21,7 @@ public class GameGnomClassTest {
 
     @Before
     public void openBrowser() {
+        System.setProperty("webdriver.chrome.driver","C:\\Program Files (x86)\\Chrome\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
