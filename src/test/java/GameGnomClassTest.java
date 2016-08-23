@@ -21,7 +21,7 @@ public class GameGnomClassTest {
 
     @Before
     public void openBrowser() {
-        System.setProperty("webdriver.chrome.driver","C:\\Program Files (x86)\\Chrome\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Program Files (x86)\\Chrome\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
@@ -70,71 +70,88 @@ public class GameGnomClassTest {
 
 
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getAbortAddWorthButton()));
+        System.out.println("1");
         personagePage.abortAddWorth();
+        System.out.println("2");
         Thread.sleep(500);
+        System.out.println("3");
         personagePage.openCharacteristicsMenu();
+        System.out.println("4");
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getIncreaseStr()));
+        System.out.println("5");
         personagePage.increaseStrBy1();
+        System.out.println("6");
         personagePage.increaseStrBy1();
         personagePage.increaseStaminaBy1();
         personagePage.increaseStaminaBy1();
         personagePage.increaseStaminaBy1();
+        System.out.println("7");
         personagePage.openPropertisMenu();
+        System.out.println("8");
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getAddWorth()));
         personagePage.clikAddWorth();
+        System.out.println("9");
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getWorthSelector()));
         personagePage.selectWorth(SettingsForTest.WORTH);
+        System.out.println("10");
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getAddButtonInPopupWindow()));
         assertEquals("Конопка добавить должна быть активна", true, personagePage.getAddButtonInPopupWindow().isEnabled());
         assertEquals("Предупреждение должно отсутствовать", false, personagePage.getWarningmesage().isDisplayed());
+        System.out.println("11");
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getAddButtonInPopupWindow()));
+        System.out.println("12");
         personagePage.submitAddWorth();
+        System.out.println("13");
         wait.until(ExpectedConditions.attributeContains(personagePage.getLoader(), "aria-hidden", "true"));
         assertEquals("У персонажа должна появиться внушительность", true, personagePage.getWorthImpressiveness().isDisplayed());
         personagePage.savePersonage();
+        System.out.println("14");
         wait.until(ExpectedConditions.attributeContains(personagePage.getLoader(), "aria-hidden", "true"));
         driver.navigate().refresh();
         driver.switchTo().alert().accept();
+        System.out.println("15");
         wait.until(ExpectedConditions.attributeContains(personagePage.getLoader(), "aria-hidden", "true"));
         personagePage.openPropertisMenu();
+        System.out.println("16");
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getWorth()));
         personagePage.openWorth();
+        System.out.println("17");
         wait.until(ExpectedConditions.visibilityOf(personagePage.getAddWorth()));
         assertEquals("У персонажа должна остаться внушительность", true, personagePage.getWorthImpressiveness().isDisplayed());
         personagePage.openCharacteristicsMenu();
-        System.out.println("1");
+        System.out.println("18");
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getDecreaseStamina()));
-        System.out.println("2");
+        System.out.println("19");
         personagePage.decreaseStaminaBy1();
-        System.out.println("3");
+        System.out.println("20");
         Thread.sleep(500);
         personagePage.openPropertisMenu();
-        System.out.println("4");
+        System.out.println("21");
         wait.until(ExpectedConditions.visibilityOf(personagePage.getAddWorth()));
-        System.out.println("5");
+        System.out.println("22");
         Utill search = new Utill();
-        System.out.println("6");
+        System.out.println("23");
         assertEquals("У персонажа должна исчезнуть внушительность", false, search.isElementPresent
-                ("//*[contains(text(), 'Внушительность')]",driver));
+                ("//*[contains(text(), 'Внушительность')]", driver));
         personagePage.savePersonage();
-        System.out.println("7");
+        System.out.println("24");
         wait.until(ExpectedConditions.attributeContains(personagePage.getLoader(), "aria-hidden", "true"));
-        System.out.println("8");
+        System.out.println("25");
         driver.navigate().refresh();
         driver.switchTo().alert().accept();
-        System.out.println("9");
+        System.out.println("26");
         wait.until(ExpectedConditions.attributeContains(personagePage.getLoader(), "aria-hidden", "true"));
-        System.out.println("10");
+        System.out.println("27");
         personagePage.openPropertisMenu();
-        System.out.println("11");
+        System.out.println("28");
         wait.until(ExpectedConditions.elementToBeClickable(personagePage.getWorth()));
-        System.out.println("12");
+        System.out.println("29");
         personagePage.openWorth();
-        System.out.println("13");
+        System.out.println("30");
         wait.until(ExpectedConditions.visibilityOf(personagePage.getAddWorth()));
-        System.out.println("14");
+        System.out.println("31");
         assertEquals("У персонажа должна исчезнуть внушительность", false, search.isElementPresent
-                ("//*[contains(text(), 'Внушительность')]",driver));
+                ("//*[contains(text(), 'Внушительность')]", driver));
     }
 
     @After
