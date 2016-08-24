@@ -1,5 +1,6 @@
 import WebPages.*;
 import org.apache.log4j.Logger;
+import org.apache.logging.log4j.core.util.Assert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
 
 public class GameGnomClassTest {
 
@@ -36,119 +38,103 @@ public class GameGnomClassTest {
         personageListPage.fillName(SettingsForTest.NAME);
         personageListPage.selecRace(SettingsForTest.RACE);
         personageListPage.fillexperience(SettingsForTest.XP);
-        PersonagePage personagePage = personageListPage.addCharacer();
+        PersonageCreatePage personageCreatePage = personageListPage.addCharacer();
 
-        wait.until(ExpectedConditions.visibilityOf(personagePage.getPersonageName()));
-        wait.until(ExpectedConditions.visibilityOf(personagePage.getPersonageRace()));
-        wait.until(ExpectedConditions.visibilityOf(personagePage.getPersonageExp()));
+        wait.until(ExpectedConditions.visibilityOf(personageCreatePage.getPersonageName()));
+        wait.until(ExpectedConditions.visibilityOf(personageCreatePage.getPersonageRace()));
+        wait.until(ExpectedConditions.visibilityOf(personageCreatePage.getPersonageExp()));
 
 
         assertEquals("Name should be " + SettingsForTest.NAME, SettingsForTest.NAME,
-                personagePage.getPersonageName().getText());
-        assertEquals("Расса персонажа должна быть " + SettingsForTest.NAME.toLowerCase(), SettingsForTest.RACE.toLowerCase()
-                , personagePage.getPersonageRace().getText().toLowerCase());
-        assertEquals("Опыт персонажа должна быть " + SettingsForTest.XP.toLowerCase(), SettingsForTest.XP.toLowerCase()
-                , personagePage.getPersonageExp().getAttribute("value"));
+                personageCreatePage.getPersonageName().getText());
+        assertEquals("Race of personage should be " + SettingsForTest.NAME.toLowerCase(), SettingsForTest.RACE.toLowerCase()
+                , personageCreatePage.getPersonageRace().getText().toLowerCase());
+        assertEquals("Exp should be " + SettingsForTest.XP.toLowerCase(), SettingsForTest.XP.toLowerCase()
+                , personageCreatePage.getPersonageExp().getAttribute("value"));
 
-        personagePage.openPropertisMenu();
-        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getDisadvantages()));
-        personagePage.openWorth();
-        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getAddWorth()));
-        personagePage.clikAddWorth();
-        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getWorthSelector()));
-
-
-        personagePage.selectWorth(SettingsForTest.WORTH);
-
-        wait.until(ExpectedConditions.visibilityOf(personagePage.getWarningmesage()));
-
-        assertEquals("Принехватке атрибутов должо высвечиваться предупреждение", "Требования не выполнены!"
-                , personagePage.getWarningmesage().getText());
-        assertEquals("Конопка добавить должна быть не активна еси требования не " +
-                "выполненны", false, personagePage.getAddButtonInPopupWindow().isEnabled());
+        personageCreatePage.openPropertisMenu();
+        wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getDisadvantages()));
+        personageCreatePage.openWorth();
+        wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getAddWorth()));
+        personageCreatePage.clikAddWorth();
+        wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getWorthSelector()));
 
 
-        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getAbortAddWorthButton()));
-        LOGGER.info("1");
-        personagePage.abortAddWorth();
-        LOGGER.info("2");
+        personageCreatePage.selectWorth(SettingsForTest.WORTH);
+
+        wait.until(ExpectedConditions.visibilityOf(personageCreatePage.getWarningmesage()));
+
+        assertEquals("Warning should be present", "Требования не выполнены!"
+                , personageCreatePage.getWarningmesage().getText());
+        assertEquals("Button should not be active", false, personageCreatePage.getAddButtonInPopupWindow().isEnabled());
+
+
+        wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getAbortAddWorthButton()));
+        personageCreatePage.abortAddWorth();
+        LOGGER.info("Abort add worth operation");
         Thread.sleep(500);
-        LOGGER.info("3");
-        personagePage.openCharacteristicsMenu();
-        LOGGER.info("4");
-        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getIncreaseStr()));
-        LOGGER.info("5");
-        personagePage.increaseStrBy1();
-        LOGGER.info("6");
-        personagePage.increaseStrBy1();
-        personagePage.increaseStaminaBy1();
-        personagePage.increaseStaminaBy1();
-        personagePage.increaseStaminaBy1();
-        LOGGER.info("7");
-        personagePage.openPropertisMenu();
-        LOGGER.info("8");
-        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getAddWorth()));
-        personagePage.clikAddWorth();
-        LOGGER.info("9");
-        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getWorthSelector()));
-        personagePage.selectWorth(SettingsForTest.WORTH);
-        LOGGER.info("10");
-        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getAddButtonInPopupWindow()));
-        assertEquals("Конопка добавить должна быть активна", true, personagePage.getAddButtonInPopupWindow().isEnabled());
-        assertEquals("Предупреждение должно отсутствовать", false, personagePage.getWarningmesage().isDisplayed());
-        LOGGER.info("11");
-        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getAddButtonInPopupWindow()));
-        LOGGER.info("12");
-        personagePage.submitAddWorth();
-        LOGGER.info("13");
-        wait.until(ExpectedConditions.attributeContains(personagePage.getLoader(), "aria-hidden", "true"));
-        assertEquals("У персонажа должна появиться внушительность", true, personagePage.getWorthImpressiveness().isDisplayed());
-        personagePage.savePersonage();
-        LOGGER.info("14");
-        wait.until(ExpectedConditions.attributeContains(personagePage.getLoader(), "aria-hidden", "true"));
+        personageCreatePage.openCharacteristicsMenu();
+        LOGGER.info("Open character menu");
+        wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getIncreaseStr()));
+        personageCreatePage.statChange("str",2,"up"); //strength, add 2 points
+        personageCreatePage.statChange("sta",3,"up"); // stamina, add 3 points
+        LOGGER.info("Change hero stats to add worth");
+        personageCreatePage.openPropertisMenu();
+        LOGGER.info("Open hero prop. menu");
+        wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getAddWorth()));
+        personageCreatePage.clikAddWorth();
+        LOGGER.info("Open addWorth popup menu");
+        wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getWorthSelector()));
+        personageCreatePage.selectWorth(SettingsForTest.WORTH);
+        LOGGER.info("Select worth to add");
+        wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getAddButtonInPopupWindow()));
+        assertEquals("Button should be active ", true, personageCreatePage.getAddButtonInPopupWindow().isEnabled());
+        assertEquals("No warning should be present", false, personageCreatePage.getWarningmesage().isDisplayed());
+        LOGGER.info("Check popup menu");
+        wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getAddButtonInPopupWindow()));
+        personageCreatePage.submitAddWorth();
+        LOGGER.info("Submitting worth add");
+        wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
+        assertEquals("Character should have worth", true, personageCreatePage.getWorthImpressiveness().isDisplayed());
+        personageCreatePage.savePersonage();
+        LOGGER.info("Check that worth was added, save character");
+        wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
         driver.navigate().refresh();
         driver.switchTo().alert().accept();
-        LOGGER.info("15");
-        wait.until(ExpectedConditions.attributeContains(personagePage.getLoader(), "aria-hidden", "true"));
-        personagePage.openPropertisMenu();
-        LOGGER.info("16");
-        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getWorth()));
-        personagePage.openWorth();
-        LOGGER.info("17");
-        wait.until(ExpectedConditions.visibilityOf(personagePage.getAddWorth()));
-        assertEquals("У персонажа должна остаться внушительность", true, personagePage.getWorthImpressiveness().isDisplayed());
-        personagePage.openCharacteristicsMenu();
-        LOGGER.info("18");
-        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getDecreaseStamina()));
-        LOGGER.info("19");
-        personagePage.decreaseStaminaBy1();
-        LOGGER.info("20");
+        LOGGER.info("Refresh page");
+        wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
+        personageCreatePage.openPropertisMenu();
+        LOGGER.info("Open prop. menu");
+        wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getWorth()));
+        personageCreatePage.openWorth();
+        LOGGER.info("Open worth menu");
+        wait.until(ExpectedConditions.visibilityOf(personageCreatePage.getAddWorth()));
+        assertEquals("Worth of character should be saved", true, personageCreatePage.getWorthImpressiveness().isDisplayed());
+        personageCreatePage.openCharacteristicsMenu();
+        LOGGER.info("Check is worth saved, open characteristics menu");
+        wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getDecreaseStamina()));
+        personageCreatePage.statChange("str",1,"down"); //strength, take 2 points
+        LOGGER.info("Decrease str by 1");
         Thread.sleep(500);
-        personagePage.openPropertisMenu();
-        LOGGER.info("21");
-        wait.until(ExpectedConditions.visibilityOf(personagePage.getAddWorth()));
-        LOGGER.info("22");
+        personageCreatePage.openPropertisMenu();
+        LOGGER.info("Open prop menu");
+        wait.until(ExpectedConditions.visibilityOf(personageCreatePage.getAddWorth()));
         Utill search = new Utill();
-        LOGGER.info("23");
-        assertEquals("У персонажа должна исчезнуть внушительность", false, search.isElementPresent
+        assertFalse("Worth of character should disappeared",search.isElementPresent
                 ("//*[contains(text(), 'Внушительность')]", driver));
-        personagePage.savePersonage();
-        LOGGER.info("24");
-        wait.until(ExpectedConditions.attributeContains(personagePage.getLoader(), "aria-hidden", "true"));
-        LOGGER.info("25");
+        personageCreatePage.savePersonage();
+        LOGGER.info("Check is worth Внушительность is disappeared");
+        wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
         driver.navigate().refresh();
         driver.switchTo().alert().accept();
-        LOGGER.info("26");
-        wait.until(ExpectedConditions.attributeContains(personagePage.getLoader(), "aria-hidden", "true"));
-        LOGGER.info("27");
-        personagePage.openPropertisMenu();
-        LOGGER.info("28");
-        wait.until(ExpectedConditions.elementToBeClickable(personagePage.getWorth()));
-        LOGGER.info("29");
-        personagePage.openWorth();
-        LOGGER.info("30");
-        wait.until(ExpectedConditions.visibilityOf(personagePage.getAddWorth()));
-        LOGGER.info("31");
+        LOGGER.info("Refresh page");
+        wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
+        personageCreatePage.openPropertisMenu();
+        LOGGER.info("Open prop menu");
+        wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getWorth()));
+        personageCreatePage.openWorth();
+        LOGGER.info("Open worth menu");
+        wait.until(ExpectedConditions.visibilityOf(personageCreatePage.getAddWorth()));
         assertEquals("У персонажа должна исчезнуть внушительность", false, search.isElementPresent
                 ("//*[contains(text(), 'Внушительность')]", driver));
     }
@@ -157,13 +143,13 @@ public class GameGnomClassTest {
     public void delTestPersonageAndCloseBrowser() throws IOException, InterruptedException {
         final Wait<WebDriver> wait = new WebDriverWait(driver, 5);
 
-        PersonagePage personagePage = new PersonagePage(driver);
+        PersonageCreatePage personageCreatePage = new PersonageCreatePage(driver);
         Thread.sleep(500);
-        personagePage.openMinMenu();
+        personageCreatePage.openMinMenu();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(), 'персонажи')]")));
 
 
-        PersonageListPage personageListPage = personagePage.goToPersonageListPage();
+        PersonageListPage personageListPage = personageCreatePage.goToPersonageListPage();
         driver.switchTo().alert().accept();
         Thread.sleep(500);
         personageListPage.openMoreMenuForPersonage();

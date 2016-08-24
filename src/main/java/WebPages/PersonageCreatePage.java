@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 /**
  * Created by Nikita on 19.07.2016.
  */
-public class PersonagePage extends BasePage {
+public class PersonageCreatePage extends BasePage {
     @FindBy(xpath = "//a[text()='Главное меню']")
     private WebElement mainMenuButton;
     @FindBy(xpath = "//a[contains(text(), 'персонажи')]")
@@ -120,7 +120,7 @@ public class PersonagePage extends BasePage {
         return worth;
     }
 
-    public PersonagePage(WebDriver webDriver) {
+    public PersonageCreatePage(WebDriver webDriver) {
         super(webDriver);
     }
 
@@ -185,6 +185,23 @@ public class PersonagePage extends BasePage {
 
     public void decreaseStrBy1() {
         decreaseStr.click();
+    }
+
+    public void statChange(String statName, int byNumber, String side){
+        WebElement stat = null;
+        switch (statName){
+            case "str":
+                if (side == "up"){stat = increaseStr;}
+                else if (side == "down"){stat = decreaseStr;}
+                break;
+            case "sta":
+                if (side == "up"){stat = increaseStamina;}
+                else if (side == "down"){stat = decreaseStamina;}
+                break;
+        }
+        for (int i = 0;i<byNumber;i++){
+            stat.click();
+        }
     }
 
     public void increaseStaminaBy1() {
