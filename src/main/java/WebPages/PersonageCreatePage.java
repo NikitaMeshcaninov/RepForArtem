@@ -15,6 +15,8 @@ public class PersonageCreatePage extends BasePage {
     private WebElement mainMenuButton;
     @FindBy(xpath = "//a[contains(text(), 'персонажи')]")
     private WebElement myPersonagesButton;
+    @FindBy (xpath = "//a[@id='attached_skills_mm']")
+    private WebElement attachedSkillsButton;
     @FindBy(xpath = "//h3[text() = '" + SettingsForTest.NAME + "']")
     private WebElement personageName;
     @FindBy(xpath = "//div[p/strong[text()='Раса:']]/following-sibling::div/p")
@@ -179,6 +181,12 @@ public class PersonageCreatePage extends BasePage {
         return new PersonageListPage(getWebDriver());
     }
 
+    public AttachedSkills goToAttachedSkills(){
+
+        attachedSkillsButton.click();
+        return new AttachedSkills(getWebDriver());
+    }
+
     public void increaseStrBy1() {
         increaseStr.click();
     }
@@ -189,15 +197,20 @@ public class PersonageCreatePage extends BasePage {
 
     public void statChange(String statName, int byNumber, String side){
         WebElement stat = null;
-        switch (statName){
-            case "str":
-                if (side == "up"){stat = increaseStr;}
-                else if (side == "down"){stat = decreaseStr;}
-                break;
-            case "sta":
-                if (side == "up"){stat = increaseStamina;}
-                else if (side == "down"){stat = decreaseStamina;}
-                break;
+        if (statName.equals("str")) {
+            if (side == "up") {
+                stat = increaseStr;
+            } else if (side == "down") {
+                stat = decreaseStr;
+            }
+
+        } else if (statName.equals("sta")) {
+            if (side == "up") {
+                stat = increaseStamina;
+            } else if (side == "down") {
+                stat = decreaseStamina;
+            }
+
         }
         for (int i = 0;i<byNumber;i++){
             stat.click();
