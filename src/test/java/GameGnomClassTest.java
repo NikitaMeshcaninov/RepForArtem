@@ -1,6 +1,6 @@
 import WebPages.*;
+import enums.Attribute;
 import org.apache.log4j.Logger;
-import org.apache.logging.log4j.core.util.Assert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.w3c.dom.Attr;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -20,6 +21,9 @@ public class GameGnomClassTest {
 
     private WebDriver driver;
     private static final Logger LOGGER = Logger.getLogger(GameGnomClassTest.class);
+
+    private static final boolean INCREASE = true;
+    private static final boolean DECREASE = false;
 
     @Before
     public void openBrowser() {
@@ -75,9 +79,8 @@ public class GameGnomClassTest {
         Thread.sleep(500);
         personageCreatePage.openCharacteristicsMenu();
         LOGGER.info("Open character menu");
-        wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getIncreaseStr()));
-        personageCreatePage.statChange("str",2,"up"); //strength, add 2 points
-        personageCreatePage.statChange("sta",3,"up"); // stamina, add 3 points
+        personageCreatePage.changeAttribute(Attribute.STRENGTH, INCREASE, 2); //strength, add 2 points
+        personageCreatePage.changeAttribute(Attribute.VITALITY, INCREASE, 3); // stamina, add 3 points
         LOGGER.info("Change hero stats to add worth");
         personageCreatePage.openPropertisMenu();
         LOGGER.info("Open hero prop. menu");
@@ -112,15 +115,14 @@ public class GameGnomClassTest {
         assertEquals("Worth of character should be saved", true, personageCreatePage.getWorthImpressiveness().isDisplayed());
         personageCreatePage.openCharacteristicsMenu();
         LOGGER.info("Check is worth saved, open characteristics menu");
-        wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getDecreaseStamina()));
-        personageCreatePage.statChange("str",1,"down"); //strength, take 2 points
         LOGGER.info("Decrease str by 1");
+        personageCreatePage.changeAttribute(Attribute.STRENGTH, INCREASE, 1);
         Thread.sleep(500);
         personageCreatePage.openPropertisMenu();
         LOGGER.info("Open prop menu");
         wait.until(ExpectedConditions.visibilityOf(personageCreatePage.getAddWorth()));
         Utill search = new Utill();
-        assertFalse("Worth of character should disappeared",search.isElementPresent
+        assertFalse("Worth of character should disappeared", search.isElementPresent
                 ("//*[contains(text(), 'Внушительность')]", driver));
         personageCreatePage.savePersonage();
         LOGGER.info("Check is worth Внушительность is disappeared");
