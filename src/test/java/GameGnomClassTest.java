@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
 
 public class GameGnomClassTest {
 
@@ -49,6 +50,8 @@ public class GameGnomClassTest {
         wait.until(ExpectedConditions.visibilityOf(personageCreatePage.getPersonageExp()));
 
 
+
+
         assertEquals("Name should be " + SettingsForTest.NAME, SettingsForTest.NAME,
                 personageCreatePage.getPersonageName().getText());
         assertEquals("Race of personage should be " + SettingsForTest.NAME.toLowerCase(), SettingsForTest.RACE.toLowerCase()
@@ -70,7 +73,7 @@ public class GameGnomClassTest {
 
         assertEquals("Warning should be present", "Требования не выполнены!"
                 , personageCreatePage.getWarningmesage().getText());
-        assertEquals("Button should not be active", false, personageCreatePage.getAddButtonInPopupWindow().isEnabled());
+        assertFalse("Button should not be active",  personageCreatePage.getAddButtonInPopupWindow().isEnabled());
 
 
         wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getAbortAddWorthButton()));
@@ -91,14 +94,14 @@ public class GameGnomClassTest {
         personageCreatePage.selectWorth(SettingsForTest.WORTH);
         LOGGER.info("Select worth to add");
         wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getAddButtonInPopupWindow()));
-        assertEquals("Button should be active ", true, personageCreatePage.getAddButtonInPopupWindow().isEnabled());
-        assertEquals("No warning should be present", false, personageCreatePage.getWarningmesage().isDisplayed());
+        assertTrue("Button should be active ",  personageCreatePage.getAddButtonInPopupWindow().isEnabled());
+        assertFalse("No warning should be present",  personageCreatePage.getWarningmesage().isDisplayed());
         LOGGER.info("Check popup menu");
         wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getAddButtonInPopupWindow()));
         personageCreatePage.submitAddWorth();
         LOGGER.info("Submitting worth add");
         wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
-        assertEquals("Character should have worth", true, personageCreatePage.getWorthImpressiveness().isDisplayed());
+        assertTrue("Character should have worth",  personageCreatePage.getWorthImpressiveness().isDisplayed());
         personageCreatePage.savePersonage();
         LOGGER.info("Check that worth was added, save character");
         wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
@@ -112,7 +115,7 @@ public class GameGnomClassTest {
         personageCreatePage.openWorth();
         LOGGER.info("Open worth menu");
         wait.until(ExpectedConditions.visibilityOf(personageCreatePage.getAddWorth()));
-        assertEquals("Worth of character should be saved", true, personageCreatePage.getWorthImpressiveness().isDisplayed());
+        assertTrue("Worth of character should be saved",personageCreatePage.getWorthImpressiveness().isDisplayed());
         personageCreatePage.openCharacteristicsMenu();
         LOGGER.info("Check is worth saved, open characteristics menu");
         LOGGER.info("Decrease str by 1");
@@ -137,7 +140,7 @@ public class GameGnomClassTest {
         personageCreatePage.openWorth();
         LOGGER.info("Open worth menu");
         wait.until(ExpectedConditions.visibilityOf(personageCreatePage.getAddWorth()));
-        assertEquals("У персонажа должна исчезнуть внушительность", false, search.isElementPresent
+        assertFalse("У персонажа должна исчезнуть внушительность",  search.isElementPresent
                 ("//*[contains(text(), 'Внушительность')]", driver));
     }
 
