@@ -58,12 +58,6 @@ public class PersonageCreatePage extends BasePage {
     @FindBy(xpath = "//*[contains(text(), 'Характеристики')]")
     private WebElement characteristics;
 
-    @FindBy(xpath = "")
-    private WebElement increaseStr;
-
-    @FindBy(xpath = "//*[text()='Сила']/following-sibling::*/child::*[@ng-click='decreaseAttribute(personageAttribute.id)']")
-    private WebElement decreaseStr;
-
     @FindBy(xpath = "//*[contains(text(), 'Внушительность')]")
     private WebElement worthImpressiveness;
 
@@ -169,11 +163,11 @@ public class PersonageCreatePage extends BasePage {
 
     public void selectWorth(String worth) throws InterruptedException {
         worthSelector.sendKeys(worth);
-        Thread.sleep(500);
+        //Thread.sleep(500);
         worthSelector.sendKeys(Keys.ARROW_DOWN);
-        Thread.sleep(500);
+        //Thread.sleep(500);
         worthSelector.sendKeys(Keys.ENTER);
-        Thread.sleep(500);
+        //Thread.sleep(500);
     }
 
     public void openMinMenu() {
@@ -181,8 +175,8 @@ public class PersonageCreatePage extends BasePage {
     }
 
     public PersonageListPage goToPersonageListPage() {
-
         myPersonagesButton.click();
+        getWebDriver().switchTo().alert().accept();
         return new PersonageListPage(getWebDriver());
     }
 
@@ -209,7 +203,7 @@ public class PersonageCreatePage extends BasePage {
     }
 
     public void submitAddWorth() {
-        addButtonInPopupWindow.click();
+        getAddButtonInPopupWindow().click();
     }
 
     public void savePersonage() {

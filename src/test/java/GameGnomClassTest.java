@@ -9,8 +9,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.w3c.dom.Attr;
 
+import javax.rmi.CORBA.Util;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -79,7 +79,7 @@ public class GameGnomClassTest {
         wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getAbortAddWorthButton()));
         personageCreatePage.abortAddWorth();
         LOGGER.info("Abort add worth operation");
-        Thread.sleep(500);
+        Utils.waitForInvisibility(driver, personageCreatePage.getAddWorthMenu());
         personageCreatePage.openCharacteristicsMenu();
         LOGGER.info("Open character menu");
         personageCreatePage.changeAttribute(Attribute.STRENGTH, INCREASE, 2); //strength, add 2 points
@@ -93,11 +93,10 @@ public class GameGnomClassTest {
         wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getWorthSelector()));
         personageCreatePage.selectWorth(SettingsForTest.WORTH);
         LOGGER.info("Select worth to add");
-        wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getAddButtonInPopupWindow()));
-        assertTrue("Button should be active ",  personageCreatePage.getAddButtonInPopupWindow().isEnabled());
+        wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
         assertFalse("No warning should be present",  personageCreatePage.getWarningmesage().isDisplayed());
+        assertTrue("Button should be active ",  personageCreatePage.getAddButtonInPopupWindow().isEnabled());
         LOGGER.info("Check popup menu");
-        wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getAddButtonInPopupWindow()));
         personageCreatePage.submitAddWorth();
         LOGGER.info("Submitting worth add");
         wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
@@ -105,12 +104,12 @@ public class GameGnomClassTest {
         personageCreatePage.savePersonage();
         LOGGER.info("Check that worth was added, save character");
         wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
+        LOGGER.info("Refresh page");
         driver.navigate().refresh();
         driver.switchTo().alert().accept();
-        LOGGER.info("Refresh page");
         wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
-        personageCreatePage.openPropertisMenu();
         LOGGER.info("Open prop. menu");
+        personageCreatePage.openPropertisMenu();
         wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getWorth()));
         personageCreatePage.openWorth();
         LOGGER.info("Open worth menu");
@@ -119,28 +118,26 @@ public class GameGnomClassTest {
         personageCreatePage.openCharacteristicsMenu();
         LOGGER.info("Check is worth saved, open characteristics menu");
         LOGGER.info("Decrease str by 1");
-        personageCreatePage.changeAttribute(Attribute.STRENGTH, INCREASE, 1);
-        Thread.sleep(500);
+        personageCreatePage.changeAttribute(Attribute.STRENGTH, DECREASE, 1);
         personageCreatePage.openPropertisMenu();
         LOGGER.info("Open prop menu");
-        wait.until(ExpectedConditions.visibilityOf(personageCreatePage.getAddWorth()));
-        Utill search = new Utill();
-        assertFalse("Worth of character should disappeared", search.isElementPresent
+        wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
+        assertFalse("Worth of character should disappeared", Utils.isElementPresent
                 ("//*[contains(text(), 'Внушительность')]", driver));
         personageCreatePage.savePersonage();
         LOGGER.info("Check is worth Внушительность is disappeared");
         wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
+        LOGGER.info("Refresh page");
         driver.navigate().refresh();
         driver.switchTo().alert().accept();
-        LOGGER.info("Refresh page");
         wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
-        personageCreatePage.openPropertisMenu();
         LOGGER.info("Open prop menu");
+        personageCreatePage.openPropertisMenu();
         wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getWorth()));
         personageCreatePage.openWorth();
         LOGGER.info("Open worth menu");
-        wait.until(ExpectedConditions.visibilityOf(personageCreatePage.getAddWorth()));
-        assertFalse("У персонажа должна исчезнуть внушительность",  search.isElementPresent
+        wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
+        assertFalse("У персонажа должна исчезнуть внушительность",  Utils.isElementPresent
                 ("//*[contains(text(), 'Внушительность')]", driver));
     }
 
@@ -149,14 +146,11 @@ public class GameGnomClassTest {
         final Wait<WebDriver> wait = new WebDriverWait(driver, 5);
 
         PersonageCreatePage personageCreatePage = new PersonageCreatePage(driver);
-        Thread.sleep(500);
         personageCreatePage.openMinMenu();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(), 'персонажи')]")));
 
 
         PersonageListPage personageListPage = personageCreatePage.goToPersonageListPage();
-        driver.switchTo().alert().accept();
-        Thread.sleep(500);
         personageListPage.openMoreMenuForPersonage();
         personageListPage.delCharacter();
         driver.close();
