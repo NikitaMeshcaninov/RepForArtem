@@ -122,6 +122,7 @@ public class GameGnomClassTest {
         personageCreatePage.openPropertisMenu();
         LOGGER.info("Open prop menu");
         wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
+        //висит ровно 30 секунд, видимо не работатет
         assertFalse("Worth of character should disappeared", Utils.isElementPresent
                 ("//*[contains(text(), 'Внушительность')]", driver));
         personageCreatePage.savePersonage();
@@ -132,13 +133,18 @@ public class GameGnomClassTest {
         driver.switchTo().alert().accept();
         wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
         LOGGER.info("Open prop menu");
-        personageCreatePage.openPropertisMenu();
+        personageCreatePage.openPropertisMenu(); // тут упало с ошибкой "Element is not
+                                                 // clickable at point (455, 607). Other
+                                                 // element would receive the click:
+                                                 // <div class="panel-group" id="perkAccordeon">...</div>"
         wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getWorth()));
         personageCreatePage.openWorth();
         LOGGER.info("Open worth menu");
         wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
+        //висит ровно 30 секунд, видимо не работатет
         assertFalse("У персонажа должна исчезнуть внушительность",  Utils.isElementPresent
                 ("//*[contains(text(), 'Внушительность')]", driver));
+        LOGGER.info("End of test");
     }
 
     @After
