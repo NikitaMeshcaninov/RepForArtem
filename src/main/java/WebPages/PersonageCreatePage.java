@@ -145,7 +145,7 @@ public class PersonageCreatePage extends BasePage {
         return mainMenuButton;
     }
 
-    public void openPropertisMenu() {
+    public void openPropertiesMenu() {
         specialPropertis.click();
     }
 
@@ -170,7 +170,7 @@ public class PersonageCreatePage extends BasePage {
         //Thread.sleep(500);
     }
 
-    public void openMinMenu() {
+    public void openMainMenu() {
         mainMenuButton.click();
     }
 

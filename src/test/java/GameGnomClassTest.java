@@ -59,7 +59,8 @@ public class GameGnomClassTest {
         assertEquals("Exp should be " + SettingsForTest.XP.toLowerCase(), SettingsForTest.XP.toLowerCase()
                 , personageCreatePage.getPersonageExp().getAttribute("value"));
 
-        personageCreatePage.openPropertisMenu();
+        personageCreatePage.openPropertiesMenu();
+
         wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getDisadvantages()));
         personageCreatePage.openWorth();
         wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getAddWorth()));
@@ -85,8 +86,8 @@ public class GameGnomClassTest {
         personageCreatePage.changeAttribute(Attribute.STRENGTH, INCREASE, 2); //strength, add 2 points
         personageCreatePage.changeAttribute(Attribute.VITALITY, INCREASE, 3); // stamina, add 3 points
         LOGGER.info("Change hero stats to add worth");
-        personageCreatePage.openPropertisMenu();
-        LOGGER.info("Open hero prop. menu");
+        personageCreatePage.openPropertiesMenu();
+        LOGGER.info("Open hero properties menu");
         wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getAddWorth()));
         personageCreatePage.clikAddWorth();
         LOGGER.info("Open addWorth popup menu");
@@ -108,8 +109,8 @@ public class GameGnomClassTest {
         driver.navigate().refresh();
         driver.switchTo().alert().accept();
         wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
-        LOGGER.info("Open prop. menu");
-        personageCreatePage.openPropertisMenu();
+        LOGGER.info("Open properties menu");
+        personageCreatePage.openPropertiesMenu();
         wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getWorth()));
         personageCreatePage.openWorth();
         LOGGER.info("Open worth menu");
@@ -119,8 +120,8 @@ public class GameGnomClassTest {
         LOGGER.info("Check is worth saved, open characteristics menu");
         LOGGER.info("Decrease str by 1");
         personageCreatePage.changeAttribute(Attribute.STRENGTH, DECREASE, 1);
-        personageCreatePage.openPropertisMenu();
-        LOGGER.info("Open prop menu");
+        personageCreatePage.openPropertiesMenu();
+        LOGGER.info("Open properties menu");
         wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
         //висит ровно 30 секунд, видимо не работатет
         assertFalse("Worth of character should disappeared", Utils.isElementPresent
@@ -133,7 +134,7 @@ public class GameGnomClassTest {
         driver.switchTo().alert().accept();
         wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
         LOGGER.info("Open prop menu");
-        personageCreatePage.openPropertisMenu(); // тут упало с ошибкой "Element is not
+        personageCreatePage.openPropertiesMenu(); // тут упало с ошибкой "Element is not
                                                  // clickable at point (455, 607). Other
                                                  // element would receive the click:
                                                  // <div class="panel-group" id="perkAccordeon">...</div>"
@@ -152,7 +153,7 @@ public class GameGnomClassTest {
         final Wait<WebDriver> wait = new WebDriverWait(driver, 5);
 
         PersonageCreatePage personageCreatePage = new PersonageCreatePage(driver);
-        personageCreatePage.openMinMenu();
+        personageCreatePage.openMainMenu();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(), 'персонажи')]")));
 
 
