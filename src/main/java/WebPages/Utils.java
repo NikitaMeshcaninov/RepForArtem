@@ -61,4 +61,16 @@ public class Utils {
         };
     }
 
+    public static boolean isElementCurrentlyPresent(String xpath, WebDriver driver) {
+        try {
+            driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+            driver.findElement(By.xpath(xpath));
+            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+            return true;
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+            return false;
+        }
+    }
+
 }
