@@ -16,11 +16,7 @@ import org.w3c.dom.Attr;
  * Created by Nikita on 19.07.2016.
  */
 public class PersonageCreatePage extends BasePage {
-    @FindBy(xpath = "//a[text()='Главное меню']")
-    private WebElement mainMenuButton;
 
-    @FindBy(xpath = "//a[contains(text(), 'персонажи')]")
-    private WebElement myPersonagesButton;
 
     @FindBy(xpath = "//a[@id='attached_skills_mm']")
     private WebElement attachedSkillsButton;
@@ -141,9 +137,7 @@ public class PersonageCreatePage extends BasePage {
         return specialPropertis;
     }
 
-    public WebElement getMainMenuButton() {
-        return mainMenuButton;
-    }
+
 
     public void openPropertiesMenu() {
         specialPropertis.click();
@@ -170,15 +164,9 @@ public class PersonageCreatePage extends BasePage {
         //Thread.sleep(500);
     }
 
-    public void openMainMenu() {
-        mainMenuButton.click();
-    }
 
-    public PersonageListPage goToPersonageListPage() {
-        myPersonagesButton.click();
-        getWebDriver().switchTo().alert().accept();
-        return new PersonageListPage(getWebDriver());
-    }
+
+
 
     public AttachedSkills goToAttachedSkills() {
 

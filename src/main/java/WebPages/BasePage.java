@@ -10,10 +10,30 @@ public abstract class BasePage {
 
     @FindBy(xpath = "//div[h4]/following-sibling::div[1]")
     private WebElement playerRole;
+
+    @FindBy(xpath = "//a[text()='Главное меню']")
+    private WebElement mainMenuButton;
+
+    @FindBy(xpath = "//a[contains(text(), 'персонажи')]")
+    private WebElement myPersonagesButton;
     
     public BasePage(WebDriver webDriver) {
         PageFactory.initElements(webDriver, this);
         this.webDriver = webDriver;
+    }
+
+    public WebElement getMainMenuButton() {
+        return mainMenuButton;
+    }
+
+    public void openMainMenu() {
+        mainMenuButton.click();
+    }
+
+    public PersonageListPage goToPersonageListPage() {
+        myPersonagesButton.click();
+        getWebDriver().switchTo().alert().accept();
+        return new PersonageListPage(getWebDriver());
     }
 
     public WebDriver getWebDriver() {

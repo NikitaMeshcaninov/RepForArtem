@@ -25,7 +25,7 @@ public class GameGnomClassTest {
     @Before
     public void openBrowser() {
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     @Test
@@ -127,12 +127,15 @@ public class GameGnomClassTest {
         driver.navigate().refresh();
         driver.switchTo().alert().accept();
         wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
+        wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getSpecialPropertis()));
+        wait.until(ExpectedConditions.visibilityOf(personageCreatePage.getSpecialPropertis()));
         LOGGER.info("19 Open prop menu");
         personageCreatePage.openPropertiesMenu(); // тут упало с ошибкой "Element is not
         // clickable at point (455, 607). Other
         // element would receive the click:
         // <div class="panel-group" id="perkAccordeon">...</div>"
         wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getWorth()));
+        wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
         personageCreatePage.openWorth();
         LOGGER.info("20 Open worth menu");
         wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
