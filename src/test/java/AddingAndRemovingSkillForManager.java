@@ -11,7 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import static junit.framework.Assert.*;
+import static org.junit.Assert.*;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -45,7 +46,7 @@ public class AddingAndRemovingSkillForManager {
 
         PersonageCreatePage personagePage = new PersonageCreatePage(driver);
         Thread.sleep(500);
-        personagePage.openMinMenu();
+        personagePage.openMainMenu();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@id='attached_skills_mm']")));
         //Вообще-то это веб элемент: attachedSkillsButton. Можно ли его иначе указать?
         System.out.println("Открываем главное меню -> Прикрепленные навыки");
