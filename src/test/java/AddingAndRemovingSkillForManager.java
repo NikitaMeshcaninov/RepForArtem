@@ -79,21 +79,5 @@ public class AddingAndRemovingSkillForManager {
         attachedSkills.setMoreButton();
         System.out.println("Нажимаем на кнопку Х и удаляем" + " " + SettingsForTest.SKILL_NAME);
         attachedSkills.setRemoveAttachedSkillX();
-
-
-
-
-
-
-
-
-
-
-
-
-
-        }
-
-
-
-        }
+    }
+}
