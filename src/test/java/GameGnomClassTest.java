@@ -32,6 +32,7 @@ public class GameGnomClassTest {
     @Test
     public void gameTest() throws IOException, InterruptedException {
         final Wait<WebDriver> wait = new WebDriverWait(driver, 5);
+        final Wait<WebDriver> waitShort = new WebDriverWait(driver, 5, 1000);
 
         HomePage homePage = new HomePage(driver);
         assertEquals("The page should enter page to game site", "Вход", driver.getTitle());
@@ -121,8 +122,10 @@ public class GameGnomClassTest {
         LOGGER.info("Open properties menu");
         wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
         //висит ровно 30 секунд, видимо не работатет
+        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         assertFalse("Worth of character should disappeared", Utils.isElementPresent
                 ("//*[contains(text(), 'Внушительность')]", driver));
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         personageCreatePage.savePersonage();
         LOGGER.info("Check is worth Внушительность is disappeared");
         wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
@@ -140,8 +143,10 @@ public class GameGnomClassTest {
         LOGGER.info("Open worth menu");
         wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
         //висит ровно 30 секунд, видимо не работатет
+        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         assertFalse("У персонажа должна исчезнуть внушительность",  Utils.isElementPresent
                 ("//*[contains(text(), 'Внушительность')]", driver));
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         LOGGER.info("End of test");
     }
 
