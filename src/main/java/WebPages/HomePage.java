@@ -13,6 +13,7 @@ public class HomePage extends BasePage{
     private static String pageURL = "http://erilon-staging.herokuapp.com/";
     @FindBy(xpath = ".//*[@id='nickName']")
     private WebElement nickNameTextField;
+
     @FindBy(xpath = "//button[@ng-click='login()']")
     private WebElement loginButton;
 

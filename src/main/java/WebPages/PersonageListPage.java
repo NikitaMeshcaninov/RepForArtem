@@ -13,19 +13,28 @@ public class PersonageListPage extends BasePage{
 
     @FindBy(xpath = ".//*[@id='name']")
     private WebElement nameField;
+
     @FindBy(xpath = ".//*[@id='race_id']")
     private WebElement raceSelector;
+
     @FindBy(xpath = ".//*[@id='experience']")
     private WebElement experienceField;
+
     @FindBy(xpath = "//button[@ng-click='createPersonage()']")
     private WebElement addCharacterButton;
+
     @FindBy(xpath = "//table//tr[td/a[contains(text(), '" + SettingsForTest.NAME + "')]]/td[2]//button")
     private WebElement moreForCharacterButton;
+
     @FindBy(xpath = "//table//tr[td/a[contains(text(), '" + SettingsForTest.NAME + "')]]/td[2]//a[contains(text(), 'х')]")
     private WebElement delButton;
 
     public PersonageListPage(WebDriver webDriver) {
         super(webDriver);
+    }
+
+    public WebElement getMoreForCharacterButton() {
+        return moreForCharacterButton;
     }
 
     public void fillName(String name) {

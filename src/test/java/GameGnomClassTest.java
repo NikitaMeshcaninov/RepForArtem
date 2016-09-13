@@ -9,8 +9,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.beans.Visibility;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -154,10 +152,27 @@ public class GameGnomClassTest {
         PersonageListPage personageListPage = personageCreatePage.goToPersonageListPage();
 
 
-        while (Utils.isElementCurrentlyPresent("//*[contains(text(), " + SettingsForTest.NAME + ")]", driver)) {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text()," + SettingsForTest.NAME + ")]")));
+        while (Utils.isElementCurrentlyPresent("//table//tr[td/a[contains(text(), '" +
+                SettingsForTest.NAME +
+                "')]]/td[2]//button", driver)) {
+
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table//tr[td/a[contains(text(), '" +
+                    SettingsForTest.NAME +
+                    "')]]/td[2]//button")));
+
             personageListPage.openMoreMenuForPersonage();
             personageListPage.delCharacter();
+            System.out.println(Utils.isElementCurrentlyPresent("//table//tr[td/a[contains(text(), '" +
+                    SettingsForTest.NAME +
+                    "')]]/td[2]//button", driver));
+            if (Utils.isElementCurrentlyPresent("//table//tr[td/a[contains(text(), '" +
+                SettingsForTest.NAME +
+                "')]]/td[2]//button", driver)) {
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table//tr[td/a[contains(text(), '" +
+                        SettingsForTest.NAME +
+                        "')]]/td[2]//button")));
+            }
+            else break;
         }
 
         driver.close();
