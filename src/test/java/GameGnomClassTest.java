@@ -53,7 +53,7 @@ public class GameGnomClassTest {
                 , personageCreatePage.getPersonageRace().getText().toLowerCase());
         assertEquals("Exp should be " + SettingsForTest.XP.toLowerCase(), SettingsForTest.XP.toLowerCase()
                 , personageCreatePage.getPersonageExp().getAttribute("value"));
-///*
+
         personageCreatePage.openPropertiesMenu();
 
         wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getDisadvantages()));
@@ -118,7 +118,6 @@ public class GameGnomClassTest {
         personageCreatePage.openPropertiesMenu();
         LOGGER.info("16 Open properties menu");
         wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
-        //висит ровно 30 секунд, видимо не работатет
         assertFalse("Worth of character should disappeared", Utils.isElementCurrentlyPresent
                 ("//*[contains(text(), 'Внушительность')]", driver));
         personageCreatePage.savePersonage();
@@ -140,7 +139,6 @@ public class GameGnomClassTest {
         personageCreatePage.openWorth();
         LOGGER.info("20 Open worth menu");
         wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
-        //висит ровно 30 секунд, видимо не работатет
         assertFalse("У персонажа должна исчезнуть внушительность", Utils.isElementCurrentlyPresent
                 ("//*[contains(text(), 'Внушительность')]", driver));//*/
         LOGGER.info("21 End of test");
