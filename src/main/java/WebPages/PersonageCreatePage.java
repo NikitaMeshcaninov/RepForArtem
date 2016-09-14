@@ -61,7 +61,6 @@ public class PersonageCreatePage extends BasePage {
     private WebElement saveButton;
 
 
-
     @FindBy(xpath = "//md-dialog")
     private WebElement addWorthMenu;
 
@@ -75,7 +74,6 @@ public class PersonageCreatePage extends BasePage {
     public WebElement getAddWorthMenu() {
         return addWorthMenu;
     }
-
 
 
     public WebElement getSaveButton() {
@@ -118,7 +116,8 @@ public class PersonageCreatePage extends BasePage {
         super(webDriver);
     }
 
-    public WebElement getPersonageName() {
+    public WebElement getPersonageName(String name, WebDriver driver) {
+        WebElement personageName = driver.findElement(By.xpath("//h3[text() = '" + name + "']"));
         return personageName;
     }
 
@@ -133,7 +132,6 @@ public class PersonageCreatePage extends BasePage {
     public WebElement getSpecialPropertis() {
         return specialPropertis;
     }
-
 
 
     public void openPropertiesMenu() {
@@ -160,9 +158,6 @@ public class PersonageCreatePage extends BasePage {
         worthSelector.sendKeys(Keys.ENTER);
         //Thread.sleep(500);
     }
-
-
-
 
 
     public AttachedSkills goToAttachedSkills() {

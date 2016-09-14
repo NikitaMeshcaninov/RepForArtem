@@ -1,5 +1,6 @@
 package WebPages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,17 +24,17 @@ public class PersonageListPage extends BasePage{
     @FindBy(xpath = "//button[@ng-click='createPersonage()']")
     private WebElement addCharacterButton;
 
-    @FindBy(xpath = "//table//tr[td/a[contains(text(), '" + SettingsForTest.NAME + "')]]/td[2]//button")
     private WebElement moreForCharacterButton;
 
-    @FindBy(xpath = "//table//tr[td/a[contains(text(), '" + SettingsForTest.NAME + "')]]/td[2]//a[contains(text(), 'х')]")
+
     private WebElement delButton;
 
     public PersonageListPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public WebElement getMoreForCharacterButton() {
+    public WebElement getMoreForCharacterButton(String name, WebDriver driver) {
+        moreForCharacterButton = driver.findElement(By.xpath("//table//tr[td/a[contains(text(), '" + name + "')]]/td[2]//button"));
         return moreForCharacterButton;
     }
 
@@ -57,11 +58,13 @@ public class PersonageListPage extends BasePage{
         return new PersonageCreatePage(getWebDriver());
     }
 
-    public void openMoreMenuForPersonage() {
+    public void openMoreMenuForPersonage(String name, WebDriver driver) {
+        moreForCharacterButton = driver.findElement(By.xpath("//table//tr[td/a[contains(text(), '" + name + "')]]/td[2]//button"));
         moreForCharacterButton.click();
     }
 
-    public void delCharacter() {
+    public void delCharacter(String name, WebDriver driver) {
+        delButton = driver.findElement(By.xpath("//table//tr[td/a[contains(text(), '" + name + "')]]/td[2]//a[contains(text(), 'х')]"));
         delButton.click();
     }
 }

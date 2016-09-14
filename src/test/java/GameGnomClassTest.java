@@ -42,13 +42,13 @@ public class GameGnomClassTest {
         personageListPage.fillexperience(SettingsForTest.XP);
         PersonageCreatePage personageCreatePage = personageListPage.addCharacer();
 
-        wait.until(ExpectedConditions.visibilityOf(personageCreatePage.getPersonageName()));
+        wait.until(ExpectedConditions.visibilityOf(personageCreatePage.getPersonageName(SettingsForTest.NAME, driver)));
         wait.until(ExpectedConditions.visibilityOf(personageCreatePage.getPersonageRace()));
         wait.until(ExpectedConditions.visibilityOf(personageCreatePage.getPersonageExp()));
 
 
         assertEquals("Name should be " + SettingsForTest.NAME, SettingsForTest.NAME,
-                personageCreatePage.getPersonageName().getText());
+                personageCreatePage.getPersonageName(SettingsForTest.NAME,driver).getText());
         assertEquals("Race of personage should be " + SettingsForTest.NAME.toLowerCase(), SettingsForTest.RACE.toLowerCase()
                 , personageCreatePage.getPersonageRace().getText().toLowerCase());
         assertEquals("Exp should be " + SettingsForTest.XP.toLowerCase(), SettingsForTest.XP.toLowerCase()
@@ -163,8 +163,8 @@ public class GameGnomClassTest {
                 SettingsForTest.NAME +
                 "')]]/td[2]//button", driver)) {
 
-            personageListPage.openMoreMenuForPersonage();
-            personageListPage.delCharacter();
+            personageListPage.openMoreMenuForPersonage(SettingsForTest.NAME,driver);
+            personageListPage.delCharacter(SettingsForTest.NAME,driver);
             Thread.sleep(500);
             if (Utils.isElementCurrentlyPresent("//table//tr[td/a[contains(text(), '" +
                     SettingsForTest.NAME +
