@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -151,33 +152,33 @@ public class GameGnomClassTest {
         PersonageCreatePage personageCreatePage = new PersonageCreatePage(driver);
 
         personageCreatePage.openMainMenu();
+
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(), 'персонажи')]")));
         PersonageListPage personageListPage = personageCreatePage.goToPersonageListPage();
 
-
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table//tr[td/a[contains(text(), '" +
+                SettingsForTest.NAME +
+                "')]]/td[2]//button")));
         while (Utils.isElementCurrentlyPresent("//table//tr[td/a[contains(text(), '" +
                 SettingsForTest.NAME +
                 "')]]/td[2]//button", driver)) {
 
+            personageListPage.openMoreMenuForPersonage();
+            personageListPage.delCharacter();
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table//tr[td/a[contains(text(), '" +
                     SettingsForTest.NAME +
                     "')]]/td[2]//button")));
 
-            personageListPage.openMoreMenuForPersonage();
-            personageListPage.delCharacter();
-            System.out.println(Utils.isElementCurrentlyPresent("//table//tr[td/a[contains(text(), '" +
-                    SettingsForTest.NAME +
-                    "')]]/td[2]//button", driver));
             if (Utils.isElementCurrentlyPresent("//table//tr[td/a[contains(text(), '" +
-                SettingsForTest.NAME +
-                "')]]/td[2]//button", driver)) {
+                    SettingsForTest.NAME +
+                    "')]]/td[2]//button", driver)) {
                 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table//tr[td/a[contains(text(), '" +
                         SettingsForTest.NAME +
                         "')]]/td[2]//button")));
+            } else {
+                break;
             }
-            else break;
         }
-
         driver.close();
     }
 }

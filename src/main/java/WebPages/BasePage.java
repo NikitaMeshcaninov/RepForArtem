@@ -16,6 +16,13 @@ public abstract class BasePage {
 
     @FindBy(xpath = "//a[contains(text(), 'персонажи')]")
     private WebElement myPersonagesButton;
+
+    @FindBy(xpath = "//*[@id= 'loader']")
+    private WebElement loader;
+
+    public WebElement getLoader() {
+        return loader;
+    }
     
     public BasePage(WebDriver webDriver) {
         PageFactory.initElements(webDriver, this);

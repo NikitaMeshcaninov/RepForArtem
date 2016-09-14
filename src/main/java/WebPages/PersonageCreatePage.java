@@ -60,8 +60,7 @@ public class PersonageCreatePage extends BasePage {
     @FindBy(xpath = "//*[@ng-click= 'savePersonage()']")
     private WebElement saveButton;
 
-    @FindBy(xpath = "//*[@id= 'loader']")
-    private WebElement loader;
+
 
     @FindBy(xpath = "//md-dialog")
     private WebElement addWorthMenu;
@@ -77,9 +76,7 @@ public class PersonageCreatePage extends BasePage {
         return addWorthMenu;
     }
 
-    public WebElement getLoader() {
-        return loader;
-    }
+
 
     public WebElement getSaveButton() {
         return saveButton;
