@@ -144,7 +144,7 @@ public class PersonageCreatePage extends BasePage {
         worth.click();
     }
 
-    public void clikAddWorth() {
+    public void clickAddWorth() {
         addWorth.click();
     }
 

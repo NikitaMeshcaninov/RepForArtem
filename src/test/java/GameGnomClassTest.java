@@ -53,13 +53,13 @@ public class GameGnomClassTest {
                 , personageCreatePage.getPersonageRace().getText().toLowerCase());
         assertEquals("Exp should be " + SettingsForTest.XP.toLowerCase(), SettingsForTest.XP.toLowerCase()
                 , personageCreatePage.getPersonageExp().getAttribute("value"));
-
+///*
         personageCreatePage.openPropertiesMenu();
 
         wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getDisadvantages()));
         personageCreatePage.openWorth();
         wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getAddWorth()));
-        personageCreatePage.clikAddWorth();
+        personageCreatePage.clickAddWorth();
         wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getWorthSelector()));
 
 
@@ -84,7 +84,7 @@ public class GameGnomClassTest {
         personageCreatePage.openPropertiesMenu();
         LOGGER.info("4 Open hero properties menu");
         wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getAddWorth()));
-        personageCreatePage.clikAddWorth();
+        personageCreatePage.clickAddWorth();
         LOGGER.info("5 Open addWorth popup menu");
         wait.until(ExpectedConditions.elementToBeClickable(personageCreatePage.getWorthSelector()));
         personageCreatePage.selectWorth(SettingsForTest.WORTH);
@@ -142,7 +142,7 @@ public class GameGnomClassTest {
         wait.until(ExpectedConditions.attributeContains(personageCreatePage.getLoader(), "aria-hidden", "true"));
         //висит ровно 30 секунд, видимо не работатет
         assertFalse("У персонажа должна исчезнуть внушительность", Utils.isElementCurrentlyPresent
-                ("//*[contains(text(), 'Внушительность')]", driver));
+                ("//*[contains(text(), 'Внушительность')]", driver));//*/
         LOGGER.info("21 End of test");
     }
 
@@ -165,10 +165,7 @@ public class GameGnomClassTest {
 
             personageListPage.openMoreMenuForPersonage();
             personageListPage.delCharacter();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table//tr[td/a[contains(text(), '" +
-                    SettingsForTest.NAME +
-                    "')]]/td[2]//button")));
-
+            Thread.sleep(500);
             if (Utils.isElementCurrentlyPresent("//table//tr[td/a[contains(text(), '" +
                     SettingsForTest.NAME +
                     "')]]/td[2]//button", driver)) {

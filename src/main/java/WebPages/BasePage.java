@@ -11,13 +11,13 @@ public abstract class BasePage {
     @FindBy(xpath = "//div[h4]/following-sibling::div[1]")
     private WebElement playerRole;
 
-    @FindBy(xpath = "//a[text()='Главное меню']")
+    @FindBy(id = "main_menu_link")
     private WebElement mainMenuButton;
 
-    @FindBy(xpath = "//a[contains(text(), 'персонажи')]")
+    @FindBy(id = "my_personages")
     private WebElement myPersonagesButton;
 
-    @FindBy(xpath = "//*[@id= 'loader']")
+    @FindBy(id = "loader")
     private WebElement loader;
 
     public WebElement getLoader() {
