@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import javax.rmi.CORBA.Util;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -158,6 +159,7 @@ public class GameGnomClassTest {
         while (Utils.isElementPresent(personageRowXpath, driver)) {
             personageListPage.openMoreMenuForPersonage(driver.findElement(By.xpath(personageRowXpath)));
             personageListPage.delCharacter(driver.findElement(By.xpath(personageRowXpath)));
+            Utils.waitTimeout(500);
         }
         driver.close();
     }

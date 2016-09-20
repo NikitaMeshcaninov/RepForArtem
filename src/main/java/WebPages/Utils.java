@@ -73,4 +73,12 @@ public class Utils {
         }
     }
 
+    public static void waitTimeout(long timeoutInMillis) {
+        try {
+            Thread.sleep(timeoutInMillis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
