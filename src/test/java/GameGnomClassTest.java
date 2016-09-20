@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
@@ -48,7 +49,7 @@ public class GameGnomClassTest {
 
 
         assertEquals("Name should be " + SettingsForTest.NAME, SettingsForTest.NAME,
-                personageCreatePage.getPersonageName(SettingsForTest.NAME,driver).getText());
+                personageCreatePage.getPersonageName(SettingsForTest.NAME, driver).getText());
         assertEquals("Race of personage should be " + SettingsForTest.NAME.toLowerCase(), SettingsForTest.RACE.toLowerCase()
                 , personageCreatePage.getPersonageRace().getText().toLowerCase());
         assertEquals("Exp should be " + SettingsForTest.XP.toLowerCase(), SettingsForTest.XP.toLowerCase()
@@ -154,27 +155,19 @@ public class GameGnomClassTest {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(), 'персонажи')]")));
         PersonageListPage personageListPage = personageCreatePage.goToPersonageListPage();
 
+
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table//tr[td/a[contains(text(), '" +
                 SettingsForTest.NAME +
                 "')]]/td[2]//button")));
-        while (Utils.isElementCurrentlyPresent("//table//tr[td/a[contains(text(), '" +
+        List testPersRow = driver.findElements(By.xpath("//table//tr[td/a[contains(text(), '" +
                 SettingsForTest.NAME +
-                "')]]/td[2]//button", driver)) {
+                "')]]/td[2]//button"));
+        for (int i = 0; i < testPersRow.size(); i++) {
 
-            personageListPage.openMoreMenuForPersonage(SettingsForTest.NAME,driver);
-            personageListPage.delCharacter(SettingsForTest.NAME,driver);
+            personageListPage.openMoreMenuForPersonage(SettingsForTest.NAME, driver);
+            personageListPage.delCharacter(SettingsForTest.NAME, driver);
+            Thread.sleep(500);// не получаеться заменить этот слип на вейт, как не пробую - не получается
 
-            Thread.sleep(500); // без этого слипа падает
-
-            if (Utils.isElementCurrentlyPresent("//table//tr[td/a[contains(text(), '" +
-                    SettingsForTest.NAME +
-                    "')]]/td[2]//button", driver)) {
-                wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table//tr[td/a[contains(text(), '" +
-                        SettingsForTest.NAME +
-                        "')]]/td[2]//button")));
-            } else {
-                break;
-            }
         }
         driver.close();
     }
