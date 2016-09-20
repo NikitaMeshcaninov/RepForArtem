@@ -58,13 +58,13 @@ public class PersonageListPage extends BasePage{
         return new PersonageCreatePage(getWebDriver());
     }
 
-    public void openMoreMenuForPersonage(String name, WebDriver driver) {
-        moreForCharacterButton = driver.findElement(By.xpath("//table//tr[td/a[contains(text(), '" + name + "')]]/td[2]//button"));
+    public void openMoreMenuForPersonage(WebElement personageRow) {
+        moreForCharacterButton = personageRow.findElement(By.xpath("td[2]//button"));
         moreForCharacterButton.click();
     }
 
-    public void delCharacter(String name, WebDriver driver) {
-        delButton = driver.findElement(By.xpath("//table//tr[td/a[contains(text(), '" + name + "')]]/td[2]//a[contains(text(), 'х')]"));
+    public void delCharacter(WebElement personageRow) {
+        delButton = personageRow.findElement(By.xpath("td[2]//a[contains(text(), 'х')]"));
         delButton.click();
     }
 }

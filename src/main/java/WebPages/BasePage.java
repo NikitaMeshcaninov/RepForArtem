@@ -1,5 +1,6 @@
 package WebPages;
 
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -39,7 +40,11 @@ public abstract class BasePage {
 
     public PersonageListPage goToPersonageListPage() {
         myPersonagesButton.click();
-        getWebDriver().switchTo().alert().accept();
+        try {
+            getWebDriver().switchTo().alert().accept();
+        } catch (NoAlertPresentException e) {
+            e.printStackTrace();
+        }
         return new PersonageListPage(getWebDriver());
     }
 

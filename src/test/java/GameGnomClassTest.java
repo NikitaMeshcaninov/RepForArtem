@@ -154,20 +154,10 @@ public class GameGnomClassTest {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(), 'персонажи')]")));
         PersonageListPage personageListPage = personageCreatePage.goToPersonageListPage();
-
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table//tr[td/a[contains(text(), '" +
-                SettingsForTest.NAME +
-                "')]]/td[2]//button")));
-        List testPersRow = driver.findElements(By.xpath("//table//tr[td/a[contains(text(), '" +
-                SettingsForTest.NAME +
-                "')]]/td[2]//button"));
-        for (int i = 0; i < testPersRow.size(); i++) {
-
-            personageListPage.openMoreMenuForPersonage(SettingsForTest.NAME, driver);
-            personageListPage.delCharacter(SettingsForTest.NAME, driver);
-            Thread.sleep(500);// не получаеться заменить этот слип на вейт, как не пробую - не получается
-
+        String personageRowXpath = "//table//tr[td/a[contains(text(), '" + SettingsForTest.NAME + "')]]";
+        while (Utils.isElementPresent(personageRowXpath, driver)) {
+            personageListPage.openMoreMenuForPersonage(driver.findElement(By.xpath(personageRowXpath)));
+            personageListPage.delCharacter(driver.findElement(By.xpath(personageRowXpath)));
         }
         driver.close();
     }
