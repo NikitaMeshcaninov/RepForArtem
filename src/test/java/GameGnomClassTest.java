@@ -165,7 +165,9 @@ public class GameGnomClassTest {
 
             personageListPage.openMoreMenuForPersonage(SettingsForTest.NAME,driver);
             personageListPage.delCharacter(SettingsForTest.NAME,driver);
-            Thread.sleep(500);
+
+            Thread.sleep(500); // без этого слипа падает
+
             if (Utils.isElementCurrentlyPresent("//table//tr[td/a[contains(text(), '" +
                     SettingsForTest.NAME +
                     "')]]/td[2]//button", driver)) {
