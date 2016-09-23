@@ -19,11 +19,11 @@ public class TestMeritPrerequisities extends BaseErilonTest {
     public void preConditions() {
         super.preConditions();
         homePage.login(TestData.USER_LOGIN);
+        createPersonageSteps = new CreatePersonageSteps(getDriver());
     }
 
     @Test
     public void gameTest() {
-        createPersonageSteps = new CreatePersonageSteps(getDriver());
         createPersonageAndCheckData();
         checkNonAvailableMerit();
         setMeritPrerequisities();
