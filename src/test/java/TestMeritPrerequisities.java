@@ -8,11 +8,11 @@ import steps.personage_steps.CreatePersonageSteps;
 
 import static org.junit.Assert.*;
 
-public class GameGnomClassTest extends BaseErilonTest {
+public class TestMeritPrerequisities extends BaseErilonTest {
 
     private CreatePersonageSteps createPersonageSteps;
 
-    private static final Logger LOGGER = Logger.getLogger(GameGnomClassTest.class);
+    private static final Logger LOGGER = Logger.getLogger(TestMeritPrerequisities.class);
 
     @Override
     @Before
