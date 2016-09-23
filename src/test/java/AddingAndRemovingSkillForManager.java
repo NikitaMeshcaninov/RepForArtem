@@ -1,4 +1,4 @@
-import WebPages.*;
+import pages.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -38,11 +38,11 @@ public class AddingAndRemovingSkillForManager {
 
         HomePage homePage = new HomePage(driver);
         assertEquals("The page should enter page to game site", "Вход", driver.getTitle());
-        System.out.println(SettingsForTest.MANAGERNAME + " " + "Залогинен");
-        PersonageListPage personageListPage = homePage.login(SettingsForTest.MANAGERNAME);
+        System.out.println(TestData.MASTER_LOGIN + " " + "Залогинен");
+        PersonageListPage personageListPage = homePage.login(TestData.MASTER_LOGIN);
         Thread.sleep(500);
         //Добавить вейтер, не всегда успевает загрузиться
-        assertEquals("Роль данного игрока неверна", SettingsForTest.MASTER_ROLE, personageListPage.getPlayerRole());
+        assertEquals("Роль данного игрока неверна", TestData.MASTER_ROLE, personageListPage.getPlayerRole());
 
         PersonageCreatePage personagePage = new PersonageCreatePage(driver);
         Thread.sleep(500);
@@ -59,14 +59,14 @@ public class AddingAndRemovingSkillForManager {
         assertEquals("Нет, неактивна", false, attachedSkills.getDisabledSaveButton().isEnabled());
         System.out.println("Вводим название навыка");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//md-dialog")));
-        attachedSkills.setAddSkillName(SettingsForTest.SKILL_NAME);
+        attachedSkills.setAddSkillName(TestData.SKILL_NAME);
         Thread.sleep(2000);
         //иногда тут отваливается написание имени, не успевает внести, спросить у Артёма как лучше обработать вейтером
         System.out.println("Проверяем что кнопка 'Сохранить' активна");
         assertTrue("Нет не активна", attachedSkills.getEnabledSavebutton().isEnabled());
-        attachedSkills.setAddSkillDescription(SettingsForTest.SKILL_DESCRIPTION);
+        attachedSkills.setAddSkillDescription(TestData.SKILL_DESCRIPTION);
         Thread.sleep(2000);
-        System.out.println("Вводим параметры" + " " + SettingsForTest.SKILL_NAME + " " + "и" + " " + SettingsForTest.SKILL_DESCRIPTION);
+        System.out.println("Вводим параметры" + " " + TestData.SKILL_NAME + " " + "и" + " " + TestData.SKILL_DESCRIPTION);
         attachedSkills.setDifficultSlider();
         attachedSkills.setTheoreticalSlider();
         attachedSkills.setSpellsSlider();
@@ -77,7 +77,7 @@ public class AddingAndRemovingSkillForManager {
         //assertEquals("Деф. выбрана", false, attachedSkills.getDifficultCheckboxEnabled().isEnabled());
         System.out.println("Нажимаем на кнопку еще");
         attachedSkills.setMoreButton();
-        System.out.println("Нажимаем на кнопку Х и удаляем" + " " + SettingsForTest.SKILL_NAME);
+        System.out.println("Нажимаем на кнопку Х и удаляем" + " " + TestData.SKILL_NAME);
         attachedSkills.setRemoveAttachedSkillX();
     }
 }
