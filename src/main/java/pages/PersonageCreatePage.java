@@ -51,7 +51,10 @@ public class PersonageCreatePage extends BasePage {
     private WebElement saveButton;
 
     @FindBy(xpath = "//md-dialog")
-    private WebElement addMeritDialog;
+    private WebElement anyModalDialog;
+
+    @FindBy(xpath = "//button[@ng-click='dialog.hide()']")
+    private WebElement deleteMeritConfirmButton;
 
     @FindBy(xpath = "//div[contains(text(), 'Недостатки')]")
     private WebElement disadvantages;
@@ -71,8 +74,8 @@ public class PersonageCreatePage extends BasePage {
         return element(addMeritButton);
     }
 
-    public WebElementFacade addMeritDialog() {
-        return element(addMeritDialog);
+    public WebElementFacade anyModalDialog() {
+        return element(anyModalDialog);
     }
 
     public WebElementFacade cancelAddMeritDialogButton() {
@@ -100,7 +103,7 @@ public class PersonageCreatePage extends BasePage {
     }
 
     public WebElementFacade getAddWorthMenu() {
-        return element(addMeritDialog);
+        return element(anyModalDialog);
     }
 
     public WebElementFacade disadvantages() {
@@ -123,8 +126,17 @@ public class PersonageCreatePage extends BasePage {
         return element(merits);
     }
 
+    public WebElementFacade deleteMeritConfirmButton() {
+        return element(deleteMeritConfirmButton);
+    }
+
     public PersonageCreatePage(WebDriver webDriver) {
         super(webDriver);
+    }
+
+    public void confirmMeritDeletion() {
+        deleteMeritConfirmButton().click();
+        anyModalDialog().waitForInvisibility();
     }
 
     public void openSpecialQualities() {
@@ -152,7 +164,7 @@ public class PersonageCreatePage extends BasePage {
     public void closeAddMeritDialog() {
         LOGGER.info("Close add merit dialog");
         cancelAddMeritDialogButton().click();
-        addMeritDialog().waitForInvisibility();
+        anyModalDialog().waitForInvisibility();
     }
 
     public void selectMerit(String name) {
@@ -186,7 +198,7 @@ public class PersonageCreatePage extends BasePage {
     public void submitAddMeritDialog() {
         LOGGER.info("Submit add merit dialog");
         addMeritDialogButton().click();
-        addMeritDialog().waitForInvisibility();
+        anyModalDialog().waitForInvisibility();
     }
 
     public void savePersonage() {

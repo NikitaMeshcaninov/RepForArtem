@@ -81,12 +81,13 @@ public class CreatePersonageSteps {
 
     public void increaseVitality(int amount) {
         personageCreatePage.changeAttribute(Attribute.VITALITY, INCREASE, amount);
-        ;
     }
 
     public void decreaseStrength(int amount) {
         personageCreatePage.changeAttribute(Attribute.STRENGTH, DECREASE, amount);
-        ;
+        if (personageCreatePage.deleteMeritConfirmButton().isCurrentlyVisible()) {
+            personageCreatePage.confirmMeritDeletion();
+        }
     }
 
     public void closeAddMeritDialog() {
