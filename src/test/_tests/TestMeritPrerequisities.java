@@ -18,7 +18,7 @@ public class TestMeritPrerequisities extends BaseErilonTest {
     @Before
     public void preConditions() {
         super.preConditions();
-        homePage.login(TestData.USER_LOGIN);
+        loginPage.login(TestData.USER_LOGIN);
         createPersonageSteps = new CreatePersonageSteps(getDriver());
     }
 

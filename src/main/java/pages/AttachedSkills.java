@@ -1,75 +1,104 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-/**
- * Created with IntelliJ IDEA.
- * User: A Timochko
- * Date: 21.08.16
- * Time: 17:13
- * To change this template use File | Settings | File Templates.
- */
+import static org.junit.Assert.assertEquals;
+
 public class AttachedSkills extends BasePage{
 
-    @FindBy (xpath = "//button[@ng-click='showAddDialog()']")
+    public static final String fieldNameLocator = "#name";
+    public static final String btnAddSkill = "//a[contains(text(),'Добавить')]";//".link-underlined.link-blue";
+    public static final String checkBoxDifficultLocator = "//label[.='Сложный']";
+    public static final String checkBoxTheoreticalLocator = "//label[.='Теоретический']";
+    public static final String checkBoxDefaultLocator = "//label[.='По умолчанию']";
+    public static final String btnAddOnAttachedSkillForm = "//button[contains(text(),'Добавить')]";
+    public static final String getSkillPopup = "//*[contains(text(),'" + TestData.SKILL_NAME + "')]";
+    public static final String btnRemoveSkill = ".btn.delete";
+    public static final String btnDeleteConfirm = ".swal2-confirm.swal2-styled";
+
+    @FindBy (xpath = btnAddSkill)
     private WebElement addSkill;
 
-    @FindBy (id = "attachedSkill_name")
+    @FindBy (css = fieldNameLocator)
     private WebElement addSkillName;
 
-    @FindBy (xpath = "//textarea[@id='input_0']")
+    @FindBy (css = "#description")
     private WebElement addSkillDescription;
 
-    @FindBy (xpath = "//*[contains(text(),'Test Name')]/..//button/span[@class='caret']")
-    private WebElement moreButton;
+    @FindBy (css = btnRemoveSkill)
+    private WebElement removeAttachedSkill;
 
-    @FindBy (xpath = "//a[contains(@ng-click, 'attachedSkill.id')]")
-    private WebElement removeAttachedSkillX;
+    @FindBy (css = btnDeleteConfirm)
+    private WebElement confirmDelete;
 
-    @FindBy (xpath = "//md-switch[@ng-model='ctrl.difficult']")
-    private WebElement difficultSlider;
+    @FindBy (xpath = getSkillPopup)
+    private WebElement elSkillPopup;
 
-    @FindBy (xpath = "//md-switch[@ng-model='ctrl.theoretical']")
-    private WebElement theoreticalSlider;
+    @FindBy (xpath = checkBoxDifficultLocator)
+    private WebElement difficultCheckBox;
 
-    @FindBy (xpath = "//md-switch[@ng-model='ctrl.spells_connected']")
-    private WebElement spellsSlider;
+    @FindBy (xpath = checkBoxTheoreticalLocator)
+    private WebElement theoreticalCheckBox;
 
-    @FindBy (xpath = "//*[contains(text(),'Test Name')]/..//div[@ng-if='attachedSkill.difficult']/span[contains(@class, 'glyphicon-ok')]")
-    private WebElement difficultCheckboxEnabled;
+    @FindBy (xpath = checkBoxDefaultLocator)
+    private WebElement defaultCheckBox;
 
-    @FindBy (xpath = "//*[contains(text(),'Test Name')]/..//div[@ng-if='attachedSkill.theoretical']/span[contains(@class, 'glyphicon-ok')]")
-    private WebElement theoreticalCheckboxEnabled;
-
-    @FindBy (xpath = "//*[contains(text(),'Test')]/..//div[@ng-if='attachedSkill.default_skill']/span[contains(@class, 'glyphicon-ok')]")
-    private WebElement defaultCheckboxEnabled;
-
-   //Спросить артема о более адекетном Xpath, потому что это явный костыль описывать два состояния одной кнопки
-    @FindBy (xpath = "//button[@ng-click='ctrl.save()' and @disabled='disabled']")
-    private WebElement disabledSaveButton;
-
-    @FindBy (xpath = "//button[@ng-click='ctrl.save()' and not(contains(@disabled, 'disabled'))]")
-    private WebElement enabledSavebutton;
+    @FindBy (xpath = btnAddOnAttachedSkillForm)
+    private WebElement elBtnAddAttachedSkillForm;
 
     public void setAddSkill(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(this.btnAddSkill)));
         addSkill.click();
     }
-    public void setMoreButton(){
-        moreButton.click();
+
+    public void clickRemoveAttachedSkill(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(this.btnRemoveSkill)));
+        removeAttachedSkill.click();
     }
-    public void setRemoveAttachedSkillX(){
-        removeAttachedSkillX.click();
+
+    public void clickConfirmDelete(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(this.btnDeleteConfirm)));
+        confirmDelete.click();
     }
-    public void setDifficultSlider(){
-        difficultSlider.click();
+
+    private String []checkBoxes = {"#difficultSkill", "#defaultSkill", "#theoreticalSkill"};
+    private boolean chbStatus(String locator){return driver.findElement(By.cssSelector(locator)).isSelected();}
+
+    public void isChecked(){
+        for(int i = 0; i < checkBoxes.length; i++)
+            assertEquals("Чек-бокс не активирован", this.chbStatus(checkBoxes[i]), true);
     }
-    public void setTheoreticalSlider(){
-        theoreticalSlider.click();
+
+    public void isUnchecked(){
+        for(int i = 0; i < checkBoxes.length; i++)
+            assertEquals("Чек-бокс активирован", this.chbStatus(checkBoxes[i]), false);
     }
-    public void setSpellsSlider(){
-        spellsSlider.click();
+
+    public void setDifficultCheckBox(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(this.checkBoxDifficultLocator)));
+        difficultCheckBox.click();
+    }
+
+    public void clickOnSkill(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(this.getSkillPopup)));
+        elSkillPopup.click();
+    }
+
+    public void verifyDataRemoved(){
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(this.getSkillPopup)));
+    }
+
+    public void setTheoreticalCheckBox(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(this.checkBoxTheoreticalLocator)));
+        theoreticalCheckBox.click();
+    }
+    public void setDefaultCheckBox(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(this.checkBoxDefaultLocator)));
+        defaultCheckBox.click();
     }
 
     public void setAddSkillName(String name){
@@ -80,29 +109,12 @@ public class AttachedSkills extends BasePage{
         addSkillDescription.sendKeys(name);
     }
 
-    public WebElement getEnabledSavebutton(){
-        return enabledSavebutton;
-    }
-    public void setEnabledSavebutton(){
-        enabledSavebutton.click();
-    }
-
-    public WebElement getDisabledSaveButton(){
-        return disabledSaveButton;
-    }
-
-    public WebElement getDifficultCheckboxEnabled(){
-        return difficultCheckboxEnabled;
-    }
-    public WebElement getTheoreticalCheckboxEnabled(){
-        return theoreticalCheckboxEnabled;
-    }
-    public WebElement getDefaultCheckboxEnabled(){
-        return  defaultCheckboxEnabled;
+    public void clickAddBtnOnAttachedSkillsForm(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(this.btnAddOnAttachedSkillForm)));
+        elBtnAddAttachedSkillForm.click();
     }
 
     public AttachedSkills (WebDriver webDriver){
         super(webDriver);
     }
-
 }

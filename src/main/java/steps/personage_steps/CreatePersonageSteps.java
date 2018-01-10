@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import pages.PersonageCreatePage;
 import pages.PersonageListPage;
-import pages.TestData;
 import utils.Utils;
 
 import java.util.concurrent.TimeUnit;
@@ -47,7 +46,7 @@ public class CreatePersonageSteps {
     }
 
     public void deletePersonages(String name) {
-        personageCreatePage.openMainMenu();
+        personageCreatePage.waitForMainMenu();
         personageListPage = personageCreatePage.goToPersonageListPage();
 
         while (personageListPage.isPersonagePresent(name)) {

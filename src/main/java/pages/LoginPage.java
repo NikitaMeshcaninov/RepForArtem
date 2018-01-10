@@ -1,30 +1,38 @@
 package pages;
 
 import base.WebElementFacade;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Nikita on 18.07.2016.
  */
-public class HomePage extends BasePage{
+public class LoginPage extends BasePage{
     private static String LOGIN_PAGE_URL = "http://erilon-staging.herokuapp.com/";
-    @FindBy(xpath = ".//*[@id='nickName']")
+    @FindBy(css = "#validation-name")
     private WebElement nickNameTextField;
 
-    @FindBy(xpath = "//button[@ng-click='login()']")
+    @FindBy(css = ".btn")
     private WebElement loginButton;
 
-    public HomePage(WebDriver driver) {
+    public LoginPage(WebDriver driver) {
         super(driver);
         getDriver().get(LOGIN_PAGE_URL);
-        assertEquals("Can't open login page", "Вход", getDriver().getTitle());
+        assertEquals("Can't open login page", "Login", getDriver().getTitle());
     }
 
+    final Wait<WebDriver> wait = new WebDriverWait(driver, 5);
+
     public PersonageListPage login(String userName) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".btn")));
+
         nickNameTextField().type(userName);
         loginButton().click();
         return new PersonageListPage(getDriver());

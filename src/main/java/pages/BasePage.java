@@ -2,22 +2,26 @@ package pages;
 
 import base.PageObject;
 import base.WebElementFacade;
-import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class BasePage extends PageObject {
-    @FindBy(id = "attached_skills_mm")
+
+    public static final String attachedSkillsLocator = "//span[contains(text(),'Прикрепленные навыки')]";
+
+    @FindBy(xpath = attachedSkillsLocator + "/..")
     private WebElement attachedSkillsButton;
 
-    @FindBy(xpath = "//div[h4]/following-sibling::div[1]")
+    @FindBy(css = ".left>div>div>div")
     private WebElement playerRole;
 
-    @FindBy(id = "main_menu_link")
-    private WebElement mainMenuButton;
+    private String mainMenuSection = ".left-menu-inner";
 
     @FindBy(id = "my_personages")
     private WebElement myPersonagesButton;
@@ -33,10 +37,6 @@ public abstract class BasePage extends PageObject {
         return element(loader);
     }
 
-    public WebElementFacade mainMenuButton() {
-        return element(mainMenuButton);
-    }
-
     public WebElementFacade attachedSkillsButton() {
         return element(attachedSkillsButton);
     }
@@ -49,8 +49,10 @@ public abstract class BasePage extends PageObject {
         return element(playerRole);
     }
 
-    public void openMainMenu() {
-        mainMenuButton().click();
+    final Wait<WebDriver> wait = new WebDriverWait(driver, 15);
+
+    public void waitForMainMenu() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(this.mainMenuSection)));
     }
 
     public PersonageListPage goToPersonageListPage() {

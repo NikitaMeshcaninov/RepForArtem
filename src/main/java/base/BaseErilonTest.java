@@ -3,14 +3,14 @@ package base;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import pages.HomePage;
+import pages.LoginPage;
 import utils.Timeout;
 
 import java.util.concurrent.TimeUnit;
 
 public class BaseErilonTest {
     private WebDriver driver;
-    protected HomePage homePage;
+    protected LoginPage loginPage;
 
     protected WebDriver getDriver() {
         return driver;
@@ -21,6 +21,6 @@ public class BaseErilonTest {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Timeout.DEFAULT_IMPLICITLY_WAIT, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-        homePage = new HomePage(driver);
+        loginPage = new LoginPage(driver);
     }
 }
