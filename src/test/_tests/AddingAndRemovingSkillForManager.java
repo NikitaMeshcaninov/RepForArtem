@@ -1,3 +1,5 @@
+import org.junit.After;
+import org.junit.AfterClass;
 import pages.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +17,7 @@ import static org.junit.Assert.*;
 
 public class AddingAndRemovingSkillForManager {
 
-    private WebDriver driver;
+    private static WebDriver driver;
 
     @Before
     public void openBrowser() {
@@ -79,5 +81,10 @@ public class AddingAndRemovingSkillForManager {
         attachedSkills.verifyDataRemoved();
 
         driver.close();
+    }
+
+    @AfterClass
+    public static void driverQuit(){
+        driver.quit();
     }
 }
