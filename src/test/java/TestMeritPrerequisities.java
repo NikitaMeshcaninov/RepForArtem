@@ -1,9 +1,9 @@
 import base.BaseErilonTest;
-import org.junit.Before;
-import pages.*;
 import org.apache.log4j.Logger;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import pages.TestData;
 import steps.personage_steps.CreatePersonageSteps;
 
 import static org.junit.Assert.*;
