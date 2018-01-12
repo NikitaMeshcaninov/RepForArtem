@@ -37,7 +37,7 @@ public class TestMeritPrerequisities extends BaseErilonTest {
 
     @After
     public void postConditions() {
-        createPersonageSteps.deletePersonages(TestData.PERSONAGE_NAME);
+        createPersonageSteps.deletePersonages(this.personageName);
         getDriver().close();
         getDriver().quit();
     }
@@ -45,7 +45,7 @@ public class TestMeritPrerequisities extends BaseErilonTest {
     private void createPersonageAndCheckData() {
         createPersonageSteps.createPersonage(this.personageName, TestData.RACE, TestData.XP);
 
-        assertEquals("Personage name should be " + personageName, personageName,
+        assertEquals("Personage name should be " + this.personageName, this.personageName,
                 createPersonageSteps.getPersonageName());
         assertEquals("Amount of personage experience should be " + TestData.XP, TestData.XP,
                 createPersonageSteps.getPersonageExperience());
