@@ -13,11 +13,13 @@ public class TestMeritPrerequisities extends BaseErilonTest {
     private CreatePersonageSteps createPersonageSteps;
 
     private static final Logger LOGGER = Logger.getLogger(TestMeritPrerequisities.class);
+    private String personageName;
 
     @Override
     @Before
     public void preConditions() {
         super.preConditions();
+        personageName = TestData.PERSONAGE_NAME + TestData.generateString("abcdef", 5);
         loginPage.login(TestData.USER_LOGIN);
         createPersonageSteps = new CreatePersonageSteps(getDriver());
     }
@@ -37,15 +39,14 @@ public class TestMeritPrerequisities extends BaseErilonTest {
     public void postConditions() {
         createPersonageSteps.deletePersonages(TestData.PERSONAGE_NAME);
         getDriver().close();
+        getDriver().quit();
     }
 
     private void createPersonageAndCheckData() {
-        createPersonageSteps.createPersonage(TestData.PERSONAGE_NAME, TestData.RACE, TestData.XP);
+        createPersonageSteps.createPersonage(this.personageName, TestData.RACE, TestData.XP);
 
-        assertEquals("Personage name should be " + TestData.PERSONAGE_NAME, TestData.PERSONAGE_NAME,
+        assertEquals("Personage name should be " + personageName, personageName,
                 createPersonageSteps.getPersonageName());
-        assertEquals("Race of personage should be " + TestData.RACE.toLowerCase(), TestData.RACE,
-                createPersonageSteps.getPersonageRace());
         assertEquals("Amount of personage experience should be " + TestData.XP, TestData.XP,
                 createPersonageSteps.getPersonageExperience());
     }

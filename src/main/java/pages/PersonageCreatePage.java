@@ -8,19 +8,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * Created by Nikita on 19.07.2016.
- */
 public class PersonageCreatePage extends BasePage {
     private static final Logger LOGGER = Logger.getLogger(PersonageCreatePage.class);
 
-    @FindBy(xpath = "//h3")
+    @FindBy(xpath = "//h3/a")//a[contains(text(),'" + TestData.PERSONAGE_NAME + "')]")
     private WebElement personageName;
 
-    @FindBy(xpath = "//div[p/strong[text()='Раса:']]/following-sibling::div/p")
+    @FindBy(css = ".filter-option.pull-left")//button//span[contains(text(),'" + TestData.RACE + "')]')]")
     private WebElement personageRace;
 
-    @FindBy(xpath = ".//*[@id='expirience']")
+    @FindBy(xpath = "//span[contains(text(),'XP')]//strong")//[contains(text(),'" + TestData.XP + "')]")
     private WebElement personageExperience;
 
     @FindBy(xpath = "//*[contains(text(),'Особенности')]")

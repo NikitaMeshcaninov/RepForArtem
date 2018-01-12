@@ -5,7 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import pages.PersonageCreatePage;
 import pages.PersonageListPage;
+import pages.TestData;
 import utils.Utils;
+import static org.junit.Assert.assertEquals;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,10 +23,18 @@ public class CreatePersonageSteps {
         personageCreatePage = PageFactory.initElements(driver, PersonageCreatePage.class);
     }
 
+    private void checkPersonageRace(){
+        assertEquals("Race of personage should be " + TestData.RACE.toLowerCase(), TestData.RACE,
+                this.getPersonageRace());
+    }
+
     public PersonageCreatePage createPersonage(String name, String race, String experience) {
+        personageListPage.btnAddIsDisabled();
         personageListPage.fillName(name);
         personageListPage.selectRace(race);
         personageListPage.fillExperience(experience);
+        this.checkPersonageRace();
+        personageListPage.btnAddIsEnabled();
         return personageListPage.clickAddPersonageButton();
     }
 
@@ -42,7 +52,7 @@ public class CreatePersonageSteps {
     }
 
     public String getPersonageExperience() {
-        return personageCreatePage.personageExperience().getAttribute("value");
+        return personageCreatePage.personageExperience().getText();
     }
 
     public void deletePersonages(String name) {

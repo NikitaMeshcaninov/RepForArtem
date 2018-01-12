@@ -2,16 +2,17 @@ package pages;
 
 import base.WebElementFacade;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import static org.junit.Assert.assertEquals;
 
-/**
- * Created by Nikita on 18.07.2016.
- */
 public class PersonageListPage extends BasePage{
 
+    //#createPersonageButton
+    private final String characterBtn = "//button[@ng-click='createPersonage()']";
 
     @FindBy(id = "name")
     private WebElement nameField;
@@ -22,9 +23,8 @@ public class PersonageListPage extends BasePage{
     @FindBy(id = "experience")
     private WebElement experienceField;
 
-    @FindBy(xpath = "//button[@ng-click='createPersonage()']")
+    @FindBy(xpath = characterBtn)
     private WebElement addCharacterButton;
-
 
     public PersonageListPage(WebDriver webDriver) {
         super(webDriver);
@@ -66,8 +66,20 @@ public class PersonageListPage extends BasePage{
         return isElementCurrentlyPresent(By.xpath("//table//tr[td/a[contains(text(), '" + name + "')]]"));
     }
 
+    public void btnAddIsEnabled(){
+        assertEquals("Button is disabled", this.addCharacterButton.isEnabled(), true);
+    }
+
+    public void btnAddIsDisabled(){
+        assertEquals("Button is enabled", this.addCharacterButton.isEnabled(), false);
+    }
+
     public PersonageCreatePage clickAddPersonageButton() {
+        waitForElementVisibleByXpath(this.characterBtn);
+        this.addCharacterButton.sendKeys(Keys.HOME);
+        wait.until(ExpectedConditions.elementToBeClickable(this.addCharacterButton));
         addCharacterButton().click();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//h3[.='Добавить персонажа']")));
         waitForLoader();
         return new PersonageCreatePage(getDriver());
     }

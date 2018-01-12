@@ -23,7 +23,7 @@ public abstract class BasePage extends PageObject {
 
     private String mainMenuSection = ".left-menu-inner";
 
-    @FindBy(id = "my_personages")
+    @FindBy(id = "my_personages")   //span[contains(text(),'Персонажи')]
     private WebElement myPersonagesButton;
 
     @FindBy(id = "loader")
@@ -53,6 +53,14 @@ public abstract class BasePage extends PageObject {
 
     public void waitForMainMenu() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(this.mainMenuSection)));
+    }
+
+    public void waitForElementVisibleByXpath(String locator){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+    }
+
+    public void waitForElementVisibleByCss(String locator){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator)));
     }
 
     public PersonageListPage goToPersonageListPage() {
