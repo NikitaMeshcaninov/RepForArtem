@@ -7,17 +7,20 @@ import static org.apache.commons.lang3.ArrayUtils.add;
  */
 class Leilighem {
 	public static void main(String[] args) {
-		int array[]  = {3, 5, 7, 9, 11, 13};
+		int array[]  = new int[1];;
 		for (int i = 0; i < array.length; i++) {
-			String toPrint = "array[" + i + "]=" + array[i];
+		    String toPrint = "array[" + i + "]=" + array[i];
+			System.out.print("Вывод массива: " + toPrint + "\n");
 
 			int randomNumber =  (int) (Math.random() * 10);
 			System.out.print("Вывод рандомного числа: " + randomNumber + "\n");
 
-			int array2[] = add(array, randomNumber);
+			array = add(array, randomNumber);
 
-			System.out.print("Вывод измененного массива: " + ArrayUtils.toString(array2) + "\n");
-
+			System.out.print("Вывод измененного массива: " + ArrayUtils.toString(array) + "\n");
+			if(array.length == 10) {
+				break;
+			}
 		}
 	}
 }
