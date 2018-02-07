@@ -10,7 +10,7 @@ class Leilighem {
 		int array[]  = new int[1];
 		for (int i = 0; i < array.length; i++) {
 			String toPrint = "array[" + i + "]=" + array[i];
-			System.out.print("Вывод начального массива: " + toPrint + "\n");
+			/*System.out.print("Вывод начального массива: " + toPrint + "\n");*/
 
 			int randomNumber =  (int) (Math.random() * 10);
 			System.out.print("Вывод рандомного числа: " + randomNumber + "\n");
