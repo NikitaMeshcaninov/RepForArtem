@@ -3,6 +3,7 @@ package base;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import pages.HomePage;
 import utils.Timeout;
 
@@ -19,8 +20,5 @@ public class BaseErilonTest {
     @Before
     public void preConditions() {
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Timeout.DEFAULT_IMPLICITLY_WAIT, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        homePage = new HomePage(driver);
     }
 }
